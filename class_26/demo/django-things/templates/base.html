@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Our Title</title>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'about' %}">About</a>
+            </nav>
+        </header>
+
+        {% block content %}
+
+        {% endblock content %}
+
+    </body>
+</html>
