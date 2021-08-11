@@ -27,14 +27,14 @@ def find_max_value(self):
 
 # If testing is needed
 
-# from max_value.max_value import BinaryTree, Node
-#
-# def test_max_val():
-#     tree = BinaryTree()
-#     tree.root = Node(10)
-#     tree.root.right = Node(30)
-#     tree.root.left = Node(7)
-#
-#     actual = tree.find_max()
-#     expected = 30
-#     assert actual == expected
+from max_value.max_value import BinaryTree, Node
+
+def test_max_val():
+    tree = BinaryTree()
+    tree.root = Node(10)
+    tree.root.right = Node(30)
+    tree.root.left = Node(7)
+
+    actual = tree.find_max()
+    expected = 30
+    assert actual == expected
