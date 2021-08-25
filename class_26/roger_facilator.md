@@ -41,11 +41,15 @@ print(reverse([1,2,3,4,5, 6]))
   - A **LOT** of websites have been built.
   - There are 1,197,982,359 websites in the World as of January 2021.
   - In the process certain practices have turned out to be more useful than others.
-  - The practices that have shown to be consistently good and signifigantly better to enough people take on the label "best practices"
-  - The term "best practices" is subjective, sometimes a cause for debate, and often used too usely.
-  - But the impulse behind the term is a good thing and can be expressed in other ways...
-    - work smart not hard
-    - work smarter not harder - this leaves in the idea that you'll still be working hard ;)
+  - The practices that have shown to be consistently good and signifigantly better
+  - to enough people take on the label "best practices"
+  - The term "best practices" is subjective, sometimes a cause for debate, and often
+  - used too usely.
+  - But the impulse behind the term is a good thing and can be expressed in \
+  - other ways...
+    - work smart not harder
+    - work smarter not harder - this leaves in the idea that you'll still be 
+    - working hard ;)
     - do more of the good stuff and less of the bad
     - Don't reinvent the wheel
 
@@ -99,11 +103,14 @@ print(reverse([1,2,3,4,5, 6]))
         - wsgi.py - Used for deployment only (non-dev) or when using docker. (We will not be altering this file)
         - db.sqlite3 - Our simple Database
 
-- > $ python manage.py runserver
+    ```python
+    python manage.py runserver
+    ```
+
   - note the unapplied migrations and explain we'll be coming back to that
   - open the browser and navigate to home page
     > Look at this folks.  We have a running server just that quick.
-    > point out the 'YOu are seeing this page because DEBUG=True
+    > point out the 'You are seeing this page because DEBUG=True
     > Show where that it in settings, change it and re-run the server
     - Will have to add allowed hosts of '127.0.0.1' and restart server
     - Put debut back to True
@@ -117,7 +124,11 @@ print(reverse([1,2,3,4,5, 6]))
 ### Create App
 
 - Stop dev server
-- > $ python manage.py startapp things
+
+```python
+python manage.py startapp things
+```
+
 - > $ tree
   - discuss the files that were generated
   - discuss difference between a *project* and an *app*

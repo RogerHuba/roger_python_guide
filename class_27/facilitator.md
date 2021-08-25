@@ -1,3 +1,7 @@
+# Review any painpoints in Django so far.
+
+
+
 # Add movies to Django Movies
 
 - The Start
@@ -5,7 +9,7 @@
   - Start today's demo from scratch adjusting the pace as needed and eliciting questions along the way.
   - Before starting prep/review ask students for particular pain points and keep them in mind during build out.
   - > mkdir starwars-movie-rater
-  - > cd movie-rater
+  - > cd starwars-movie-rater
   - > poetry init -n
   - > poetry add django
   - > poetry shell
@@ -55,8 +59,11 @@ class Movie(models.Model):
     reviewer = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 ```
 
+- > NOTE: The cascade will delete ay object that was created by a deleted user.
+
 - python manage.py makemigrations movies
 - python manage.py migrate
+- Go ahead and run the server really quick and go to the admin page
 - python manage.py createsuperuser
 - python manage.py runserver
 - log in to admin
@@ -77,7 +84,7 @@ admin.site.register(Movie)
 - Now see the movie.
 - Create a Movie
   - Notice the less than ideal display of *Movie object(1)*
-- Update Movie model with \__str__ method that returns self.name
+- Update Movie model with `__str__` method that returns self.name
 
 ```python
     def __str__(self):
@@ -135,7 +142,7 @@ urlpatterns = [
 - update project urls.py
 
 ```python
-from django.urls import include
+from django.urls import path, include
 urlpatters = [
     path('', include('movies.urls')),
 ]
@@ -146,6 +153,8 @@ urlpatters = [
   - Explain briefly that this is a very common step, but not the default
 - Create `templates/base.html` with common html and content block
 - In vs-code can use keyword html:5
+
+- create a base.html
 
 ```html
 <!DOCTYPE html>
@@ -175,6 +184,29 @@ urlpatters = [
 {% endblock content %}
 ```
 
+- You may be asking yourself.  How does django know waht onject_list is referring to. This is because of the object_list.  This is part of the generic import in the models.  You can also set this manually.
+
+In views.py
+
+```python
+class MovieListView(ListView):
+    template_name = 'movie_list.html'
+    model = Movie
+    context_object_name = 'sw_movies' # <-- Add this
+```
+
+Then in the movie_list.html
+
+```django
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for movie in sw_movies %} # <--Change object_list to this (or whatever you set in views)
+        <h2>{{ movie.name }} </h2>
+    {% endfor %}
+{% endblock content %}
+```
+
 ## DetailView
 
 - Update views.py to add a Detail View
@@ -198,6 +230,7 @@ urlpatterns = [
     path('', MovieListView.as_view(), name="movie_list"),
     path('<int:pk>/', MovieDetailView.as_view(), name="movie_detail"),
 ]
+# The int is specifying that it will get an integer back in the form of a primary key. You use this when your view is guranteed to revieve an int.
 ```
 
 - Add templates/movie_detail.html
@@ -224,4 +257,49 @@ urlpatterns = [
   <h2><a href="{% url 'movie_detail' movie.pk %}">{{ movie.name }}</a></h2>
   {% endfor %}
 {% endblock content %}
+```
+
+- The way this works is by looking up the URL definition as specified in the movies.urls module. You can see exactly where the URL name of ‘detail’ is defined below:
+
+```python
+from django.urls import path
+
+from .views import MovieListView, MovieDetailView
+
+# the 'name' value as called by the {% url %} template tag
+
+urlpatterns = [
+    path('', MovieListView.as_view(), name="movie_list"),
+    path('<int:pk>/', MovieDetailView.as_view(), name="movie_detail"),
+]
+```
+
+- Now test out the links in the page and point out the movies/1 in the address bar.
+
+### Testing
+
+```
+from django.test import TestCase
+from django.urls import reverse
+from movies.models import Movie
+
+class MoviesTests(TestCase):
+    
+    def setup(self):
+        Movie.objects.create(name = 'Empire', rating = 10, reviewer = 'rogerhuba')
+    
+    def test_movie_rating(self):
+        movie = Movie.objects.get(name='Empire')
+        self.assertEqual(movie.rating) == 10
+    
+    
+    def test_list_page_status_code(self):
+        url = reverse("movie_list")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+    def test_list_page_template(self):
+        url = reverse("movie_list")
+        response = self.client.get(url)
+        self.assertTemplateUsed(response, "movie_list.html")
+        self.assertTemplateUsed(response, "base.html")
 ```

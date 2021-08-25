@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <section>
+    <h2>{{ movie.name }}</h2>
+    <p>Rating: {{ movie.rating }}</p>
+    <p>Reviewer: {{ movie.reviewer }}</p>
+  </section>
+{% endblock content %}
