@@ -1,12 +1,19 @@
 # Lecture NOTES: Class 32:  Permissions & Postgresql
 
+## Jokes
+
+- How do you deal with a fear of speed bumps? You slowly get over it.
+- It really takes guts to be an organ doner
+- What state is knows for small drinks?  Minnesota
+- What happens when a snowman throws a tantrum? It has a meltdown
+
 ## Review the Lab
 
 - Show stretch goals and requirements.
 
 ## Lambda Functions
 
-- Definition: In Python, a lambda function is a single-line function declared with no name, which can have any number of arguments, but only have one expression. Such a function is capable of behaving similarly to a regular function declared using the Python's def keyword. A lambda function can’t contain any statements. In a lambda function, statements like return, pass, assert, or raise will raise a SyntaxError exception.
+- Definition: In Python, a lambda function is a single-line function defined with no name, which can have any number of arguments, but only have one expression. Such a function is capable of behaving similarly to a regular function declared using the Python's def keyword. A lambda function can’t contain any statements. In a lambda function, statements like return, pass, assert, or raise will raise a SyntaxError exception.
 
 > Lets look at some examples:
 
@@ -18,6 +25,7 @@ this_var = this_function(5)
 ```
 
 ```python
+# variable = labmda parameters:return
 x = lambda x: x
 
 x(5)
@@ -42,7 +50,11 @@ def sum_all(x, y, z):
 ```python
 x = lambda x, y, z: x + y + z
 
-x(10)
+x(2, 3, 5)
+```
+
+```python
+larger = lambda x,y: a if x>y else b
 ```
 
 ## Topic 1 : Permissions Setup for Demo
@@ -144,21 +156,26 @@ There are also only a few changes to enable switching to Postgres thanks to Dock
 
 `Dockerfile` is same as last class
 
-```t
+```python
 # FIRST:  Order Matters in Dockerfiles since they are executed from top-tp-bottom
 
 FROM python:3
 
 # FROM directive is probably the most crucial amongst all others for Dockerfiles. It defines the base image to use to start the build process. It can be any image, including the ones you have created previously. If a FROM image is not found on the host, Docker will try to find it (and download) from the Docker Hub or other container repository. It needs to be the first command declared inside a Dockerfile.
 
-
+# This prevents Python from writing out pyc files
 ENV PYTHONDONTWRITEBYTECODE 1
+
 ENV PYTHONUNBUFFERED 1
 
 # The ENV command is used to set the environment variables (one or more). These variables consist of “key value” pairs which can be accessed within the container by scripts and applications alike. This functionality of Docker offers an enormous amount of flexibility for running programs.
 
 # PYTHONDONTWRITEBYTECODE will remove .pyc files from our container which is a good optimization.  
+
 # PYTHONUNBUFFERED will buffer our output so it will look “normal” within Docker for us.
+# This keeps python from buffering stdin/stout
+# Standard input - this is the file handle that your process reads to get information from you.
+# Standard output - your process writes conventional output to this file handle.
 
 RUN mkdir /code
 
@@ -201,7 +218,7 @@ services:
       - "8000:8000"
 
     # External port / Internal Port mapping  
-
+    # Depends on points to the service that you use below 
     depends_on:
       - db
   db:
@@ -215,12 +232,14 @@ services:
 In order for Django to make the switch two things are needed.
 
 1. Some way for python to talk to postgres
-1. Updated Database settings
+1. Updated Database settings*
 
 - > poetry add psycopg2-binary
 - **BIG SUR WARNING:** Might need to set the system version compatibility
   - > export SYSTEM_VERSION_COMPAT=1
   - then try to add again
+
+- > poetry export -f requirements.txt -o requirements.txt --without-hashes
 
 Now let's move on to Database settings
 
@@ -253,7 +272,7 @@ Uh oh. A bunch of errors about relations not existing.
 
 Anybody have a guess why?
 
-Because we are running with a brand new Postgres Database running inside our Docker containe. Not the sqlite file we've been using so far.
+Because we are running with a brand new Postgres Database running inside our Docker container. Not the sqlite file we've been using so far.
 
 The good news is that Django lets you treat them the same (with a few quirks at the edges, but that's rare)
 

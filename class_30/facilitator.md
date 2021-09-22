@@ -1,20 +1,18 @@
 # Hashtables
 
-> Let's do a review of the reading
+> Let's talk about Hashtables / Hashmaps. There are 
 > Pin Reading and Blank WebPage for writing
-> HashTables associate a Key: Vith a value
-> QUESTION: What data structure have you used that associates a kay with a value?
+> HashTables associate a Key: with a value
+> QUESTION: What data structure have you used that associates a key with a value?
 > ANSWER: Dictionary
-> Turns out these dictionaries are notjust handy and fun to use, they are also VERY efficient.
+> Turns out these dictionaries are not just handy, they are also VERY efficient.
 > QUESTION: What is the BigO of a dictionary?
 > ANSWER: o(1)
-> Why is it this?  We know there is a list / array involved.
-> This is more of a conceptual array.  Under the hood does a python dictionary literaly use an array? That is not really our business,
-> that is an implementation detail. But it defiantely uses the notion of sequential memory. It may litteraly be an array.
-> It reality, it dosn't matter to us. For the outside user we can get with
-> efficiency a value using a key. We will assume the notion of an array
-> Draw out an array.  Give a key:value of spam:bacon. We want to get them into the array?  How could we add it in there?
-> we could add it in as a tuple.  Not very efficient. (DRAW OUT)
+> Why is it this?  We know there is a list / array involved. This is more of a conceptual array.  Under the hood does a python dictionary literaly use an array? That is not really our business, that is an implementation detail. But it defiantely uses the notion of sequential memory. It may litteraly be an array. It reality, it dosn't matter to us. For the outside user we can get with efficiency a value using a key. We will assume the notion of an array
+
+- Draw out an array.  Give a key:value of spam:bacon. We want to get them into the array?  How could we add it in there?
+
+> we could add it in as a tuple.  Not very efficient. (DRAW OUT)+
 > Image the efficency needed using tubples?  Could we get o(1) efficiency?
 > What would our efficnecy there (o(n))
 > We definately know there is something better we can use.

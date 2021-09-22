@@ -7,12 +7,15 @@ from movies.models import Movie
 
 class MoviesTests(TestCase):
     
-    def setup(self):
+    def setUp(self):
         self.user = get_user_model().objects.create_user(
             username="tester", email="tester@email.com", password="pass")
         self.movie = Movie.objects.create(
             name = 'Empire', rating = 10, reviewer = self.user)
     
+    def test_string_representation(self):
+        self.assertEqual(str(self.movie), 'Empire')
+
     def test_movie_name(self):
         self.assertEqual(f'{self.movie.name}', 'Empire')
     
@@ -27,5 +30,3 @@ class MoviesTests(TestCase):
         response = self.client.get(url)
         self.assertTemplateUsed(response, "movie_list.html")
         self.assertTemplateUsed(response, "base.html")
-
-    

@@ -1,18 +1,18 @@
-# Django Project 
+# Django Project
 
 - Visit [API Quick Start](https://github.com/codefellows/python-401-api-quickstart)
-- Show process of `Use this Template`
-  - Encourage students to create their own template repository to their liking
-- inspect `pyproject.toml`
-  - point out the new (or more recent) libraries
-    - django-cors-headers (Cross Origin Resource Sharing)
-      - Allows in-browser requests to your Django application from other origins / domains
-    - django-environ
-      - Used for hiding certain environment variables
-    - whitenoise
-      - Allows for static content after in production
-    - etc.
-- > Start with poroject from previous class
+- Encourage students to instepct the template repository
+- Maybe create your own template?
+
+> Because we are going to be deploying on the internet, we need to do a few things before we can move forward:
+
+- Update project to use django-environ
+- Update settings.py with .env variables
+- Update docker-compose.yml to use .env
+- Update our DB to the internet
+- Update project to use django-cors-headers
+
+- > Start with project from previous class
   - If you have get errors installing on Mac
     - > `export SYSTEM_VERSION_COMPAT=1`
     - > poetry install if copied
@@ -20,46 +20,36 @@
 
 ## Update .env
 
-- > Touch .env file in porject folder
+- > Touch .env file in project folder
 
 ```env
-
 SECRET_KEY=put-real-secret-key-here
 DEBUG=True
-
 ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0
-ALLOW_ALL_ORIGINS=True
-
-#DATABASE_ENGINE=django.db.backends.postgresql
-#DATABASE_NAME=postgres
-#DATABASE_USER=postgres
-#DATABASE_PASSWORD=postgres
-#DATABASE_HOST=db
-#DATABASE_PORT=5432
+DATABASE_NAME=postgres
+DATABASE_USER=postgres
+DATABASE_PASSWORD=postgres
+DATABASE_HOST=db
+DATABASE_PORT=5432
 ```
-
-- Name it `.env` in same folder
-  - Inspect the `.env` a bit
 
 ## Update Settings
 
+- `poetry add django-environ`
 - Update `project/settings.py` to use `django-environ`
-  - > add `import environ` below path
+- add `import environ` below path in settings.py
 
 - read in the environment variables on next line
 - `environ.Env.read_env()`
-- > Add the following 
 
+- > Add the following:
 - > This will force the environment to production if .env missing
+
 ```python
 env = environ.Env(
     DEBUG=(bool, False)
 )
-```
 
-- > Add the following
-
-```python
 # reading .env file
 environ.Env.read_env()
 ```
@@ -72,8 +62,6 @@ DEBUG = env.bool('DEBUG')
 ALLOWED_HOSTS = tuple(env.list('ALLOWED_HOSTS'))
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': env('DATABASE_NAME'),
         'USER': env('DATABASE_USER'),
@@ -84,7 +72,28 @@ DATABASES = {
 }
 ```
 
-## Test Local First
+> Test Container
+> Now it is time to update the docker-compose.yml to use variables
+[docker-compose variables](https://docs.docker.com/compose/environment-variables/)
+
+touch .env in root folder. Point out that this is different from the .env in the project folder.
+
+```env
+DATABASE_NAME=postgres
+DATABASE_USER=postgres
+DATABASE_PASSWORD=postgres
+```
+
+-Update docker-compose
+
+```docker
+environment:
+  - POSTGRES_DB=${DATABASE_NAME}
+  - POSTGRES_USER=${DATABASE_USER}
+  - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+```
+
+test-local
 
 ## Remote Database Time
 
@@ -93,7 +102,7 @@ DATABASES = {
 - Create Database with name `blog-api-db` on the free plan.
 - Select any available region you like.
 - Click on the new DB to get details.
-- Update `.env` file with relevant details from your database.
+- Update project `.env` file with relevant details from your database.
   - DB_NAME=laxuqqyk
   - DB_USER=laxuqqyk
   - DB_PASSWORD=vXR-YPh867JP-kATaTgh6KsUBNTWdjCG
@@ -102,12 +111,15 @@ DATABASES = {
 
 - > Comment out DB stuff in docker-compose.yml
 
-## Test API Remote
-
 - dcu --build -d
-- docker-compose run web ./manage.py migrate
+- docker-compose run web python manage.py migrate
+- docker-compose run web python manage.py createsuperuser
+- Hit admin route and add some stuff, see it there.
+- Go to Elephant DB and look at table Data
 
 ## Add CORS
+> It is time to deply our Django app to the internet. There is one more thing we need to add to our project.  
+> django-cors-headers. A Django App that adds Cross-Origin Resource Sharing (CORS) headers to responses. This allows in-browser requests to your Django application from other origins.
 
 ```python
 poetry add whitenoise (should already be there)
@@ -122,12 +134,14 @@ There are also 2 items in middleware to add:
 
 The corsheader needs to be high up on the middleware and it will handle cross origin issues for us nased on the list we entered.
 
+[CORS SITE](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
+
 ```python
 MIDDLEWARE = [
-    # 'corsheaders.middleware.CorsMiddleware',
+    #ADD 'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    #ADD 'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -153,9 +167,13 @@ ALLOWED_ORIGINS=http://localhost:3000
 
 **NOTE** Be sure to shutdown server, update requirements.
 
+Add project to a GH repository (Don't forget .gitignore)
+[Global Git Ignore](http://egorsmirnov.me/2015/05/04/global-gitignore-file.html)
+
 ## Deploy Project - AWS
+
 [A Quick Reference](https://stackabuse.com/deploying-django-applications-to-aws-ec2-with-docker/)
-[Reverence 2](https://testdriven.io/blog/django-docker-https-aws/)
+[Reference 2](https://testdriven.io/blog/django-docker-https-aws/)
 [Reference 3](https://try.digitalocean.com/deploy-django/?utm_campaign=amer_app_platform_kw_en_cpc&utm_adgroup=deploy_django&_keyword=%2Bdjango%20%2Bdeploy&_device=c&_adposition=&utm_content=conversion&utm_medium=cpc&utm_source=google&gclid=CjwKCAjwr_uCBhAFEiwAX8YJgXskoOQkDmIscZOYjfdztw60P2h2mynnRyRPbIgl2mNmAtvNsDU1QRoCCt8QAvD_BwE)
 [Reference 4](https://gist.github.com/npearce/6f3c7826c7499587f00957fee62f8ee9)
 [Reference 5](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html)
@@ -163,28 +181,32 @@ ALLOWED_ORIGINS=http://localhost:3000
 ### AWS
 
 - Log into the AWS Console.
+- [AWS Login](https://aws.amazon.com/console/)
 - Go to EC2 and Launch Instance
-- Select Amazon Linus 2 AMI
+- Select Amazon Linux 2 AMI (Free Tier Eligible)
   - Select t2.micro
-  - Launch Instance
+  - Review and Launch Instance
+  - Launch Instance*
   - Create a new Key Pair (blog-api)
-  - Be sure to download PEM
+  - Be sure to download PEM and save file
   - Launch Instance
-  - Edit Security Group for Inbound Data Custom TCP 8000 0.0.0.0/0  
+  - Edit Security Group for Inbound Data
+    - Custom TCP 8000 Anywhere 0.0.0.0/0
 
 ### SSH
 
 - Navigate to .ssh
-  - copy pem file to .ssh 
+  - copy pem file to .ssh
   - run chmod 400 on file.
 - Obtain the Ec2 Instance Public IP
-  - ssh -i blog-api.pem ec2-user@ec2-34-211-158-52.us-west-2.compute.amazonaws.com
+- EC2->Instance->check Box -> Connect ->SSH Client
+- ssh -i "blog-api.pem" ec2-user@ec2-54-203-8-100.us-west-2.compute.amazonaws.com
 
 ## EC2 Instance
 
 - See updates needed sudo yum update
 - sudo yum install git
-- clone repo
+- clone repo (Be sure to select HTTPS)
 - sudo yum install -y docker
 - sudo usermod -a -G docker ec2-user
 - sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -197,8 +219,9 @@ ALLOWED_ORIGINS=http://localhost:3000
 - sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 - sudo reboot
 - Add missing .env
-- Update allowed_hosts
+- Update allowed_hosts with EC2 IP and Change Debug to False
 
+Test the Public IP
 
 ## Deploy Project - Heroku Time
 

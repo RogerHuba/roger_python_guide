@@ -10,35 +10,59 @@
 
 ## Lecture / Demo
 
-> Although we are going to be using a tool that will simplify our ability to use a django custom
-> user, we left the heavy reading in on how to do it mannually so that you will have an idea 
-> what DjangoX is doing to simplify things.  As developers we 
+> As we have gone through and added to our Django project, we have come across some things(or steps) that we had to complete to get the project up and running. I have teased out a few things like talking about snippits, and templates. Today we are going to push the envelope of "efficient" to the next level. This may inspire you to push the envelope even further on your own.
 
+- You have heard me mention this DjangoX business, lets jump in and see what it is.
 - [DjangoX](https://github.com/wsvincent/djangox)
+- William S Vincent is the author of the Django for beginners, and the Django for professional, and Django for API book series.
+- During the creation of his projects for books, he got tired of doing the same thing over and over again with all of the same steps. The creation process was not very DRY to him. He notices that there were ALOT of similar things that were the same across every site that he had to do before he got into the unique work for that project.  That is how DjangoX was born.
+- As we go through the template, we see a few ways to install. What do we notice right off?  No Poetry. Fear not, it is pretty simple to convert over to poetry and get this running.
+- Point out what is not talked about here in the Features. The Django custom users. If you apply your migrations, Django creates a user_table in the DB. If you want to make changes to that user table, it is a real pain to do. DjangoX takes care of that up front.
+- Talk about whitenoise. We have not had to deal with this yet but when we move to production, you normally do not server your static files from the same place you do your code. You will normally use a Dontent Delivery Network (CDN) because it is cheaper and more efficient. Whitenoise gives us a lot of help.
+- How did WVincent get this made. Well, via GitHub of course. You actually have the ability to turn any repository you have now into a template with the click of a button. With this we can use his template, and even create your own template.
 
 > Click on the Use This Template
     > Select an Owner
-    > Give it a name snacks - x
+    > Give it a name things-tracker
     > Give Description
-    > Not Grabbing Branches - Create
+    > Not Grabbing Branches - Create repo from template
+> Should only take a few seconds.
 > Navigate to my Github and now I have a DjangoX Project
-    > This is mine, not a fork, but mine with a nice template.
+    > This is mine, not a fork, but mine with a nice template. I can do whatever I want with this
 > In the upper left corner you can see it was copied from wvincent
 > It is mine, and I want to use it, so I think it is time to clone it
-
-- Click the Green Code Dropdown and select clone.
-- Clone the repo to computer
-
+> Click the Green Code Dropdown and select clone.
+> Clone the repo to computer
 > It's time to look at the instructions.  Scroll
 > Clone down your repo to your computer
 > Walk through looking at pipfile with requirements.
-> Manually install items from piplock file
-> 
+> Lets do a conversion from pipenv to Poetry.
+> `poetry init -n`
+
+```python
+poetry add Django django-allauth django-crispy-forms django-debug-toolbar whitenoise
+```
+
 - **WARNING:** On Mac you may get an error and need to re-set the system version compatibility due to upgrade issues with with Big Sur, the name of latest version of Mac OS.
-- ```export SYSTEM_VERSION_COMPAT=1```
+-```export SYSTEM_VERSION_COMPAT=1```
   - Then do poetry add again
   - Or find a TA
 - > poetry add --dev black flake8
+
+### Fire up the project
+
+> poetry shell if not already there
+> Lets see if this in enough to get up and running
+> ALTERNATIVE: Could show pmp. Run alias and show pmp
+>`python manage.py runserver`
+> Take a little time to go into the .zshrc file and show alias
+> `code ~/.zshrc
+> Look at the missing migrations. Few more than we are use to.
+>`pmp migrate`
+> Go through things on the screen like the DjangoX which is a home re-fresh, the login, the sighup, the applied styles.
+> One thing to note in the login is the email and password. Django default is username and password.
+> We can signup with a email and password. This seems to be wired up pretty good right out of the box
+> Now there are some additiional thing we may want to add like, email verification as an example.
 
 ### Remove files we don't need and talk a little about them
 
@@ -48,65 +72,94 @@
 - Pipfile
 - Pipfile.lock
 
-> We notice some thing right away that are here.  Templates folder, static folder, instead of a project folde we have a config folder.
-> Look through the settings file and look for things that are normal and then things that are not.
-> We look around as needed.  
-### Fire up the project
+> We notice some thing right away that are here.  Templates folder, static folder, instead of a project folde we have a config folder. Look through the settings file and look for things that are normal and then things that are not. We look around as needed.  
 
-- > poetry shell
-- > python manage.py migrate
-- > python manage.py createsuperuser
-- > python manage.py runserver
-  - look around
-- Point out the log in / sign up features and tease that we'll need to do same in next module.
+## Add Things App to project
 
-## Add Snacks App to project
+- Lets see if we can just add an application to the project
+- python manage.py startapp things
+- Now there is no way this knew we were going to call the app things so we have to still do some manual things.
 
-- python manage.py startapp snacks
-- add `snacks` to `INSTALLED_APPS`
+## URL Time (Project)
+
+- add `things` to `INSTALLED_APPS`
+- Next lets take a look at the project URLS.
+
+> This looks little different. We have this debug setting.
+
+- add `path('things', include('things.urls')),` to urlpatterns.
+
+## URL Time (APP)
+
+- `touch things/urls.py`
+- QUESTION:  Does anyone know what is suppose to go in the URLS?
+- ANSWER: Rhetorical.  You all know already.
+- can point them to:
+  - `https://code.visualstudio.com/docs/editor/userdefinedsnippets`
+- Use `DJUC`
+
+## Views Time
+
+- Delete what is there
+- Anyone remember what to put here?
+- Sure would be great if I had a snippit for here.
+- use `DJVC`
+- That sure is a whole lot easier using snippits
+- Notice that this loads everything that I need(almost)
+- I will need to add fields for my forms after I update the model.
 
 ## Model time
+
+- I don't have a snippit for this. Models are a little different because they are all different.
 
 ```python
 from django.contrib.auth import get_user_model
 from django.db import models
 
-class Snack(models.Model):
+class Thing(models.Model):
     name = models.CharField(max_length=64)
     description = models.TextField(default="")
     purchaser = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-
 
     def __str__(self):
         return self.name
 ```
 
-- Add Snack model to admin.py so it's accessible in Admin
+## Admin Time
+
+- Add Thing model to admin.py so it's accessible in Admin
 
 ```python
 from django.contrib import admin
-from .models import Snack
+from .models import Things
 
-admin.site.register(Snack)
+admin.site.register(Things)
 ```
 
-- Do migration for Snack model
-- > python manage.py makemigrations snacks
+- Do migration for Thing model
+- > python manage.py makemigrations thing
 - > python manage.py migrate
 
-### View Time
+## Template Time
 
-```python
-from django.views.generic import ListView
-from .models import Snack
+- go to .oh-my-zsh -> custom -> example.zsh
+- Show the template creation alias I have written.
+- from the base dir, run crud_templates things things
+- Then run tree templates
 
-class SnackListView(ListView):
-    template_name = 'snacks/snack-list.html'
-    model = Snack
-```
+- In things-list run `dtc`
+- point out that we need to add _base.html
+  
+## TESTING Time
 
-- Add more views as needed
-- This would be a **GREAT** time to use a snippet
-- Best way is to use [Snippet Generator](https://snippet-generator.app/){:blank}
-- Refer to included [SNIPPETS.md](./SNIPPETS.md){:blank} for examples snippets built with Snippet Generator.
+- Lets see if this gets things up and running
+- If it does then hit the /things route and we should see Thing List comming soon
+- After getting through any errors talk about streamlining things
 
+- If you did not makemigrations after updating model may have to do this.
+- Still need to update views with model informaiton in fields "name", "description" etc
+
+- We can update to crispy forms in our templates now pretty easily (something that came with DjangoX)
+- {%  load crispy_forms_tags %}
+- {{ form|crispy}}
+- T
