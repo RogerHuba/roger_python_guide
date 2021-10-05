@@ -14,10 +14,10 @@ You CANNOT use the string library
 ```python
 # Usint panagram
   
-def ispangram(str):
-    alphabet = "abcdefghijklmnopqrstuvwxyz"
-    for char in alphabet:
-        if char not in str.lower():
+def ispangram(str: word): -> boolean
+    ALPHA = "abcdefghijklmnopqrstuvwxyz"
+    for char in ALPHA:
+        if char not in word.lower():
             return False
   
     return True
@@ -42,10 +42,9 @@ def is_panagram(str):
     return is_str_pan
 ```
 
+## Chalenge #2 (35 Min)
 
-## Chalenge #2 (40 Min)
-
-Given a LL and an int, delete all nodes where the node value is > the given int. 
+Given a LL and an int, delete all nodes where the node value is > the given int.
 
 (ll, 18)
 
@@ -82,22 +81,19 @@ def delete_over(ll, num):
     return ll       
 ```
 
-
 ## Challenge #3 (40 Min)
 
-Write a function that takes a binary tree as an argument, as well as some integer. Check if there exists a leaf whose path weight equals the given integer. If there does, return True. Otherwise, return False.
+Write a function that takes a binary search tree as an argument, as well as some integer. Check if a node value equals the given integer. If there does, return True. Otherwise, return False.
 
 ```python
-def leaf_has_weight(root, target, weight_so_far=0):
-
-    if not root:
-      return False
-
-    my_weight = weight_so_far + root.value
-
-    if not root.left and not root.right:
-        return target == my_weight
-
-    return (leaf_has_weight(root.left, target, my_weight) or 
-            leaf_has_weight(root.right, target, my_weight))
+def bst_contains(input_tree, value):
+  node = input_tree.root
+  while node is not None:
+    if value == node.value:
+      return True
+    elif value < node.value:
+      node = node.left
+    else:
+      node = node.right
+  return False
 ```
