@@ -1,11 +1,12 @@
 # File I/O
 
 ## Dad Joke of the Day
- - My wife asked me to sync her phone, so I threw it into the ocean. I don’t know why she’s mad at me.
- - Why do you never see elephants hiding in trees? Because they’re so good at it.
 
- ## Truth / Falsy
- 
+- My wife asked me to sync her phone, so I threw it into the ocean. I don’t know why she’s mad at me.
+- Why do you never see elephants hiding in trees? Because they’re so good at it.
+
+## Truth / Falsy
+
  ```python
  stuff = None
 
@@ -58,8 +59,8 @@ Example: 'aggressiveness'
 Return: 'agresivn'
 
 ### Review the Lab for Today
+
 - Show the given sample mad-lib
 - Show the same output expected.
 
 ### Read Files
-

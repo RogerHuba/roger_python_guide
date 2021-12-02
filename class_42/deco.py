@@ -1,26 +1,53 @@
 from functools import wraps
-def yo_mamma_decorator(func):
+from time import sleep
+
+def emphasize(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        orig_val = func(*args, **kwargs)
-        return f'Yo mamma says "{orig_val}"' 
+
+        return_val_from_undecorated_function = func(*args, **kwargs)
+
+        emphasized = return_val_from_undecorated_function.upper() + "!!!"
+
+        return emphasized
 
     return wrapper
 
-def sophisticated_decorator(func):
+def sarcastic_decorator(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         orig_val = func(*args, **kwargs)
-        return f'It is with a great honor that I hear you say "{orig_val}"'
+        return f'Oh Sure, "{orig_val}" sounds like a "great" idea'
 
     return wrapper
 
 
-@yo_mamma_decorator
-@sophisticated_decorator
-def just_saying(txt):
+def proclaim(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        orig_val = func(*args, **kwargs)
+        return "On this day I do say, " + orig_val
+
+    return wrapper
+
+def procrastinate(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        sleep(3)
+        return func(*args, **kwargs)
+
+    return wrapper
+
+
+@procrastinate
+@proclaim
+def say(txt):
     return txt
 
+@sarcastic_decorator
+@emphasize
+def restaurant_suggestion(cuisine):
+    return cuisine
 
 if __name__ == "__main__":
-    print(just_saying('I love star wars!'))
+    print(say('spam goes best with eggs.'))

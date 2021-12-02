@@ -2,8 +2,6 @@
 
 ## Modify API
 
-**NOTE:** This section can be skipped if your Cookie Stand API already has custom claim and token expiration.
-
 - Three small changes are needed to API.
 - By default, minimal information is included in the JWT returned by API.
 - We need to make a small change to include more info bundled in the tokens.
@@ -72,7 +70,6 @@ SIMPLE_JWT = {
 ## Create App
 
 - `npx create-next-app --example with-tailwindcss cookie-stand-demo`
-- cd to folder created
 
 ## Install Dependencies
 
@@ -151,7 +148,7 @@ export default MyApp
 - `pages/index.js`
   - Modify user definition line to be `const { user, login } = useAuth();`
   - Add onClick handler to login button.
-    - `<button onClick={() => login(process.env.NEXT_PUBLIC_USERNAME, process.env.NEXT_PUBLIC_PASSWORD)}`
+    - `<button onClick={() => login('somebody', 'somepassword')}`
     - NOTE: the username and password must match known user in API's database
 - Page should still render `Welcome somebody` but this user is real!
 - Logging out is just as easy
@@ -182,7 +179,7 @@ export default function Home() {
                 ) : (
                     <>
                         <h2>Need to log in</h2>
-                        <button onClick={() => login(process.env.NEXT_PUBLIC_USERNAME, process.env.NEXT_PUBLIC_PASSWORD)} className="p-2 text-white bg-gray-500 rounded">Login</button>
+                        <button onClick={() => login('rudy', 'rudy')} className="p-2 text-white bg-gray-500 rounded">Login</button>
                     </>
                 )}
             </main>
@@ -238,7 +235,7 @@ export default function Home() {
                 ) : (
                     <>
                         <h2>Need to log in</h2>
-                        <button onClick={() => login(process.env.NEXT_PUBLIC_USERNAME, process.env.NEXT_PUBLIC_PASSWORD)} className="p-2 text-white bg-gray-500 rounded">Login</button>
+                        <button onClick={() => login('rudy', 'rudy')} className="p-2 text-white bg-gray-500 rounded">Login</button>
                     </>
                 )}
             </main>
@@ -297,7 +294,7 @@ export default function Home() {
                 ) : (
                     <>
                         <h2>Need to log in</h2>
-                        <button onClick={() => login(process.env.NEXT_PUBLIC_USERNAME, process.env.NEXT_PUBLIC_PASSWORD)} className="p-2 text-white bg-gray-500 rounded">Login</button>
+                        <button onClick={() => login('rudy', 'rudy')} className="p-2 text-white bg-gray-500 rounded">Login</button>
                     </>
                 )}
             </main>
@@ -344,7 +341,7 @@ function StandCreateForm({ onCreate }) {
 - So now we can Read and Create resources. Let's move on to Delete.
 - **NOTE:** Get the students to lead the way here
 - First we need to define `deleteResource`
-  - `const { resources, loading, createResource, deleteResource } = useResource();`
+  - `const { resources, loading, createResource } = useResource();`
 - Next, modify `<StandList>` declaration
   - `<StandList stands={resources} loading={loading} onDelete={deleteResource} />`
 - Last, update `<StandList>` component definition to  allow deletes...

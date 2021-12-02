@@ -20,9 +20,9 @@
 
 - It is HARD
 - Designed for you to Struggle (this is where the learning happens)
-    - You will FAIL a lot here as well as on the job.
-    - You will work harder here than you will on the job.
-    - You Will have to do a lot on your own to meet deadlines.
+  - You will FAIL a lot here as well as on the job.
+  - You will work harder here than you will on the job.
+  - You Will have to do a lot on your own to meet deadlines.
 - Not just problem solving approach, but build toughness (be ok with failure)
 - Once you get comfortable with were you are at, you will get promoted and have to start it all over again.
 - Expectations are high (no longer in 201 or 301)
@@ -31,17 +31,18 @@
 ## Class Logistics
 
 - Canvas
-    - Go through Syllabus
-    - Go Over the weekly schedule
+  - Go through Syllabus
+  - Go Over the weekly schedule
 - Front Row (Uploaded when it shows Class: xx)
 - Remo Setup Guide
 - Course Repository
-    - Review Overall Course breakdown in COurse Repo
+  - Review Overall Course breakdown in COurse Repo
 
 ## Demo of Code
+
 - Talk about following along with coding and instead just take notes.
-    - If you fall behind, you lose focus and you may miss something.
-    - If there is something you want to go back to, take note of the time so you can skip to that time in the video. 
+  - If you fall behind, you lose focus and you may miss something.
+  - If there is something you want to go back to, take note of the time so you can skip to that time in the video. 
 - In your pre-work you installed a tool called poetry. Lets see how that works. 
 
 - Poetry - Gives us a virtual Environment to be able to use different dependencies but not on a global level, only in the env
@@ -132,9 +133,16 @@ print(movie())
 
 - Show `if __name__ == "__main__":` 
 
+```python
 multi_line = '''
 Here is some text
 And some more text
 And alas there is more
-```
+'''
+
+
 print(mult_line)
+better_multiline_string = dedent(multi_line)
+print(better_multiline_string)
+```
+

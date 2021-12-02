@@ -8,43 +8,48 @@ export default function Home() {
     const { resources, loading, createResource, deleteResource } = useResource();
 
     return (
-      <div>
-        <Head>
-            <title>Cookie Stand Demo</title>
-            <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <main className="p-4 space-y-8 text-center">
-          <h1 className="text-4xl">Fetching Data from Authenticated API</h1>
-          {user ? (
-            <>
-              <h2>Welcome {user.username}</h2>
-                <button onClick={logout} className="p-2 text-white bg-gray-500 rounded">Logout</button>
-                <StandCreateForm onCreate={createResource} />
-                <StandList stands={resources} loading={loading} onDelete={deleteResource} />
-            </>
-        ) : (
-            <>
-              <h2>Need to log in</h2>
-               <button onClick={() => login(process.env.NEXT_PUBLIC_USERNAME, process.env.NEXT_PUBLIC_PASSWORD)} className="p-2 text-white bg-gray-500 rounded">Login</button>
-          </>
-          )}
-        </main>
-      </div>
-  )
+        <div>
+            <Head>
+                <title>Cookie Stand Demo</title>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
+
+            <main className="p-4 space-y-8 text-center">
+                <h1 className="text-4xl">Fetching Data from Authenticated API</h1>
+                {user ? (
+                    <>
+                        <h2>Welcome {user.username}</h2>
+
+                        <button onClick={logout} className="p-2 text-white bg-gray-500 rounded">Logout</button>
+
+                        <StandCreateForm onCreate={createResource} />
+
+                        <StandList stands={resources} loading={loading} onDelete={deleteResource} />
+
+                    </>
+                ) : (
+                    <>
+                        <h2>Need to log in</h2>
+                        <button onClick={() => login('rudy', 'rudy')} className="p-2 text-white bg-gray-500 rounded">Login</button>
+                    </>
+                )}
+            </main>
+        </div>
+    )
 }
 
 function StandList({ stands, loading, onDelete }) {
 
-  if (loading) return <p>Loading...</p>
+    if (loading) return <p>Loading...</p>
 
-  return <ul>
-      {stands?.map(stand => (
-          <li key={stand.id} className="space-x-2">
-              <span>{stand.location}</span>
-              <span onClick={() => onDelete(stand.id)}>[X]</span>
-          </li>
-      ))}
-  </ul>
+    return <ul>
+        {stands?.map(stand => (
+            <li key={stand.id} className="space-x-2">
+                <span>{stand.location}</span>
+                <span onClick={() => onDelete(stand.id)}>[X]</span>
+            </li>
+        ))}
+    </ul>
 }
 
 function StandCreateForm({ onCreate }) {
