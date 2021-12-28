@@ -7,7 +7,7 @@
 
 ## Presentation Kickoff (30 - 45 Min)
 
-- [401 Kickoff](https://docs.google.com/presentation/d/1ZFTh-Wtl6CdmMPl0JgEjlBlOOyPXrup5mNQVRXML1-w/edit#slide=id.gaf2f0b4324_0_0)
+- [401 Kickoff](https://docs.google.com/presentation/d/1CrJZW7G4NA8UCud69IXa1VFlvJxY18wkEqIMQ1J_vvU/edit#slide=id.ge708d69c0a_0_286)
 
 ## Introductions
 
@@ -19,13 +19,17 @@
 ## Misc Things (5-10 Min)
 
 - It is HARD
+- Expectations are high (no longer in 201 or 301)
+  - No more hand holding
+  - More expectations from you.
+  - Harder than the day course!
 - Designed for you to Struggle (this is where the learning happens)
   - You will FAIL a lot here as well as on the job.
   - You will work harder here than you will on the job.
   - You Will have to do a lot on your own to meet deadlines.
 - Not just problem solving approach, but build toughness (be ok with failure)
 - Once you get comfortable with were you are at, you will get promoted and have to start it all over again.
-- Expectations are high (no longer in 201 or 301)
+
 - There will be times where you have to just let a grade go.
 
 ## Class Logistics
@@ -33,16 +37,16 @@
 - Canvas
   - Go through Syllabus
   - Go Over the weekly schedule
-- Front Row (Uploaded when it shows Class: xx)
+- Show Zoom Recording area
 - Remo Setup Guide
 - Course Repository
-  - Review Overall Course breakdown in COurse Repo
+  - Review Overall Course breakdown in Course Repo
 
 ## Demo of Code
 
 - Talk about following along with coding and instead just take notes.
   - If you fall behind, you lose focus and you may miss something.
-  - If there is something you want to go back to, take note of the time so you can skip to that time in the video. 
+  - If there is something you want to go back to, take note of the time so you can skip to that time in the video.
 - In your pre-work you installed a tool called poetry. Lets see how that works. 
 
 - Poetry - Gives us a virtual Environment to be able to use different dependencies but not on a global level, only in the env
@@ -54,17 +58,17 @@
   - > poetry new demo - This creates an entire structure for us
     - run tree and show the things here.
     - Change the name of the readme from a .rst to a .md
-  - > poetry install - Linke NPM instlal.  Will take a lock file and install dependencies (useful when you download a project)
+  - > poetry install - Like NPM install.  Will take a lock file and install dependencies (useful when you download a project)
   - > poetry add - Adds dependencies to your local environment
   - > poetry shell - Puts you into the virtual environment
 
-- Open up VS Code in the Virtual Environment.  Point out that VS Code knows your in an environment bu tit may take a min to get there.
+- Open up VS Code in the Virtual Environment.  Point out that VS Code knows your in an environment but it may take a min to get there.
 - > I'm sure you already know this but VSCode is not perfect.  Poetry is not perfect either. There may be times where you are having problems and you need to burn your virtual environment and resetup.  Be ok with doing that. It gives you practice.
 
 - > Now that we are here.  Let's write some code.
 
-```bash
-demo/touch topics.py
+```zsh
+touch demo/topics.py
 ```
 
 - In topics add the following
@@ -86,9 +90,9 @@ Answer: We use the print statment
 
 ```python
 print('Star Wars is the best')
-# Print is a builtin function. We don't have to define this
 ```
 
+- Print is a builtin function. We don't have to define this
 - Let's Execute this as a script. This is calling the file and running it directly.
 
 ```bash
@@ -126,12 +130,14 @@ def movie(movie: str) -> str:
 print(movie())
 ```
 
+NOTE: Talk about spacing in Python
+
 - > There may be times where we want to run a file as a script, and other times we want to impoort a specific function
 
 - Create a import_value.py file.
 - import files and call it.
 
-- Show `if __name__ == "__main__":` 
+- Show `if __name__ == "__main__":`
 
 ```python
 multi_line = '''
@@ -146,3 +152,4 @@ better_multiline_string = dedent(multi_line)
 print(better_multiline_string)
 ```
 
+Open guessing game and walk through the code.

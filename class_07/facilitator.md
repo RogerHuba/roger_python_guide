@@ -1,6 +1,7 @@
 # Game of Greed II
 
 ## PPH This Week
+
 [Recorded](https://frontrowviews.com/Home/Event/Details/5ca39148cf724702fc24c210)
 
 ## Dad Jokes
@@ -11,19 +12,22 @@
 - What kind of egg did the evil chicken lay?  A deviled egg.
 
 ## Whitebaord (groups)
+
 - Write a function that takes a linked_list with single letters as values, and returns all lthe letters in a single string.
 `[p] -> [y] -> [t] -> [h] -> [o] -> [n] -> None`
 - returns 'python'
 
 
 ## Linked List Deep Dive
+
 - use [Invision](https://rogerhuba592985.invisionapp.com/freehand/linked-list-Y8JWBcq8h)
 - Various option shere.  
-    - Code from scratch
-    - Bring up working code and walk through with truth tables
+  - Code from scratch
+  - Bring up working code and walk through with truth tables
 
 ### Complexity
-- There were some grumblings in the learning journal about having to build a game. Some students were asking why we are building a game instead of a more serious application. 
+
+- There were some grumblings in the learning journal about having to build a game. Some students were asking why we are building a game instead of a more serious application.
 - I can give you a great answer there. Games are often a lot more complex because of the randomness and chance that are involved in them.
 - When you think about something like Bus Mall or Salmon Cookies, the application was pretty straight forward. There was a small element of randomness with picture that was shown or the total cookies that were sold. In game of gree, the entire app is based of chance and user input. There are so many different paths than can take place.
 - There are so many additional moving parts to keep track of and to have to account for.
@@ -33,6 +37,7 @@
 - Go over the quick builtin demo on changing things.
 
 ### Game of Riddler
+
 - Run the Demo again to make to see the expected end result.
 - Be sure this time to try and put something that you don't have (Cheat)
 
@@ -49,5 +54,3 @@
 - remove the code from ridler.py and run tests.  Do a red - green - refactor
 
 ### Show the Dice
-
-

@@ -58,7 +58,7 @@ def test_sith_lord_name_darth_vader_fixture(vader):
 @pytest.mark.skip('Pending Code')
 def test_sith_lord_attacking(vader):
     actual = vader.attacking()
-    expected = 'Darth Vader is attacking!'
+    expected = 'Darth Vader is Force attacking!'
     assert actual == expected
 
 @pytest.mark.skip('Pending Code')
@@ -76,7 +76,7 @@ def test_jedi_class_method():
 @pytest.mark.skip('Pending Code')
 def test_sith_class_method():
     actual = JediMaster.get_code()
-    expected = 'Peace is a lie, there is only PASSION'
+    expected = 'Peace is a lie, there is only PASSION.'
     actual = expected
 
 @pytest.mark.skip('Pending Code')
