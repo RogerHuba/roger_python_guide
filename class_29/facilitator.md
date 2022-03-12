@@ -1,6 +1,6 @@
 # Django X
 
-## Review of THis Weeks Feedback
+## Review of This Weeks Feedback
 
 - Should be in the class repo under class-20 readme.md
 
@@ -41,13 +41,8 @@
 
 ```python
 poetry add Django django-allauth django-crispy-forms django-debug-toolbar whitenoise
+poetry add --dev black flake8
 ```
-
-- **WARNING:** On Mac you may get an error and need to re-set the system version compatibility due to upgrade issues with with Big Sur, the name of latest version of Mac OS.
--```export SYSTEM_VERSION_COMPAT=1```
-  - Then do poetry add again
-  - Or find a TA
-- > poetry add --dev black flake8
 
 ### Fire up the project
 
@@ -123,6 +118,9 @@ class Thing(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('thing_detail', args=[str(self.id)])
 ```
 
 ## Admin Time
@@ -160,6 +158,54 @@ admin.site.register(Things)
 - Still need to update views with model informaiton in fields "name", "description" etc
 
 - We can update to crispy forms in our templates now pretty easily (something that came with DjangoX)
-- {%  load crispy_forms_tags %}
-- {{ form|crispy}}
-- T
+
+```raw
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h2>Create Snack</h2>
+<form method="post" class="uniForm">
+  {% csrf_token %}
+  {{ form|crispy }}
+  <input type="submit" value="SAVE">
+</form>
+{% endblock content %}
+
+```
+
+### URL Time
+
+- Add `path('snacks/', include('snacks.urls')),` to urlpatterns in `config/urls.py`
+  - **NOTE:** snacks is not required to have it's own url path.
+    - It could be that pages in `pages` app (or elsewhere) use Snack model as needed.
+- create `snacks/urls.py`
+
+```python
+from django.urls import path
+from .views import SnackListView
+
+urlpatterns = [
+    path('', SnackListView.as_view(), name='snack_list')
+]
+```
+
+- Add rest of CRUD url patterns
+- This is also a great time for a snippet
+
+- `python manage.py runserver`
+
+### Tweak model for full CRUD
+
+- For create/update will need to add to `snacks/models.py`
+
+```python
+from django.urls import reverse
+...
+    def get_absolute_url(self):
+        return reverse('snack_detail', args=[str(self.id)])
+```
+
+### SNACK CRUD
+
+- Run server again and do some CRUD on your snacks

@@ -39,17 +39,17 @@ print(reverse([1,2,3,4,5, 6]))
 
 - **Why**
   - A **LOT** of websites have been built.
-  - There are 1,197,982,359 websites in the World as of January 2021.
+  - 1,179,448,021
+    - Currently, there are around 1.18 billion websites in the World. 17% of these websites are active, 83% are inactive.
   - In the process certain practices have turned out to be more useful than others.
   - The practices that have shown to be consistently good and signifigantly better
   - to enough people take on the label "best practices"
   - The term "best practices" is subjective, sometimes a cause for debate, and often
   - used too usely.
-  - But the impulse behind the term is a good thing and can be expressed in \
+  - But the impulse behind the term is a good thing and can be expressed in
   - other ways...
     - work smart not harder
-    - work smarter not harder - this leaves in the idea that you'll still be 
-    - working hard ;)
+    - work smarter not harder - this leaves in the idea that you'll still be working hard ;)
     - do more of the good stuff and less of the bad
     - Don't reinvent the wheel
 

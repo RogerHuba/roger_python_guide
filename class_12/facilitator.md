@@ -1,6 +1,7 @@
 # Lecture NOTES: Data analysis with Pandas
 
 ## Jokes
+
 You do know, that just under half of all data science jokes are below average, right?
 
 There are two kinds of data scientists: 1) Those who can extrapolate from incomplete data.
@@ -8,6 +9,7 @@ There are two kinds of data scientists: 1) Those who can extrapolate from incomp
 A SQL query walks into a bar, walks up to two tables, and asks, “Can I join you?”
 
 ## Warm-up or Whitebaord
+
 > Let's work on a Warmup.
 
 [Warm-Up](../warm-up/NOTES.md)
@@ -18,19 +20,13 @@ A SQL query walks into a bar, walks up to two tables, and asks, “Can I join yo
 [Broad-casting](../demo/broadcasting/main.ipynb)
 
 > Do a Review of today's Lab
-> NOTE: There is an issue with one of the CSV files.
+> Fire up a New Kaggle Notebook
+> Show how to add in the dataset.
+    > click on Add data and search for cereals
+> Run the first cell and show the file imported.
+> We already have pandas loaded.
+> Look at the Docs [Pandas](https://pandas.pydata.org/)
 
-> For this demo I already did my poetry init-n, added pandas and jupyterlab, and shelled up.
-> I have also pre-downloaded this cereal.csv file to for us to work with.
-
-> Let's start off by importing pandas and assigning an alias.  Again this is industry standard to use pd.
-
-```python
-import pandas as pd
-```
-
-> Next thing that I want to do is grab some data to work with.
-> # data from https://www.kaggle.com/crawford/80-cereals
 > This is where I got the data from. Under the Data tab, scroll down, and you will see it.
 > This is a .csv (Comma Separated Values)
 > When we look directly in the .csv file, at the top of the file we see the data headers.
@@ -38,10 +34,11 @@ import pandas as pd
 > Now I want to read in the data.
 
 ```python
-df = pd.read_csv('./cereal.csv')
+filename = "/kaggle/input/80-cereals/cereal.csv"
+df = pd.read_csv(filename)
 ```
-> We are going to use the df variable which stands for data frame.  Get use to this term.
-> We run this, nothing happens, but also it didn't blow up. Lets take a look at the data that we loaded.
+
+> We are going to use the df variable which stands for data frame.  Get use to this term. We run this, nothing happens, but also it didn't blow up. Lets take a look at the data that we loaded.
 
 ```python
 df.info()
@@ -50,9 +47,7 @@ df.info()
 > If we look at what is displayed, we can see that there were xx amount of entries of data, 0 - xx.
 > We also see that our data has been nicely layed out for us, even tells us the data type.
 > This is great.  We have this awesome set of data, but this is not how we will normally look at data.
-> We look at specific sections, ranges, and filtered data.  Let's do some of that. We are often working with
-> Hundreds of thousands, even millions of lines of data.
-
+> We look at specific sections, ranges, and filtered data.  Let's do some of that. We are often working with hundreds of thousands, even millions of lines of data.
 > First we can look at the first five and then the last 5 entries in the data set with the following:
 
 ```python
@@ -94,7 +89,6 @@ df.set_index('name')
 ```
 
 > We can see the numbering is gone, and the name is a sub-set on the main menu.
-
 > Lets get a little wild now.  I wand to show name, rating, and sugars, and want to sort assending on the rating
 > QUESTION: Ideas or thoughts?
 
@@ -103,29 +97,35 @@ df[['name','rating','sugars']].sort_values('rating', ascending=False)
 ```
 
 > This is all great, we are looking at the date we have and filtering, but all data will not be that simple.
-
 > Data Science is all about looking at and shaping data to tell a story. Let's tell a little story.
 
-```python
-avg_sodium = df[['sodium']].mean()
-avg_sodium
-```
+
 
 > QUESTION: What is the difference between mean, median, mode, and range?
 > mean = average
 > median = the middle value
 > mode = the value that is repeated the most
 > range = the difference between lowest and highest value
-
 > We can do things like look at the max or min of something
+
+```python
+avg_carbo = df[['sodium']].mean()
+avg_carbo
+```
+
+```python
+median_carbo = df['carbo'].median()
+median_carbo
+```
 
 ```python
 min_carbo = df['carbo'].min()
 min_carbo
+```
 
+```python
 max_carbo = df['carbo'].max()
 max_carbo
-
 ```
 
 > What if we do something like this where we want to get a list of carbs < 10
@@ -139,8 +139,7 @@ mcc = df['carbo'].mode()
 mcc
 ```
 
-> This is some cool stuff, and some easy way to display data. It takes a little to get use to but once you get the
-> hang of it, you have a lot of power at your fingertips.
+> This is some cool stuff, and some easy way to display data. It takes a little to get use to but once you get the hang of it, you have a lot of power at your fingertips.
 > You are not just limited to Pandas stuff though.
 
 ```python
@@ -159,7 +158,7 @@ df[df['carbo'] == np.mean(mcc)][['name','carbo']].set_index('name')
 df['calories'].std()
 ```
 
-> In statistics, the standard deviation is a measure of the amount of variation of a set of values.
+> In statistics, the [standard deviation](https://www.mathsisfun.com/data/standard-deviation.html) is a measure of the amount of variation of a set of values.
 > A low standard deviation indicates that the values tend to be close to the mean of the set
 > A high standard deviation indicates that the values are spread out over a wider range.
 

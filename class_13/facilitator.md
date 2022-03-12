@@ -1,6 +1,7 @@
 # Lecture NOTES: Linear Regression
 
 ## Jokes
+
 Q: Why did the fly never land on the computer?
 A: He was afriad of the world wide web.
 
@@ -13,21 +14,20 @@ A: Sith-kabob
 Q: Where did Luke get his bionic hand
 A: Second hand store
 
+## TA Code Challenge (optional)
 
-## TA Code Challenge
-
-- Have a TA do a code challenge of 
-    - Given a list, reverse the list.
-    - Once they get that, update the problem,
-    - Gived a linked-list reverse the list
+- Code challenge of:
+  - Given a list, reverse the list.
+  - Once they get that, update the problem,
+  - Gived a linked-list reverse the ll
 
 ## The Why
 
 > Let me ask you a Hypothetical Question.
-    > If we had all Covid Data could we...
-    > Guess where outbreaks were going to occur?
-    > Guess when the spread will slow
-    > Guess when we can get back on Campus
+  > If we had all Covid Data could we...
+  > Guess where outbreaks were going to occur?
+  > Guess when the spread will slow
+  > Guess when we can get back on Campus
 > Liner Regression and training model data could help us with some of those answers.
 > Now, we need to have GOOD data in order to make a good guess.
 > The more data points we have, the more accurate our estimates become.
@@ -38,24 +38,9 @@ A: Second hand store
 > Open up kaggle.com and look for some data
 > Explain that they need to prove their conclusion
 > No acceptance tests today.
-
-> Today I am going to do something a little different.  I am going to use an online
-> tool by google called colab, or Colaboratory.
-> You are will be doing this in your standard way:
-
-```python
-mkdir folder
-cd folder
-poetry init -n
-poetry add pandas matplotlib sklearn juypterlab
-touch regression.ipynb
-code . or juypter lab
-```
-> If we want to work on some data, well we need to find some data to play around
-> with.  I have this salary.csv file that I am going to use.
+> If we want to work on some data, well we need to find some data to play around with.  I have this salary.csv file that I am going to use.
 > Look over the CVS to see what kind of data we are looking at.
-> We want to use this data to visualize our data, and start making some
-> predictions based on what we see.
+> We want to use this data to visualize our data, and start making some predictions based on what we see.
 > I created another csv file that has something called snacks in it (explain)
 > Next we will start our imports
 
@@ -83,14 +68,13 @@ salary  = pd.read_csv('salary.csv')
 salary.head()
 ```
 
-> Sweet.  We have some Data.  Next we need to get the data into the form we need
-> by the tools to do the linear regression. Lets go through these steps.
+> Sweet.  We have some Data.  Next we need to get the data into the form we need by the tools to do the linear regression. Lets go through these steps.
 > This is called selecting the features
 
 ```python
 # Selecting Features
 X = salary["YearsExperience"].values
-y salary["Salary"].values
+y = salary["Salary"].values
 ```
 
 > This is often referred to as X. This is what we are going to pay attention to
@@ -143,6 +127,7 @@ X
 > tuple but the tuple has 4 things in it
 
 add to previous
+
 ```python
 # Keep Track of our Data
 # X feature = Years of Experience
@@ -162,8 +147,7 @@ print(f"y_test shape [{y_test.shape}")
 ```
 
 > From the data we got some shape data back. Why did we do this?
-> 1) to plot the data, (2) Do some analysis of the data
-
+> (1) to plot the data, (2) Do some analysis of the data
 > Let's see what it will take to plot this data using matplotlib
 
 ```ptyhon
@@ -187,6 +171,7 @@ lm.fit(x_train, y_train)
 > years of experience.
 
 add to previous
+
 ```python
 lm = LinearRegression()
 lm.fit(x_train, y_train)
@@ -223,30 +208,12 @@ plt.plot
 
 > We drew a prediction line in how years of experience relates to salary.
 > QUESTION: What would you infer from this data?
-> We could potentially dig into the data little here and look at some of the
-> outliers on our plot.
-> If this is something you want to do to prove your hypothesis, then you will
-> have a little research to do on what methods or other libraries to import.
-
-> I mentioned earlier that I have another csv file that I did some things with
-> and added some snacks. Lets see if we can prove that salary goes up based on
-> the number of snacks consumed in a day.
-> Let's walk through our code and change years of experience to snacks
-
-Things we need to update:
-- csv file
-    - Here we notice that everything will still work?
-    - QUESTION: Why does everything still work with a new file?
-    - ANSWER: Because we still have Years of Exp in there
-- Update our X to "Snacks'
-- Update X Plots Data
+> We could potentially dig into the data little here and look at some of the outliers on our plot.
+> If this is something you want to do to prove your hypothesis, then you will have a little research to do on what methods or other libraries to import.
 
 > This was  not overly difficult to make the change and see the new data.
-> But I am a developer, I am inherently LAZY.  I want to do a little work as
-> possible. So let's do a little more work, so we ultimately have to do less work.
-
-> We are going to use something called Seaborn. We will learn a little more about
-> Seaborn next week, but we can use it a little today.
+> But I am a developer, I am inherently LAZY.  I want to do a little work as possible. So let's do a little more work, so we ultimately have to do less work.
+> We are going to use something called Seaborn. We will learn a little more about Seaborn in the next class, but we can use it a little today.
 
 ```python
 import seaborn as sns

@@ -2,8 +2,8 @@
 
 ## House Keeping
 
-- [Make sure you sign up for a library](https://docs.google.com/spreadsheets/d/1nPXDMI5IOAyr0fsJveRDY2iUeNDqaYbEn97zcEqSN90/edit#gid=0)
-- Partner Power Hour Today by a current TA  Hex King.
+- [Make sure you sign up for a library](https://docs.google.com/spreadsheets/d/1nPXDMI5IOAyr0fsJveRDY2iUeNDqaYbEn97zcEqSN90/edit#gid=18456559)
+- Partner Power Hour Today by a current TA  Kassie Bradshaw.
 - Career Coaching Next Saturday
 
 ## Warmup
@@ -16,6 +16,10 @@
 > QUESTION: `What does crud stand for?`
 > ANSWER: `Create Read Update Delete`
 > In our last lab, we added some persistance to our app, but we only implemented that through the admin console in Django.  We want to provide end users the ability to do this as well.  We are going to code this out from scratch There are a few things I will copy/paste to save time, others I'll code out.
+
+## Alias
+
+Show the alias that have been setup for venv.
 
 ## Create the File Structure and Environment
 
@@ -89,7 +93,7 @@ DEBUG = env.bool('DEBUG')
 ALLOWED_HOSTS = tuple(env.list('ALLOWED_HOSTS'))
 ```
 
-> In .env (Note the location of this is not what is expected.)
+> In .env (Note the location of this is not what is expected. Inside project folder)
 
 ```env
 SECRET_KEY=xxxx
@@ -171,7 +175,7 @@ touch templates/movie-update.html
 </head>
 <body>
     <header>
-      <h1><a href="{% url 'movie_list' %}">Full Stack Movies</a></h1>
+      <h1>Full Stack Movies</h1>
     </header>
     {% block content %}
     <p>Looks like somebody forgot to define this block in child template</p>
@@ -185,7 +189,7 @@ touch templates/movie-update.html
 > ANSWER: Content Delivery Network
 > Media rich companies use them all the time: Netflix, ESPN etc.
 > Lag matters, Disney does not just have a server in LA to service China. Can mention load servers and content that does not change Django refers to this as static
-> In order to handle this, you need to add {% load static %}
+> In order to handle this, you need to add {% load static %} to the top of the base.html
 > You will also need to create a folder called static
 > Then add your style.css file there
 > While I am running in development mode, I will use my static folder. In my case right here I am using bootstrap so I could get away with not loading static.
@@ -295,11 +299,11 @@ touch movies/urls.py
 ```python
 from django.urls import path
 from django.urls.resolvers import URLPattern
-from .views import DetailView, ListView, CreateView, UpdateView, DeleteView
+from .views import MovieDetailView, MovieListView, MovieCreateView, MovieUpdateView, MovieDeleteView
 
 urlpatterns = [ 
-    path('', ListView.as_view(), name='list_view'),
-    path('<int:pk>', DetailView.as_view(), name='detail_view'),
+    path('', MovieListView.as_view(), name='list_view'),
+    path('<int:pk>', MovieDetailView.as_view(), name='detail_view'),
     path('', CreateView.as_view(), name='create_view'),
     path('', UpdateView.as_view(), name='update_view'),
     path('', DeleteView.as_view(), name='delete_view'),
@@ -394,7 +398,12 @@ class MovieCreateView(CreateView):
 > Yea, we had to make a form here but this is not overkill for us. Lets see if this works and we will come back from there. Is it lovely, maybe not but you get it at a low cost. Lets dig into a couple lines of that code.
 > 2 Things that matter here.
 > `ALWAYS add {% csrf_token %}`
-> Stands for cross site request forgery. Major security flaw in web applications, and you don't want yours to be one of them. This one line gets rid of a lot of bad actors / hackers. This is more than locking the doors to your vehicle, it is the equivalent of low jack. Little cost for a lot of help. The other thing that is happening is the form is rendering out each field represented in the fields list as a paragraph Show that we can take one of the fields away. Lets move on to the last ones, update and delete.
+>Cross Site Request Forgery protection
+The CSRF middleware and template tag provides easy-to-use protection against Cross Site Request Forgeries. This type of attack occurs when a malicious website contains a link, a form button or some JavaScript that is intended to perform some action on your website, using the credentials of a logged-in user who visits the malicious site in their browser. A related type of attack, ‘login CSRF’, where an attacking site tricks a user’s browser into logging into a site with someone else’s credentials, is also covered.
+
+The first defense against CSRF attacks is to ensure that GET requests are side effect free. Requests via ‘unsafe’ methods, such as POST, PUT, and DELETE, can then be protected by following the steps below in a smililar
+
+> Stands for `cross site request forgery`. There are major security flaw in web applications, and you don't want yours to be one of them. This one line gets rid of a lot of bad actors / hackers. This is more than locking the doors to your vehicle, it is the equivalent of low jack. Little cost for a lot of help. The other thing that is happening is the form is rendering out each field represented in the fields list as a paragraph Show that we can take one of the fields away. Lets move on to the last ones, update and delete.
 > The other item here is `form.as_p`. This renders the form in a p tag. There are some other methods avaliable such as form.as_table and form.as_ul
 
 ## Update

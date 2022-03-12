@@ -1,7 +1,7 @@
 import nltk
 # Need to add via poetry
 
-
+nltk.download()
 nltk.download('words', quiet=True)
 nltk.download('names', quiet=True)
 

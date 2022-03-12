@@ -1,19 +1,23 @@
 # Lecture NOTES: Data Visualization with Seaborn
 
 ## Dad Jokes
+
 - What's Forrest Gump's password? 1forrest1
 - What do you call a fancy fish? So-fish-ticated.
 - If two vegetarians get in an argument, is it still called beef?
 
 ## Talk about up-coming project week.
 
-## Warm Up.
+## Warm Up
+
 - Given a linked_list where the data is a list of integers, find the highest value
 
-## Review Assignment 
+## Review Assignment
+
 - Head to Canvas and look at assignment that is due.
 
 ### Demo
+
 - Fire up a .ipynb file
 
 ```python
@@ -61,7 +65,9 @@ sns.set()
 # sns.set_style('darkgrid')
 # sns.set(font='serif')
 ```
+
 - Rerun the figure drawing after each style.  Leave the dark when done.
+- 
 > There are 4 styles that are used, dark, whitegrid, darkgrid, and ticks. You can play with them to see what you like to use. There are 2 ways to set the style. We can also experiment with things like font.
 
 ```python
@@ -125,7 +131,6 @@ print()
 ```
 
 > If you want to move the rotation to an angle change the rotation to 45.
-
 > Now you may be wondering what these lines are on the bar chart. They reference the confidence levels. You almost never say with 100% certainty that somehting is. Especially when dealing with statistics. We say "with a 95% confidence level" this is the case.  You can override this by adding in a ci=None
 
 ```python

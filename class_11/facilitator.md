@@ -1,55 +1,77 @@
 # Demos: Class 11 - Intro to Data Science with Numpy
 
-> Welcome to Module 3. YOu have completed 20% of Python.  Only 80% to go.
+> Welcome to Module 3. You have completed 20% of Python.  Only 80% to go.
 > First 2 modules were about getting and applying some of the python language
-> If you are still struggling with python concepts. Check out [HolyPython](https://holypython.com/beginner-python-exercises/poetry )
+> If your still struggling with py concepts. Check out [HolyPython](https://holypython.com/)
 
-## Demo Jupyter Notebook
+## Data Science'ish
 
-> NOTE: Feel free to follow along with what I do, but if you get an error(Weather VS Code, Poetry, Jupyter or other) on your end, hold off questions until the end of lecture or when we get to Lab Time.
+- Today we head into doing some work with data science.
+- **Emphasize** You will not be an expert in Data Science this week.
+- The Goal is to get you an introduction and some exposure.
+- There is a reason that most data scientists have masters or doctorate degrees.
+- A big pre-requisite is to understand ENOUGH about what is going on under the hood (The Python Magic).
+  - There is a whole-bunch of math that is going on that we don't need to know specifics.
+- Today we are going to take a look at Numpy, why Numpy exists, why other tools build on Numpy, and some other data structures that are used in Data Science.
+- Data Science creates creates programs and scripts that can learn on their own experience.
+It is not free to do this.  By free, I mean in terms of computational power.  It takes a lot to churn through all of these data sets. It puts quite a load on your CPU or Graphics processor to complete some of these tasks.  Depending on what you are doing and how big your data set is, your computer may whine like a small jet engine.
+- We are not going to hit any MAJOR data sets that require a server grade computer to accomplish, but be aware that it will take some computational power and you could see some proccessing delays.
+- Our Main Objective is to make sure we are using the tool, and not letting the tool use us.
+- In the reading you had an introduction to Numpy Arrays.
+  - Numpy arrays are different from plain old Python lists.
+  - Python arrays are implemented using lists
+    - Don't need to know the size when you start out
+    - Don't need to know the date type
+    - Can have multiple data types
+    - Are mutable (NOTE: Good time for a question on the difference between immutable and mutable.)
+  - This makes lists flexible and easy to work with, but not very good to optimize them. (Memory, character iteration)
+  - When optimization = need for speed, there are some things that would be very helpful
+    - What is the size of the list upon declaration
+    - What type of data will be stored (how much memory will be needed for each item)
+    - Helps to be immutable (less tracking of things) - Other languages like Java require these things.
+  - When SPEED REALLY MATTERS - Python my not be the best option.
+    - Because Python is an interpreted language and not fully compiled, it runs through the code at runtime and figures out what it needs to do. In other languages like JAVA or C#, a lot happens during compile, that speed things up.
+  - To some of you this may seem confusing. Python is one of the biggest players in data science, I told you earlier that it takes a lot of computation power, but that Python itself is not the best.  Speed really matters in Data Science.  Hmmm, where am I going with this?
+  
+  QUESTION: How can Python be in-efficient with speed but still be the premier language for Data Science where speed matters?
 
-```bash
-mkidr numpy-fun
-cd numpy-fun
-poetry init -n
-poetry add numpy matplotlib jupyterlab
-```
+  - Python can leverage some powerful friends. This is where Numpy comes in.  Numpy was written in C. C is a very performant language. It is a pain to develop in C, no-where near as user-friendly. You will actually find that a lot of Python libraries, especially the ones that are written for data science, are just wrappers of code written in C.  The nice thing about it is you would never know.
+  - QUESTION: What does Numpy stand for?
+    - Numerical Python
+- All of this to say.  Arrays in numpy matters a lot, and we are going to get a chance to play with them today.
 
-> These 3 dependencies are pretty big. Depending on the speed of your internet and the strength of your computer, this could take a few minutes to complete.
+## Preview the Lab Assignment
 
-```bash
-touch notebook-fun.ipynb
-# QUESTION: What does ipynb stand for? Interactive Python Notebook
-poetry shell
-code .
-```
+Do a quick overview of today's Lab.
 
-The first time you open VSCode and click on your .ipynb file, you will probably get a prompt to install
+Encourage class to identify risk areas.
 
-- Python XXX 64-bit requires ipykernel to be installed.  Source Jupyter (Extension).
-- Click Install and let VS code do its thing. You should be able to ignore warnings.
+## Demo Notebook
 
-> NOTE: There may be some issues with Big Sur and Jupyter Notebook. Time to get your Google-FU ready.
+> NOTE: Feel free to follow along with what I do, but if you get an error on your end, hold off questions until the end of lecture or when we get to Lab Time.
 
-- Make sure to select the proper interpreter
+- Create an account at [Kaggle](https://kaggle.com) if needed.
+- From home page click the blue + button to create a new notebook.
+- Click on the autogenerated title and name something better, `numpy array fun`
+- Make quick note of first cell
+  - Particularly about the helpful libraries pre-installed.
+  - Also show that Kaggle supports working and temp folders.
 
-> Lets run a command
+> Talk about numpy and pandas iports and convention
+
+Let's run a command
 
 ```python
-print('Hello World from Jupyter Notebook')
+print('Hello World from Kaggle Notebook')
 ```
 
-> Couple of ways to get this to run:
-
-> - I can do a shift-enter.
-> - I can press the play button to run just this cell.
->   - Add a new Cell with a division by 0, then create a new cell with a print to show the error won't break things
-> - I can press the button to run everything.
-
-> - Show the arrows that can move cells up and down in the order of execution.
-> - While you can run each cell individually, subsequent cells will be aware of any global variables.
-
-> - Show an example of creating a variable in once cell and printing it in the next.
+> Couple of ways to get this to run
+> I can do a shift-enter.
+> I can press the play button to run just this cell.
+> Add a new Cell with a division by 0, then create a new cell with a print to show the error won't break things
+> I can press the button to run everything.
+> While you can run each cell individually, subsequent cells will be aware of any global variables.
+> Show an example of creating a variable in once cell and printing it in the next.
 
 ```python
 message = 'Python is fun!'
@@ -57,13 +79,17 @@ message = 'Python is fun!'
 print(message)
 ```
 
-> This looks like it is running from Top to Bottom, but that is not entirely true.  What matters is the Numbers of execution.
->
-> Add at the beginning in the first cell and talk about execution order.
+> One thing to note
 
 ```python
-print(message)
+import sys
+print(sys.version)
+# You will not have access to features above 3.7
 ```
+
+> This looks like it is running from Top to Bottom, but that is not entirely true.  What matters is the Numbers of execution.
+
+- Add at the beginning in the first cell and talk about execution order.
 
 > Show the clear all output, then restart the server and show the execution clears.
 > Run first line again and now we have an error
@@ -74,28 +100,11 @@ print(message)
 # My Awesome Notebook Project
 ```
 
-NOTE: We will close out the notebook-fun file now.
-
-## Demo for the Lab
-
-```bash
-touch checkerboard.ipynb
-```
-
-
-> One thing we are going to need right away is Numpy. Press the 'I believe' button on this and trust me.
-
-```python
-import numpy as np
-```
-
-> This will import Numpy with an alias of np.  This is industry convention to use. np can be anything.
-> numpy will allow us to see straight data. If we want to visualize data, that will take another library, but we will come back to that.
+> This will import Numpy with an alias of np.  This is industry convention to use. np can be anything. Numpy will allow us to see straight data. If we want to visualize data, that will take another library, but we will come back to that.
 > let's do some things with numpy arrays.
 > We are going to need an 8 x 8 matrix (an array of arrays)
 > Numpy makes this very easy. I am not going to waste your time and show you the long way to do this.
 > Lets make a board / grid.
-
 > How can we set this up? Well lots of ways. The typical way is to give it a default value.
 > You want to be able to give this matrix a certain shape. (matrix is not contained to just 2 dimensions)
 > In our case we are going to want: 8 x 8 x 3
@@ -105,18 +114,20 @@ import numpy as np
 
 ```python
 grid = np.ones()
+# Look for shape errir
 ```
-
-> This will return an array of ones with the shape and typy of the input.  But how do you know this other than taking my word for this?
-
-> We can access help files by doing something like this:
 
 ```python
-# grid = np.ones()
-help(np)
-help(np.ones)
+grid = np.ones((8,8))
+# Tuple
 ```
 
+We can access the grid like this
+
+```python
+print(grid[0,0])
+
+> This will return an array of ones with the shape and typy of the input.  But how do you know this other than taking my word for this?
 > We can see that it is looking for a shape, and we can even see some examples of how to run this.
 > In our case we want a 3 dimensional array to be filled with ones.
 >

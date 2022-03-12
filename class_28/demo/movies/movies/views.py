@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import MovieListView, MovieDetailView, MovieCreateView, MovieUpdateView, MovieDeleteView
 from .models import Movie
 from django.urls import reverse_lazy
 

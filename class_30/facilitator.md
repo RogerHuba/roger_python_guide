@@ -1,15 +1,19 @@
 # Hashtables
 
-> Let's talk about Hashtables / Hashmaps. There are 
-> Pin Reading and Blank WebPage for writing
+> Let's talk about Hashtables
+> NOTE: Pin Reading and Blank WebPage for writing
 > HashTables associate a Key: with a value
 > QUESTION: What data structure have you used that associates a key with a value?
-> ANSWER: Dictionary
+> ANSWER: Dictionary, JS Objects, even possible arrays / lists
 > Turns out these dictionaries are not just handy, they are also VERY efficient.
 > QUESTION: What is the BigO of a dictionary?
 > ANSWER: o(1)
 > Why is it this?  We know there is a list / array involved. This is more of a conceptual array.  Under the hood does a python dictionary literaly use an array? That is not really our business, that is an implementation detail. But it defiantely uses the notion of sequential memory. It may litteraly be an array. It reality, it dosn't matter to us. For the outside user we can get with efficiency a value using a key. We will assume the notion of an array
 
+- Use invision of the appt.  Blue has someone Greed does not
+- Talk about placing someone has to be determineistic.
+- Checking commer will always be in the first appt.  Clarissa will always be another.
+- 
 - Draw out an array.  Give a key:value of spam:bacon. We want to get them into the array?  How could we add it in there?
 
 > we could add it in as a tuple.  Not very efficient. (DRAW OUT)+

@@ -3,11 +3,9 @@
 ## DAD Jokes
 
 - What do you get from a pampered cow?  
-    - Spoiled milk.
+  - Spoiled milk.
 - Why did the hacker organize a marathon?
-    - He wanted to make money from people who "ran somewhere"
-
-
+  - He wanted to make money from people who "ran somewhere"
 
 ## Warm Up - QUESTION
 
@@ -41,24 +39,32 @@ if filtered_employees_two == ['River Tam', 'Bilbo Baggins', 'Khan', 'R2D2']:
 ```python
 
 # Challenge #1
-filtered_employees_one = [
-    employee['name'] for employee in employees if employee['senority'] i >= 10]
+filtered_employees_one = [employee['name'] for employee in employees if employee['seniority'] >= 10]
+
+print(filtered_employees_one)
 
 if filtered_employees_one == ['John Conners', 'Bilbo Baggins', 'Darth Revan']:
     print('SUCCESS Test One')
 
 # Challenge #2
-filtered_employees_two = [
-    employee['name'] for employee in employee if employee['senority'] i%3 == 0]
+filtered_employees_two = [employee['name'] for employee in employees if employee['seniority'] %3 == 0]
+
+print(filtered_employees_two)
 
 if filtered_employees_two == ['River Tam', 'Bilbo Baggins', 'Khan', 'R2D2']:
     print('SUCCESS Test Two')
 ```
 
 ## Code Challenge
-> Given a 2 linked lists, return the count of duplicate values
 
-Given 2 ll, return the count of duplicate values
+> Given a 2 linked lists, return the duplicate values
+
+Sample Data
+1 -> 3 -> 8 -> None
+2 -> 3 -> 8 -> None
+
+return [3, 8]
+
 
 ```text
 Algo
@@ -82,12 +88,12 @@ return count
 def count_common_nodes(ll_1, ll_2):
     current1 = ll_1.head
     current2 = ll_2.head
-    count = 0
+    dupes = []
 
     while current1:
         while current2:
             if current1.value == current2.value:
-                count += 1
+                dupes.append(current1.value)
             current2 = current2.next
         current1 = current1.next
         current2 = ll_2.head
@@ -114,6 +120,7 @@ def count_common_nodes(ll_1, ll_2):
 
     return count
 ```
+
 ### Exit Example
 
 - There is an area in the tests that could give you some un-expected behavior if you have not implemented sys.exit. If you end your script without a true exit, your script stops executing, but the script is still open. Evenutally garbage collection will fix this but we don't like to rely on things like usually, eventually, sometimes. We want things handled. There is a way to catch the code and make sure we get a graceful exit.
@@ -138,7 +145,11 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         quit_game('Keyboard Interrup Detected')
 ```
+
 ### Lecture
+
+> Review the Lab Feature Tasks and Requirements
+
 > Here we are on the hump lecture of module 2. We have been trying to wrap our heads around what being pythonic really is. How do we make pythonic code? Python has very little in the way of rules. Most of the expectations are more conventions.
 
 - Tonight we are going to review a few Classes and methods and discuss what is going on with them.

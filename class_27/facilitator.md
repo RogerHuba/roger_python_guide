@@ -15,7 +15,6 @@ Print out -
 
 - Print each students name starting at end (aka tail) of list.
 
-
 ## Todays Jokes
 
 - What do you call security guards working outside Samsung shops? Guardians of the Galaxy.
@@ -64,7 +63,7 @@ SELECT * FROM users WHERE school = "CodeFellows';
   - A model can be corresponds to a Database Table but is authored as a Python class
   - The model's attributes are comparable to the columns in a table
   - The values of those attributes are like the DB table rows
- 
+
 ### Creating a Model
 
 - Edit `movies/models.py` and add...
@@ -107,7 +106,7 @@ admin.site.register(Movie)
 
 ```python
     def __str__(self):
-        return self.name
+        return f'{self.name} reviewed by {self.reviewer} with a score of {self.rating}'
 ```
 
 ### Inspecting the Database
@@ -297,7 +296,7 @@ urlpatterns = [
 
 ### Testing
 
-```
+```python
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
@@ -331,3 +330,5 @@ class MoviesTests(TestCase):
         self.assertTemplateUsed(response, "movie_list.html")
         self.assertTemplateUsed(response, "base.html")
 ```
+
+run python manage.py test
