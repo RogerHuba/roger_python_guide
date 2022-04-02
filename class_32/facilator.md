@@ -234,12 +234,11 @@ In order for Django to make the switch two things are needed.
 1. Some way for python to talk to postgres
 1. Updated Database settings*
 
+- > pip install psycopg2-binary
 - > poetry add psycopg2-binary
-- **BIG SUR WARNING:** Might need to set the system version compatibility
-  - > export SYSTEM_VERSION_COMPAT=1
-  - then try to add again
 
 - > poetry export -f requirements.txt -o requirements.txt --without-hashes
+- > pip freeze >> requirements.txt
 
 Now let's move on to Database settings
 
@@ -263,6 +262,17 @@ Make sure the `NAME`, `USER` and `PASSWORD` keys match the corresponding values 
 Believe it or not, that's all the code required.
 
 How does it run?
+
+if you get a libgp error for a mac M1, this is the fix
+
+```text
+Those on a MAC M1.  This is what fixed the DB issue.
+
+/usr/sbin/softwareupdate --install-rosetta
+/usr/sbin/softwareupdate --install-rosetta --agree-to-license
+export DOCKER_DEFAULT_PLATFORM=linux/amd64
+
+```
 
 > docker-compose up --build
 

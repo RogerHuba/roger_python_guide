@@ -89,11 +89,12 @@ Next we need to adjust our settings.py.  Lets add the following tp REST_FRAMEWOR
   ],
 ```
 
-Our next setps is to add urls that are added to app to handle the fact that we are supplying tokens (access and a refresh)
+Our next setps is to add urls and views that are added to app to handle the fact that we are supplying tokens (access and a refresh)
 
 > May need to update the views to the listview
 
 ```python
+  # changed from permission to authentication
   from rest_framework.permissions import IsAuthenticatedOrReadOnly
   # PostList / BlogList
   permission_classes = (IsAuthenticatedOrReadOnly,)
@@ -110,7 +111,7 @@ path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_p
 path('api/token/refresh', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
 ```
 
-Now we have 2 paths, we don't know how they work yet, we don't know what they do exactly, but we do know that when someone hits our site at these url's somethinbg is going to happen.
+Now we have 2 paths, we don't know how they work yet, we don't know what they do exactly, but we do know that when someone hits our site at these url's something is going to happen.
 
 And we see our posts list.  Or do we?  Authentication credentials not provided. How do we do this? So our interaction with this API is not going to be a user but another computer getting some information.  Lets try to replicate this.  You may still have this from previous classes httpie.  You can install this with brew.
 
@@ -141,7 +142,7 @@ Now we have something going on.  We have an access and a refresh token.
 Lets grab the access inside the quotes and put in a get request:
 
 ```python
-http :8000/api/v1/posts/ 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjMxNjY3NzAzLCJqdGkiOiI2NTFlYjU1ZmFmMTI0OGM0ODg5ZjllMmQ1ZjA5MThlZSIsInVzZXJfaWQiOjF9.vfjkTh39oYomrB6dmPl_mtOhWGLNYkN_ezWgFAGJGQU'
+http :8000/api/things/ 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ4MDA0NjMxLCJpYXQiOjE2NDgwMDQzMzEsImp0aSI6IjYwNjJlZGZiNDU1NjQyYmViODIxNDlmYjIyOTBlYThhIiwidXNlcl9pZCI6MX0.a0QJlD3ZXlaXi3V_p5bqyrQd_KYS9__hrDG1ChlHcKE'
 ```
 
 if you get a ```HTTP/1.1 301 Moved Permanently``` you are missing a / on the end of the route

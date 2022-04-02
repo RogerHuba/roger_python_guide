@@ -24,6 +24,7 @@
 
     - Airline 
     - Sprinkler
+    - Social Media (Friends on Facebook)
 
 > Graph is a non-linear data structure.
 

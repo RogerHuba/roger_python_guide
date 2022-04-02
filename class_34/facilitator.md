@@ -20,7 +20,7 @@
 
 ## Update .env
 
-- > Touch .env file in project folder
+- > Touch .env file inside the  project folder
 
 ```env
 SECRET_KEY=put-real-secret-key-here
@@ -118,12 +118,13 @@ test-local
 - Go to Elephant DB and look at table Data
 
 ## Add CORS
+
 > It is time to deply our Django app to the internet. There is one more thing we need to add to our project.  
 > django-cors-headers. A Django App that adds Cross-Origin Resource Sharing (CORS) headers to responses. This allows in-browser requests to your Django application from other origins.
 
 ```python
-poetry add whitenoise (should already be there)
-poetry add django-cors-headers
+pip install whitenoise (should already be there)
+pip install django-cors-headers
 ```
 
 Add this to settings.py in INSTALLED_APPS
@@ -161,8 +162,8 @@ CORS_ALLOW_ALL_ORIGINS = env.bool("ALLOW_ALL_ORIGINS")
 - > Add this to the .env
 
 ```python
-ALLOW_ALL_ORIGINS=True
 ALLOWED_ORIGINS=http://localhost:3000
+ALLOW_ALL_ORIGINS=True
 ```
 
 **NOTE** Be sure to shutdown server, update requirements.
@@ -187,7 +188,7 @@ Add project to a GH repository (Don't forget .gitignore)
   - Select t2.micro
   - Review and Launch Instance
   - Launch Instance*
-  - Create a new Key Pair (blog-api)
+  - Create a new Key Pair (things-api)
   - Be sure to download PEM and save file
   - Launch Instance
   - Edit Security Group for Inbound Data
@@ -197,7 +198,7 @@ Add project to a GH repository (Don't forget .gitignore)
 
 - Navigate to .ssh
   - copy pem file to .ssh
-  - run chmod 400 on file.
+  - run chmod 400 on file. (chmod 400 name-of-file.pem)
 - Obtain the Ec2 Instance Public IP
 - EC2->Instance->check Box -> Connect ->SSH Client
 - ssh -i "blog-api.pem" ec2-user@ec2-54-203-8-100.us-west-2.compute.amazonaws.com
@@ -207,6 +208,7 @@ Add project to a GH repository (Don't forget .gitignore)
 - See updates needed sudo yum update
 - sudo yum install git
 - clone repo (Be sure to select HTTPS)
+  - Add .env stuff in project file
 - sudo yum install -y docker
 - sudo usermod -a -G docker ec2-user
 - sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -218,7 +220,6 @@ Add project to a GH repository (Don't forget .gitignore)
 
 - sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 - sudo reboot
-- Add missing .env
 - Update allowed_hosts with EC2 IP and Change Debug to False
 
 Test the Public IP

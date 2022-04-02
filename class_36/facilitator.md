@@ -1,11 +1,19 @@
-Group Challenges
+# Challenges
 
-## Challenge #1 (20 Min)
+## Individual Challenge #1 (20 Min) -> Review (30 Min)
+
+WB only.  Individual. Given a list, write a function that takes in the list and sums up the numers in the list. You can assume you will always get a list, there will always be at least one item in the list, and there will only be whole numbers (may be positive or negative).
+
+Have every individual share their WB and critique items on the WB.  Do not critique the code or algo (not enough time)
+
+## Group Challenge #2 (20 Min) -> Review Possible Solutions (10 Min)
 
 Write a function to determine if a sentence is a panagram.  A panagram is a sentence or expression using every letter of the alphabet at least once.  Return 'True' or 'False"
 
-> The quick brown fox jumps over the lazy sleeping dog.
-> Five quacking Zephyrs jolt my wax bed.
+
+> The quick brown fox jumps over the lazy sleeping dog. -> True
+> Five quacking Zephyrs jolt my wax bed. -> True
+> The quick brown fox ->
 
 An 'A' or an 'a' will count as 1.
 
@@ -14,7 +22,7 @@ You CANNOT use the string library
 ```python
 # Usint panagram
   
-def ispangram(str: word): -> boolean
+def ispangram(word):
     ALPHA = "abcdefghijklmnopqrstuvwxyz"
     for char in ALPHA:
         if char not in word.lower():
@@ -42,9 +50,9 @@ def is_panagram(str):
     return is_str_pan
 ```
 
-## Chalenge #2 (35 Min)
+## Group Chalenge #3 (30 Min) - Review (10 Min)
 
-Given a LL and an int, delete all nodes where the node value is > the given int.
+Given a LL and an int, write a function that deletes all nodes where the node value is > the given int.
 
 (ll, 18)
 
@@ -81,7 +89,7 @@ def delete_over(ll, num):
     return ll       
 ```
 
-## Challenge #3 (40 Min)
+## Group Challenge #4 (30 Min)
 
 Write a function that takes a binary search tree as an argument, as well as some integer. Check if a node value equals the given integer. If there does, return True. Otherwise, return False.
 
