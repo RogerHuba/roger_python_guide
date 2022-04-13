@@ -41,7 +41,6 @@ Plan on explaining each step as you go.
 - Strip out the code/files we won't be using
   - `pages/api` folder
   - `public/vercel.svg`
-  - update `name` in `package.json`
   - Remove most of code inside `pages/index.js`
     - Keep outmost div, `<Head>` and empty `<main>` with blank className attributes.
     - Update `<Head>` title
@@ -129,6 +128,7 @@ Add below the form
 Let's move on to table that shows the 8 Ball's responses.
 
 Continuing with "just static" plan for now.
+Add below 8 Ball
 
 ``` javascript
 {/* Responses Table */}
@@ -237,7 +237,7 @@ The file should be in root of project.
 
 ## Generate a reply
 
-- > Add to index.js
+- > Add to index.js at top
 - import { replies } from '../data'
 
 - Next update `questionAskedHandler`
@@ -261,7 +261,7 @@ But it's no fun just to alert the reply, let's get it to show in the 8 ball!
 
 In order to do that the React way we need to think about `state`
 
-- State is a plain JavaScript object used by React to represent  information about the component's current situation. It's managed in the component.
+- State is a plain JavaScript object used by React to represent information about the component's current situation. It's managed in the component.
 
 We want the `state` of our app to include the generated response after a question is asked. The concept of `state` is extremely important in React and it needs to be handled in a particular way.
 
@@ -273,7 +273,7 @@ There are actually 2 supported ways of doing this. The older (but still supporte
 import { useState } from 'react'
 ```
 
-At top of `Home` function add a line to work with `useState` hook.
+At top of `Home` before other functions add a line to work with `useState` hook.
 
 ```javascript
 const [reply, setReply] = useState('Ask me anything');
@@ -289,7 +289,7 @@ Now change `questionAskedHandler` to update state instead of doing an alert.
 setReply(randomReply);
 ```
 
-We're almost there, now we need to remove the hard coded "Yes." from the 8 Ball.
+We're almost there, now we need to remove the hard coded "Ask me anything" from the 8 Ball.
 
 Update the inner `<p>` tag to use `{reply}` Inside the form.
 
@@ -426,12 +426,41 @@ In order to make this dynamic we need one small, but fundamental, change to the 
     {/* Now - dynamic */}
     {answeredQuestions.map(item => {
         return (<tr>
-            <td className="pl-2 border border-gray-700">{item.id}</td>
+            <td className="pl-2 border border-gray-700">{item.id + 1}</td>
             <td className="pl-2 border border-gray-700">{item.question}</td>
             <td className="pl-2 border border-gray-700">{item.reply}</td>
         </tr>);
     })}
 </tbody>
+```
+
+## Components
+
+Lets do one as an example.  Lets update the header.
+
+create folder called components.
+add a header.js
+
+in Header.js
+
+```react
+export default function Header(props) {
+    return (
+        <header className = "flex items-center justify-between p-4 bg-gray-500 text-gray-50">
+        <h1 className="text-4xl">Magic 8 Ball</h1>
+        <p>{answeredQuestions.length} questions answered</p>
+      </header>
+    )
+}
+```
+
+in index.js
+
+```html
+import Header from '../components/Header';
+
+
+<Header count={answeredQuestions.length} />
 ```
 
 ## Recap

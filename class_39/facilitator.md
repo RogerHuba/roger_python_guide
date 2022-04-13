@@ -71,8 +71,12 @@ SIMPLE_JWT = {
 
 ## Create App
 
-- `npx create-next-app --example with-tailwindcss cookie-stand-demo`
+[Non TypeScript Next JS](https://tailwindcss.com/docs/guides/nextjs)
+
+- `npx create-next-app cookie-stand-front`
 - cd to folder created
+- npm install -D tailwindcss postcss autoprefixer
+- npx tailwindcss init -p
 
 ## Install Dependencies
 
@@ -88,7 +92,7 @@ import Head from 'next/head'
 
 export default function Home() {
 
-    const user = null;
+    let user = null;
 
     return (
         <div>
@@ -112,7 +116,7 @@ export default function Home() {
 ```
 
 - Page should render `Need to log in`
-- Change `user = null` to `user = {username:'somebody'}` and see what happens
+- Change `user = null` to `user = {username:'pat'}` and see what happens
 
 ```javascript
 const user = { username: 'somebody' };
@@ -142,7 +146,7 @@ export default MyApp
 ```
 
 - `_app.js` contains the parent for all page components.
-- By wrapping `AuthProvider` around then all page components, and all their children, have access to auth provided "stuff" - as long as these components ask the right way.
+- By wrapping `AuthProvider` around them, all page components, and all their children, have access to auth provided "stuff" - as long as these components ask the right way.
 - `pages/index.js`
   - Add `import { useAuth } from '../contexts/auth'`
   - Change `user` definition line to `const { user } = useAuth();`
@@ -153,7 +157,7 @@ export default MyApp
   - Add onClick handler to login button.
     - `<button onClick={() => login(process.env.NEXT_PUBLIC_USERNAME, process.env.NEXT_PUBLIC_PASSWORD)}`
     - NOTE: the username and password must match known user in API's database
-- Page should still render `Welcome somebody` but this user is real!
+- Page should still render `Welcome pat` but this user is real!
 - Logging out is just as easy
 - Modify `pages/index.js` to  handle logging out
 
