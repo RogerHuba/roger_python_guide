@@ -6,13 +6,13 @@
 - Where do baby cats learn to swim? The kitty pool.
 - What do you call your grandma’s number on speed dial? Instagram
 
-## Warmup
-
-- Create a function that takes a linked_list and an action
-
 ## Whiteboards
 
 - Whiteboards are in progress now.  Give pass / fail statistics.
+
+## Warmup
+
+- Given a LL, sum the values in the LL
 
 ## Lecture
 
@@ -166,7 +166,7 @@ for i in range(10):
 - Run `pytest` again and show the LinkedList is not iterable.
 -> But we want this to be iterabel. We really really want this to be iterable in a for in loop. How do we do this? There are many things in python that are iterable. The way they define themselves as iterable is by overriding a `__dunder` method. That `__dunder` method is `__iter__`.
 
-- add to code under __init__
+- add to code after __init__
 
 ```python
 # it is a method so it needs self.

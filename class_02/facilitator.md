@@ -1,5 +1,11 @@
 # Class 02
 
+## Jokes
+
+- Why is Peter Pan always flying? Because he Neverlands.
+- Why did the coach go to the bank? To get his quarterback.
+- I lost my job at the bank on my first day. A woman asked me to check her balance, so I pushed her over.
+
 Testing and Modules
 
 ## if __name__ == "__main__"
@@ -37,3 +43,52 @@ def main():
 if __name__ == '__main__':
     main()
 ```
+
+## Demos: Test Driven Development
+
+Two demos today. One on FizzBuzz to really drill down on the process of TDD. The second on recursion. Both are small amounts of final code but big conceptually.
+
+## FizzBuzz
+
+> `../demo/fizz-buzz`
+
+Solve classic FizzBuzz challenge using Test Driven Development
+
+- > `mkdir fizz-buzz`
+- Create/Activate virtual environment.
+  - note convention of using hyphen vs. underscore at this level
+- `cd fizz-buzz`
+  - show tree of generated files
+  - `fizz_buzz` sub folder
+  - `tests` sub folder
+- `pip install pytest`
+  - installs dependencies into virtual environment
+  - note `.venv` directory
+  - note the `(.venv)` in terminal prompt.
+  - export requirements
+    - > pip freeze > requirements.txt
+- run `pytest`
+  - should get `bash: pytest: command not found`
+- run `pytest` again and see what happens
+  - should get on test collected and passing
+  - point out that `pytest` was installed by default
+  - point out that a single test already included
+- pause and talk about FizzBuzz then move on to coding out using TDD
+- write first test:
+
+        def test_fizz_buzz_one():
+          actual = fizz_buzz(1)
+          expected = "1"
+          assert actual == expected
+
+- run `pytest`
+
+## Recursion
+
+> `../demo/recursion`
+
+- The demo is very small amount of code. But it's recursive so it can do a lot with a little.
+- The problem is computing the factorial of a number.
+- Make sure to model stepping through and tracking variable values the way the interpreter would.
+- **NOTE:** The code for recursion demo uses wordy folder/file names to make clear distictions between packages and modules.
+  - Reiterate to students that you wouldn't see that naming convention used otherwise.

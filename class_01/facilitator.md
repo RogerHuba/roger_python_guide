@@ -23,6 +23,7 @@
   - No more hand holding
   - More expectations from you.
   - Harder than the day course!
+- Plagerism
 - Designed for you to Struggle (this is where the learning happens)
   - You will FAIL a lot here as well as on the job.
   - You will work harder here than you will on the job.
@@ -47,23 +48,19 @@
 - Talk about following along with coding and instead just take notes.
   - If you fall behind, you lose focus and you may miss something.
   - If there is something you want to go back to, take note of the time so you can skip to that time in the video.
-- In your pre-work you installed a tool called poetry. Lets see how that works. 
+- Venv - Gives us a virtual Environment to be able to use different dependencies but not on a global level, only in the env
+- Others, poetry, pipenv, pipx
+- Demonstrate each of these commands
+  - > python3 -m venv .venv
+  - > source ./.venv/bin/activate MAC
+  - > .\.venv\Scripts\activate
 
-- Poetry - Gives us a virtual Environment to be able to use different dependencies but not on a global level, only in the env
-- Pyenv - Allows us to use different versions of Python
-- Pipenv Does Both
+  -> pip install xxx
+  -> pip install -r requirements.txt
+  -> pip freeze > requirements.txt
 
-  - Demonstrate each of these commands
-  - > poetry
-  - > poetry new demo - This creates an entire structure for us
-    - run tree and show the things here.
-    - Change the name of the readme from a .rst to a .md
-  - > poetry install - Like NPM install.  Will take a lock file and install dependencies (useful when you download a project)
-  - > poetry add - Adds dependencies to your local environment
-  - > poetry shell - Puts you into the virtual environment
-
-- Open up VS Code in the Virtual Environment.  Point out that VS Code knows your in an environment but it may take a min to get there.
-- > I'm sure you already know this but VSCode is not perfect.  Poetry is not perfect either. There may be times where you are having problems and you need to burn your virtual environment and resetup.  Be ok with doing that. It gives you practice.
+- Open up PyCharm in the Virtual Environment.  Point out that PyCharm knows your in an environment but it may take a min to get there.
+- > I'm sure you already know this but IDE's is not perfect.  Venv is not perfect either. There may be times where you are having problems and you need to burn your virtual environment and resetup.  Be ok with doing that. It gives you practice.
 
 - > Now that we are here.  Let's write some code.
 
