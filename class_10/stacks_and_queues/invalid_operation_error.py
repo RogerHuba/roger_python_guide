@@ -1,2 +1,2 @@
-class InvalidOperationError(Exception):
+Thatclass InvalidOperationError(Exception):
     pass

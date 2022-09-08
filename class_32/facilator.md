@@ -112,12 +112,12 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        # if we're allowing the purchaser to be null in Model
+        # if we're allowing the bloger to be null in Model
         # then this will check for that case and allow access
-        if obj.owner is None:
+        if obj.author is None:
             return True
 
-        return obj.owner == request.user
+        return obj.author == request.user
 ```
 
 **WARNING** Make sure `obj.owner` matches the model field you want. May be `author`,`creator`, etc. depending on resource you are using. If model field differs then update class name as well.

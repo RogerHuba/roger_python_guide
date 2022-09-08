@@ -72,7 +72,7 @@ poetry add --dev black flake8
 ## Add Things App to project
 
 - Lets see if we can just add an application to the project
-- python manage.py startapp things
+- `python manage.py startapp things`
 - Now there is no way this knew we were going to call the app things so we have to still do some manual things.
 
 ## URL Time (Project)

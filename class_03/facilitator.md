@@ -9,29 +9,15 @@
 
 Given a string, write a function that returns a new string but only has one of each character
 Exampe: 'commissioner'
-Return: 'comisoner'
+Return: 'comisner'
 
 Example: 'aggressiveness'
 Return: 'agresivn'
 
-### Truth / Falsy
+### When you need help
 
- ```python
-stuff = None
-stuff = ''
-stuff =  0 
-stuff =  False
-stuff =  True
-stuff =  '0'
-stuff =  []
-stuff =  [False]
-stuff =  {}
-
-if stuff:
-    print('This will evaluate as a Falsy Statement')
-else:
-    print('This will evaluate as a Truthy Statement')
-```
+- [W3Schools](https://www.w3schools.com/python/python_reference.asp)
+- [Python Cheatsheet](https://overapi.com/)
 
 ### Tuples / Set
 
@@ -110,17 +96,6 @@ except:
 print("Total lie!. The problem was not dividing by zero. It was a type error")
 ```
 
-> Another Variation of Previous
-
-```python
-try:
-    print("Divide by zero again", 1 / "spam")
-except:
-    print("Don't divide by zero silly.")
-
-print("Total lie!. The problem was not dividing by zero. It was a type error")
-```
-
 > If you must handle every exception then make sure to retain the relevant error info. For example, you may have requirement that end user never sees a program error. In that case make sure to log/record the error details and then present something more palatable to end user
 
 ```python
@@ -188,7 +163,7 @@ contents = file.read()
 print(contents)
 ```
 
-> That is all fine and dandy. We opened the file, we read and printed the content. 
+> That is all fine and dandy. We opened the file, we read and printed the content.
 QUESTION: What is wrong with this scenario?
 ANSWER: We left the file open.
 

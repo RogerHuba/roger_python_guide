@@ -153,7 +153,7 @@ We can now run
 
 - > python manage.py test
 
-We are almost done with the regular Django things.  Only thing left us urls and views.  These things will still matter.  We are not going to be using templates.  Instead we will be using something that will mkae our data into JSON?  From our readings does anyone remember what this will use? **Serializer**
+We are almost done with the regular Django things.  Only thing left us urls and views.  These things will still matter.  We are not going to be using templates.  Instead we will be using something that will make our data into JSON?  From our readings does anyone remember what this will use? **Serializer**
 
 ### Adding Django Rest Framework
 

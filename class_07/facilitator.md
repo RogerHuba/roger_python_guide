@@ -1,9 +1,5 @@
 # Game of Greed II
 
-## PPH This Week
-
-[Recorded](https://frontrowviews.com/Home/Event/Details/5ca39148cf724702fc24c210)
-
 ## Dad Jokes
 
 - Why are skeletons so chill?  Because nothing gets under their skin.

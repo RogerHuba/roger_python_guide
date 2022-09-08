@@ -8,7 +8,7 @@ class Hashtable:
 
     def _hash(self, key):
 
-        sum = 0
+        sum = 0 
 
         for ch in key:
             sum += ord(ch)

@@ -16,7 +16,7 @@
 
 ## Warm up #2
 
-- Given a linked_list, iterate the linked list and return the largest value
+- Given a linked_list, write a function that will traverse the linked list and return the largest value
 - input_linked_list (7)->(2)->(13)->(9)->(3) expected return (13)
 
 ```python
@@ -54,20 +54,10 @@ def largest_value(ll):
 
 ## Create a Poetry Project for Game of Greed
 
-- Use `poetry new game-of-greed`
-- run `cd game-of-greed`
-- run `mv README.rst README.md`
-- run `poetry install`
-- run `poetry add --dev black flake8`
 - run `poetry shell`
 - copy tests into test folder
 - run `touch game_of_greed/game_of_greed.py`
 
-- Time to talk about black and what it can do for you.
-- [Link to Black Site](https://pypi.org/project/black/)
-- Create a quick function in the game_of_greed.py.  Be sure to add bad formatting in ther
-- run `black game_of_greed\game_of_greed.py` and watch the formater fix things.
-- Open for discussion the things that this can do for us.
 
 - Run pytest.
 

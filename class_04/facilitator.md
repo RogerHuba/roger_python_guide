@@ -6,15 +6,9 @@
 - I remember as a kid, my dad got fired from his job as a road worker for theft. I refused to believe he could do such a thing, but when I got home, the signs were all there.
 - How do you steal a coat? You jacket.
 
-## Feed Survey Results
+### Student Whiteboard
 
-- Show canvas statistics
-- The good
-- The bad
-
-### Student
-
-- Given an array, remove all duplicates, and return a new list of non dupes.  You cannot use a set.
+- Given an list, remove all duplicates, and return a new list of non dupes.  You cannot use a set.
 
 ### Review Lab 04
 
@@ -23,24 +17,15 @@
 
 ### Demo
 
-> QUESTION: What is a Class?
-> ANSWER: A class creates a new type of object, allowing a new instance. Each instance can have different attributest attached to it.
-> If you know anything about me, you know my love for star wars. Today is the first of many Star Wars Demos to come. We will be building out the start of what could be a Star Wars Text game.
+- > QUESTION: What is a Class?
+- > ANSWER: A class creates a new type of object, allowing a new instance. Each instance can have different attributes attached to it.
+- > If you know anything about me, you know my love for star wars. Today is the first of many Star Wars Demos to come. We will be building out the start of what could be a Star Wars Text game.
 
-- Have a student walk you through poetry setup for star-wars
+- Have a student walk you through virtual env setup for star-wars
 
-```zsh
-poetry new star-wars
-cd star-wars-demo
-poetry install
-poetry shell
-touch star-wars/star_wars.py
-code .
-```
-
-> We are going to run todays Demo similar to your lab, TDD. I have tests already written.
-> Copy the test file in and make sure that everything is skipped.
-> NOTE: May need to poetry add pytest again to import it properly.
+- > We are going to run todays Demo similar to your lab, TDD. I have tests already written.
+- > Copy the test file in and make sure that everything is skipped.
+- > NOTE: May need to poetry add pytest again to import it properly.
 
 ```python
 pytest

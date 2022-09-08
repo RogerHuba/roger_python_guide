@@ -28,9 +28,9 @@ Print out -
   - Before starting prep/review ask students for particular pain points and keep them in mind during build out.
   - > mkdir starwars-movie-rater
   - > cd starwars-movie-rater
-  - > poetry init -n
-  - > poetry add django
-  - > poetry shell
+  - > python3 -m venv .venv
+  - > pip install django
+  - > source ./.venv/bin/activate
   - > django-admin startproject movie_rater_project .
   - > SAY: From Experience I know I need to run my migrations and add my app
   - > QUESTION: What is the command to migrate?

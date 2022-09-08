@@ -59,7 +59,7 @@ In this tutorial we are going to partially follow along but make a few tweaks al
 Lets start by installing a library
 
 ```python
-poetry add djangorestframework_simplejwt
+pip install djangorestframework_simplejwt
 ```
 
 **NOTE** JB did not get 3.8 error with latest libraries as of 3/23/21
@@ -91,14 +91,6 @@ Next we need to adjust our settings.py.  Lets add the following tp REST_FRAMEWOR
 
 Our next setps is to add urls and views that are added to app to handle the fact that we are supplying tokens (access and a refresh)
 
-> May need to update the views to the listview
-
-```python
-  # changed from permission to authentication
-  from rest_framework.permissions import IsAuthenticatedOrReadOnly
-  # PostList / BlogList
-  permission_classes = (IsAuthenticatedOrReadOnly,)
-```
 
 In our project urls.py
 > First we need to import a library
@@ -120,7 +112,7 @@ And we see our posts list.  Or do we?  Authentication credentials not provided. 
 > using httpie lets use the terminal to hit our server:
 
 ```bash
-http GET localhost:8000/api/v1/posts.  Note you can leave off the localhost
+http GET localhost:8000/api/v1/blogs  Note you can leave off the localhost
 ```
 
 We see our Authentication credential error
@@ -142,7 +134,7 @@ Now we have something going on.  We have an access and a refresh token.
 Lets grab the access inside the quotes and put in a get request:
 
 ```python
-http :8000/api/things/ 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ4MDA0NjMxLCJpYXQiOjE2NDgwMDQzMzEsImp0aSI6IjYwNjJlZGZiNDU1NjQyYmViODIxNDlmYjIyOTBlYThhIiwidXNlcl9pZCI6MX0.a0QJlD3ZXlaXi3V_p5bqyrQd_KYS9__hrDG1ChlHcKE'
+http :8000/api/v1/blogs 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjYyNjAxNTkzLCJpYXQiOjE2NjI2MDEyOTMsImp0aSI6Ijk0YmFhM2VhNDliMTQzMmJhNzdiMjhmZmE2ZGY2OWI5IiwidXNlcl9pZCI6MX0.NPp1kT3RtHzEavcUDYiGoRbdD1dkpPNbPi_2P8ZEyn0'
 ```
 
 if you get a ```HTTP/1.1 301 Moved Permanently``` you are missing a / on the end of the route
@@ -170,32 +162,23 @@ That is all for the authorization portion.  It is not the best or most elegant s
 
 Next we are going to talk about switching our server runtime from django to gunicorn services for our production server.  This project was not initially set up with docker so lets add that.
 
-Create a docker-compose.yml and a Dockerfile (or copy from previous demo)
-[Dockerfile](../demo/blog_auth/Dockerfile)
-[docker-compose](../demo/blog_auth/docker-compose.yml)
-
-Point out that we commented out the runserver and not running gunicorn
-May need to change version to 3.7
-
-> workers 4 Said to start 4 individual worker Used to process requests （ One worker It can be understood as a process ）, Will usually worker Number set to CPU Of the core number 2-4 times .
-
-```docker-compose
+```docker
 version: '3'
 
 services:
   web:
     build: .
     # command: python /code/manage.py runserver 0.0.0.0:8000
-    command: gunicorn blog_project.wsgi:application --bind 0.0.0.0:8000 --workers 4
+    command: gunicorn blog_api_project.wsgi:application --bind 0.0.0.0:8000 --workers 4
     volumes:
       - .:/code
     ports:
-      - 8001:8000
+      - '8000:8000'
     depends_on:
     - db
 
   db:
-    image: postgres:11
+    image: postgres
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
@@ -205,11 +188,17 @@ services:
 
 volumes:
     postgres_data:
+
 ```
 
-```poetry add gunicorn```
+Point out that we commented out the runserver and not running gunicorn
 
-Close down existing running server and get out of env.
+> workers 4 Said to start 4 individual worker Used to process requests （ One worker It can be understood as a process ）, Will usually worker Number set to CPU Of the core number 2-4 times .
+
+
+```pip install add gunicorn```
+
+Close down existing running server.
 
 After adding in the dockerfile and docker-compose.yml run a docker-compose up --build.
 
@@ -217,8 +206,8 @@ Expect that it will fail because it is missing the requirements.txt
 
 Before we export to requirements.txt we need to add a couple of dependencies.
 
-```poetry
-poetry export -f requirements.txt > requirements.txt --without-hashes
+```pip
+pip freeze requirements.txt > requirements.txt
 ```
 
 Turn DEBUG to False
@@ -227,7 +216,7 @@ re-run docker-compose up --build
 go to localhost:8000
 
 Show the new static file
-poetry add whitenoise
+```pip install whitenoise```
 
 add to settings.py
 STATIC_ROOT = BASE_DIR / 'staticfiles'
@@ -237,10 +226,30 @@ Add to Middleware
 ```python
 MIDDLEWARE = [
   'django.middleware.security.SecurityMiddleware',
-  'whitenoise.middleware.WhiteNoiseMiddleware',
+  'whitenoise.middleware.WhiteNoiseMiddleware', # <--This>
 ]
 ```
 
-> ```run python manage.py collectstatic```
+```pip
+pip freeze requirements.txt > requirements.txt
+```
 
-poetry add django-cors-headers
+> ```docker compose run web python manage.py collectstatic```
+
+```pip install django-cors-headers```
+
+```django
+INSTALLED_APPS = [
+...
+'corsheaders',
+...
+]
+
+```django
+MIDDLEWARE = [
+...,
+'corsheaders.middleware.CorsMiddleware',
+'django.middleware.common.CommonMiddleware',
+...,
+]
+```

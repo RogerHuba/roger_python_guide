@@ -12,7 +12,7 @@ Demo of scraping Code Fellows Courses
 # We need an http client to make an http request and get access to web page content.
 # In earlier courses you probably used axios or superagent
 # In Python the most popular client is called requests
-# poetry add requests
+# pip add requests
 ###############
 
 import requests

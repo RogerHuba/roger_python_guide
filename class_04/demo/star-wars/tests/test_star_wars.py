@@ -3,9 +3,6 @@ from star_wars.star_wars import JediMaster, SithLord, ForceUser
 import pytest
 
 
-def test_version():
-    assert __version__ == '0.1.0'
-
 @pytest.mark.skip('Pending Code')
 def test_jedi_master():
     assert JediMaster()
@@ -100,16 +97,16 @@ def test_force_user_count():
     expected = 2
     assert actual == expected
 
-# @pytest.fixture(autouse=True)
-# def counter_reset():
-#     JediMaster.count = 0
-#     SithLord.count = 0
+@pytest.fixture(autouse=True)
+def counter_reset():
+    JediMaster.count = 0
+    SithLord.count = 0
 
-# @pytest.fixture
-# def luke():
-#     return JediMaster('Luke')
+@pytest.fixture
+def luke():
+    return JediMaster('Luke')
 
-# @pytest.fixture
-# def vader():
-#     return SithLord('Darth Vader')
+@pytest.fixture
+def vader():
+    return SithLord('Darth Vader')
 

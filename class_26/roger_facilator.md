@@ -87,9 +87,9 @@ print(reverse([1,2,3,4,5, 6]))
 - > $ cd django-things
     > We are not going to run poetry new because that is going to give us more than we want
     > We are going to rely on django giving us the things that we need.
-- > $ poetry init -n
-- > $ poetry add django
-- > $ poetry shell
+- > $ vi
+- > $ vs
+- > $ pip install django
 - > $ django-admin startproject django_things_project .
   - **NOTE:** the dot at end
 - > $ tree django-things

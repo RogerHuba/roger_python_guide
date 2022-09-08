@@ -3,8 +3,6 @@
 ## House Keeping
 
 - [Make sure you sign up for a library](https://docs.google.com/spreadsheets/d/1nPXDMI5IOAyr0fsJveRDY2iUeNDqaYbEn97zcEqSN90/edit#gid=18456559)
-- Partner Power Hour Today by a current TA  Kassie Bradshaw.
-- Career Coaching Next Saturday
 
 ## Warmup
 
@@ -26,9 +24,9 @@ Show the alias that have been setup for venv.
 ```bash
 mkdir movies
 cd movies
-poetry init -n
-poetry add django
-poetry shell
+vi
+pip install django
+vs
 django-admin startproject movies_project .
 python manage.py runserver
   - Notice the migration warnings
@@ -403,7 +401,9 @@ The CSRF middleware and template tag provides easy-to-use protection against Cro
 
 The first defense against CSRF attacks is to ensure that GET requests are side effect free. Requests via ‘unsafe’ methods, such as POST, PUT, and DELETE, can then be protected by following the steps below in a smililar
 
-> Stands for `cross site request forgery`. There are major security flaw in web applications, and you don't want yours to be one of them. This one line gets rid of a lot of bad actors / hackers. This is more than locking the doors to your vehicle, it is the equivalent of low jack. Little cost for a lot of help. The other thing that is happening is the form is rendering out each field represented in the fields list as a paragraph Show that we can take one of the fields away. Lets move on to the last ones, update and delete.
+> Stands for `cross site request forgery`. There are major security flaw in web applications, and you don't want yours to be one of them. This one line gets rid of a lot of bad actors / hackers. This is more than locking the doors to your vehicle, it is the equivalent of low jack. Little cost for a lot of help. 
+> The official: 
+> The other thing that is happening is the form is rendering out each field represented in the fields list as a paragraph Show that we can take one of the fields away. Lets move on to the last ones, update and delete.
 > The other item here is `form.as_p`. This renders the form in a p tag. There are some other methods avaliable such as form.as_table and form.as_ul
 
 ## Update

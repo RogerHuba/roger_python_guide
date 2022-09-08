@@ -1,4 +1,4 @@
-# Game of Greed 3
+# 10000 3
 
 ## DAD Jokes
 
@@ -9,61 +9,33 @@
 
 ## Warm Up - QUESTION
 
+> Convert tuple into a list of squared values
+
 ```python
-employees = [
-    {'name': 'John Conners', 'seniority': 10},
-    {'name': 'River Tam', 'seniority': 3},
-    {'name': 'Bilbo Baggins', 'seniority': 12},
-    {'name': 'Harry Potter', 'seniority': 7},
-    {'name': 'Darth Revan', 'seniority': 19},
-    {'name': 'Khan', 'seniority': 6},
-    {'name': 'Dobbie', 'seniority': 1},
-    {'name': 'R2D2', 'seniority': 6}
-]
+nums = (1,2,3,4,5)
 
-# Challenge #1
-filtered_employees_one = []
+squares = None # make squares pass test
 
-if filtered_employees_one == ['John Conners', 'Bilbo Baggins', 'Darth Revan']:
-    print('SUCCESS Test One')
-
-# Challenge #2
-filtered_employees_two = []
-
-if filtered_employees_two == ['River Tam', 'Bilbo Baggins', 'Khan', 'R2D2']:
-    print('SUCCESS Test Two')
+assert squares == [1,4,9,16,25]
 ```
 
-## Warm Up - QUESTION
+## Overview of today's warm-up challenge
 
 ```python
-
-# Challenge #1
-filtered_employees_one = [employee['name'] for employee in employees if employee['seniority'] >= 10]
-
-print(filtered_employees_one)
-
-if filtered_employees_one == ['John Conners', 'Bilbo Baggins', 'Darth Revan']:
-    print('SUCCESS Test One')
-
-# Challenge #2
-filtered_employees_two = [employee['name'] for employee in employees if employee['seniority'] %3 == 0]
-
-print(filtered_employees_two)
-
-if filtered_employees_two == ['River Tam', 'Bilbo Baggins', 'Khan', 'R2D2']:
-    print('SUCCESS Test Two')
+nums = [1,2,3,4,5]
+squares = [num ** 2 for num in nums]
+assert squares == [1,4,9,16,25]
 ```
 
 ## Code Challenge
 
-> Given a 2 linked lists, return the duplicate values
+> Given a 2 linked lists, return the count of duplicate values
 
 Sample Data
-1 -> 3 -> 8 -> None
-2 -> 3 -> 8 -> None
+1 -> 3 -> 8 -> 13 -> None
+2 -> 3 -> 8 -> 23 -> None
 
-return [3, 8]
+return 2
 
 
 ```text
@@ -121,7 +93,7 @@ def count_common_nodes(ll_1, ll_2):
     return count
 ```
 
-### Exit Example
+### Lecture Exit Example
 
 - There is an area in the tests that could give you some un-expected behavior if you have not implemented sys.exit. If you end your script without a true exit, your script stops executing, but the script is still open. Evenutally garbage collection will fix this but we don't like to rely on things like usually, eventually, sometimes. We want things handled. There is a way to catch the code and make sure we get a graceful exit.
 
@@ -146,7 +118,7 @@ if __name__ == "__main__":
         quit_game('Keyboard Interrup Detected')
 ```
 
-### Lecture
+### 10000
 
 > Review the Lab Feature Tasks and Requirements
 
@@ -174,4 +146,18 @@ class Banker:
 
     def clear_shelf(self):
         self.shelved = 0
+```
+
+```python
+    @staticmethod
+    def roll_dice(num=6):
+        # version_1
+
+        return tuple([randint(1, 6) for _ in range(num)])
+```
+
+```python
+    def end_game(self):
+        print(f"Thanks for playing. You earned {self.banker.balance} points")
+        sys.exit()
 ```

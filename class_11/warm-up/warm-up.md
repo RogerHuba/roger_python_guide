@@ -18,5 +18,6 @@ values = {'Two':2, 'Three':3, 'Four':4, 'Five':5, 'Six':6, 'Seven':7, 'Eight':8,
       - Consider something like:
         for suit in suits:
             for card in card_names:
-    - Deal a single card
+    
+    - Deal a single card from the deck
 

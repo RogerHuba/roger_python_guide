@@ -31,9 +31,10 @@ Todays the class will build out a bot for their game of greed.
 
 ## Code Challenge 9 Review
 
-- Reverse a  linked list
-- is a linked list a palindrome
- Quick overview in invision on how to accomplish this
+- Zip a  linked list
 
-## Get Scorer's Method
+### Go over code for game of greed
+
+- Review any files or methods the students want to see.
+- Have them code review it line by line or method by method.
 

@@ -42,7 +42,7 @@ class Stack():
         return self.top.value
     
     def is_empty(self):
-        return True
+        return self.top == None
     
 
 class Queue():
