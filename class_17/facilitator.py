@@ -30,6 +30,7 @@ page = requests.get(URL)
 ###############
 
 # NOTE: Move import to top of course to get rid of linter error
+# pip install BeatifulSoup4
 from bs4 import BeautifulSoup
 
 # BeautifulSoup can parse many types of content.

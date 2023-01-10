@@ -8,7 +8,7 @@ Use this document to describe the demo(s). Generally, this is going to take the 
 
 **QUESTION:** What is the Caesar Cipher.
 
-**ANSWER:** One of the earliest and simples/gu t forms of encryption. It uses a shift value to shift the original text by that value.
+**ANSWER:** One of the earliest and simplest forms of encryption. It uses a shift value to shift the original text by that value.
 
 Here is an example:
 

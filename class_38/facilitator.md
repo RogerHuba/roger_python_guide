@@ -70,6 +70,183 @@ def depth_first_search(self, vertex):
     return result
 ```
 
+## Stepping Back / Requirements
+
+We're making progress. Let's see how things stand.
+
+See the hard coded `1 questions answered` in upper right?
+
+That's not gonna work. It should start at zero then increment as questions are answered.
+
+In other words, the number of questions answered should be part of our app's `state`
+
+So let's step back and think about our app's state.
+
+Currently we keep track of the latest reply, which works ok for rendering the 8 Ball.
+
+But it works less well for tracking the number of questions answered. And it won't work at all for the table at bottom which tracks the complete history of questions and replies.
+
+## Track Answered Questions
+
+So how about instead of tracking a single reply, we keep track of a list of `answered questions`
+
+Replace
+
+```javascript
+const [reply, setReply] = useState('Ask me anything');
+```
+
+with
+
+```javascript
+const [answeredQuestions, setAnsweredQuestions] = useState([]);
+// It says “from the returned array store first item in local variable named question, and store the second item in variable named setQuestion reply is the current value, setReply is a function to call when updating the value.that way React can efficiently know when a re-render may be needed.
+```
+
+Now were storing a more complete data set in `state`.
+
+Notice that we are now passing in an empty array as initial value.
+
+Modify `questionAskedHandler` to construct an Object representing the answered question, and update state with it.
+
+```javascript
+function questionAskedHandler(event) {
+    event.preventDefault();
+
+    // get a random reply from data
+    const randomReply = replies[Math.floor(Math.random() * replies.length)];
+
+    const answeredQuestion = {
+        question: event.target.question.value,
+        reply: randomReply,
+        id: answeredQuestions.length,
+    }
+
+    console.log('answeredQuestion', answeredQuestion);
+
+    setAnsweredQuestions([...answeredQuestions, answeredQuestion]);
+}
+```
+
+Note: we're adding an `id` property as well. This will help us when rendering Table as well as be a better simulation of data coming from an API, hint hint.
+
+Also note the way `setAnsweredQuestions` requires a **new** array. So we used the `spread` operator to grab all the existing items, then added the new one at the end.
+
+Now create a `getReply` function that will get the latest reply in a safe way.
+
+```javascript
+function getLatestReply() {
+
+    if (answeredQuestions.length === 0) {
+        return 'Ask me anything';
+    }
+
+    return answeredQuestions[answeredQuestions.length - 1].reply;
+
+    // or fancy one liner
+    // answeredQuestions[answeredQuestions.length - 1]?.reply || 'Ask me anything'
+}
+```
+
+Almost there. Now we need to modify the 8 Ball Component to use `getLatestReply` function instead of just `reply`
+
+Update innermost `<p>` tag
+
+```javascript
+<p className="text-xl text-center">{getLatestReply()}</p>
+```
+
+Run the app and make sure still works.
+
+## Questions Answered Count
+
+It does? Great! Let's get back to the `X questions answered` feature.
+
+Currently it always says 1. Armed with our new app state how could we remove that hard coding?
+
+Update header component's `<p>` tag
+
+```javascript
+<p>{answeredQuestions.length} questions answered</p>
+```
+
+See what's different? The hard coded 1 has been changed to be whatever is the length of `answeredQuestions`
+
+That's exactly what we want, and React will take care of re-rendering the header whenever that value changes.
+
+## Report Table Component
+
+This approach will really payoff when we add the `Report Table`
+
+In order to make this dynamic we need one small, but fundamental, change to the table's `<tbody>`.
+
+```javascript
+<tbody>
+    {/* Before - hard coded
+    <tr>
+        <td className="pl-2 border border-gray-700">1</td>
+        <td className="pl-2 border border-gray-700">Is Falcon and the Winter Soldier worth watching?</td>
+        <td className="pl-2 border border-gray-700">Yes.</td>
+    </tr>
+    */}
+
+    {/* Now - dynamic */}
+    {answeredQuestions.map(item => {
+        return (<tr>
+            <td className="pl-2 border border-gray-700">{item.id + 1}</td>
+            <td className="pl-2 border border-gray-700">{item.question}</td>
+            <td className="pl-2 border border-gray-700">{item.reply}</td>
+        </tr>);
+    })}
+</tbody>
+```
+
+## Components
+
+Lets do one as an example.  Lets update the header.
+
+create folder called components.
+add a header.js
+
+in Header.js
+
+```react
+export default function Footer() {
+    return (
+        <header className = "flex items-center justify-between p-4 bg-gray-500 text-gray-50">
+        <h1 className="text-4xl">Magic 8 Ball</h1>
+        <p>{answeredQuestions.length} questions answered</p>
+      </header>
+    )
+}
+```
+
+in index.js
+
+```html
+import Header from '../components/Header';
+
+
+<Header count={answeredQuestions.length} />
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### React State and Props
 
 > During our last class we had a slightly used State.  Today we are going to bring in props. There may be some shudders out there as you remember what a pain props was.  Lets do a quick refresher for some of you and a little teaching for others.

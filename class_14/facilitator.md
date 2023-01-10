@@ -146,5 +146,5 @@ Statistics can be confusing.
 > min later I was still struggling. Seaborn makes things easy, why is this so difficult. Turns out that pie charts are
 > so overused and disliked, seaborn omitted them completely. There are some workarounds to do it, but IMO not worth
 > the effort
-[Evil Pie Charts](https://medium.com/@clmentviguier/the-hate-of-pie-charts-harms-good-data-visualization-cc7cfed243b6)
-[Statistics from 21 Movie](https://www.youtube.com/watch?v=BHO5z91BS_E)
+- [Evil Pie Charts](https://medium.com/@clmentviguier/the-hate-of-pie-charts-harms-good-data-visualization-cc7cfed243b6)
+- [Statistics from 21 Movie](https://www.youtube.com/watch?v=BHO5z91BS_E)

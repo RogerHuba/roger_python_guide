@@ -1,20 +1,44 @@
-def reverse_ll(list):
+# Code Challenge
+# Code challenge of:
+#  - Given a list, reverse the list. In place, no built in methods / functions
+#  - Once they get that, update the problem,
+#  - Given a linked-list reverse the ll
 
-       previous = None
-       current = list.head
+def reverse_list(lst):
+    # 2 pointers begining and end, one incrementing, other decrementing, swap the values
+    # [1, 2, 5, 3, 4]
+    #  ^           ^
+    # [4, 2, 5, 3, 1]
+    #     ^     ^
+    # [4, 3, 5, 2, 1]
+    #        ^
+    for i in range(len(lst) // 2):
+        lst[i], lst[- 1 - i] = lst[-1 - i], lst[i]
+    return lst
 
-  
-       while current:
-           current.next = previous   
-           previous = current
-           current = next
-           if next:
-               next = currnet.next
 
-       list.head = current
+print(reverse_list([1, 2, 3, 4]))
+print(reverse_list([1, 2, 3, 4, 5]))
+print(reverse_list([1, 2]))
+print(reverse_list([1]))
+print(reverse_list([(1, ), (2,), (3, )]))
+print(reverse_list([1, '_', 3, -4]))
 
-# https://realpython.com/python-reverse-list/
 
-def reverse_list(list):
-    for i in range(len(liost) // 2):
-        list[i], list[-1 - i] = list[-1 - i], list[i]
+def reverse_ll(ll):
+    # [1] -> [2] -> [3] -> [4] -> None
+    #  ^
+    # [1] -> [2] -> [3] -> [4] -> None
+    # current: 
+    # previous: 
+    # temp_next: 
+    previous = None
+    current = ll.head
+
+    while current:
+        temp_next = current.next
+        current.next = previous
+        previous = current
+        current = temp_next
+    ll.head = previous
+    return ll

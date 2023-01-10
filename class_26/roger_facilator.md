@@ -52,11 +52,26 @@ print(reverse([1,2,3,4,5, 6]))
     - work smarter not harder - this leaves in the idea that you'll still be working hard ;)
     - do more of the good stuff and less of the bad
     - Don't reinvent the wheel
+  - MVC Architecture - The MVC (Model-View-Controller) architecture enables easy distinction between different layers of a web app. You can work with the application’s visual presentation and logic independently, and Django will automatically update and sync the changes. MVT or Model-View-Template architecture is another way Django developers like you refer to the Django architecture as it uses templates instead of components.
+  - Templates - Django has a powerful templating engine that works on its personal markup language. Templates are HTML code files that are used to display data- be it static or dynamic. Templates contain no application logic, only having information regarding visual content.
+
+  The Django templates are used for generating dynamic HTML web pages.
+
+  - DRY Principle - “Don’t repeat yourself” Python employs philosophy to provide developers with a clean, manageable working environment. Django enforces the DRY principle in everything, creating a single space for storing each distinct object. Django normalizes the values everywhere removing redundancies and allowing the developer to focus on the application logic.
+
+  - Authentication and Security Developers chose Django because it comes with a full-featured, secure user authentication system. It handles user accounts, manages cookies, user groups, and sessions, and keeps track of permissions. This lets you easily build sites that allow users to create accounts and safely sign in and out of the accounts.
+
+  Django has a state-of-the-art security system that helps developers against common security lapses such as SQL injection, cross-site scripting, clickjacking, and cross-site request forgery.
+
+  - DRF - The Django REST framework (DRF) is a component toolkit built on top of the Django framework for creating REST APIs. An API is an interface for interacting with databases. RESTful APIs are conformed to the REST architecture and are used for listing, modifying, creating, and deleting data on web servers using the HTTP protocols.
+
+With DRF, developers have access to web browsable APIs with a huge Django community backing and easy-to-use documentation.
 
 - **What**
   - Sometimes you'll get enough people agreeing on the best ways to combine those practices and a "framework" emerges.
   - One of the most popular, and long lasting, frameworks around is [Django](https://www.djangoproject.com/).
     - Check out the first qoute you see "Django makes it easier to build better Web apps more quickly and with less code."
+    - Who usus Django?  Instagram, Spotify, YouTube, The Wa Post, , The Guardian, the NY Post, bitBucket, DropBox, Pinterest, Mozilla, NASA, National Georgaphic, and a big one.  Google Search, Reddit, 
     - Highlight the page title "The Web Framework for Perfectionists with Deadlines"
     - Head down to the **Meet Django** section and tease out the common themes like rapid, fast, clean and pragmatic.
 - **How**
@@ -83,14 +98,12 @@ print(reverse([1,2,3,4,5, 6]))
 
 ### Create Project
 
-- > $ mkdir django-things
-- > $ cd django-things
-    > We are not going to run poetry new because that is going to give us more than we want
-    > We are going to rely on django giving us the things that we need.
-- > $ vi
-- > $ vs
-- > $ pip install django
-- > $ django-admin startproject django_things_project .
+- > mkdir django-things
+- > cd django-things
+- > vi "python3 -m venv .venv"
+- > vs "source ./.venv/bin/activate && python -m pip install -U pip"
+- > pip install django
+- > django-admin startproject django_things_project .
   - **NOTE:** the dot at end
 - > $ tree django-things
   - discuss the files that were generated

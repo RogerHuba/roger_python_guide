@@ -35,7 +35,7 @@ DATABASE_PORT=5432
 
 ## Update Settings
 
-- `poetry add django-environ`
+- `pip install django-environ`
 - Update `project/settings.py` to use `django-environ`
 - add `import environ` below path in settings.py
 
@@ -185,14 +185,13 @@ Add project to a GH repository (Don't forget .gitignore)
 - [AWS Login](https://aws.amazon.com/console/)
 - Go to EC2 and Launch Instance
 - Select Amazon Linux 2 AMI (Free Tier Eligible)
-  - Select t2.micro
-  - Review and Launch Instance
-  - Launch Instance*
+  - Select t2.micro (all free tier)
   - Create a new Key Pair (things-api)
   - Be sure to download PEM and save file
+  - select ssh traffic from 0.0.0.0
+    - allot http and https
   - Launch Instance
-  - Edit Security Group for Inbound Data
-    - Custom TCP 8000 Anywhere 0.0.0.0/0
+
 
 ### SSH
 
@@ -201,7 +200,7 @@ Add project to a GH repository (Don't forget .gitignore)
   - run chmod 400 on file. (chmod 400 name-of-file.pem)
 - Obtain the Ec2 Instance Public IP
 - EC2->Instance->check Box -> Connect ->SSH Client
-- ssh -i "blog-api.pem" ec2-user@ec2-54-203-8-100.us-west-2.compute.amazonaws.com
+- ssh -i "blog-api.pem" ec2-user@ec2-44-201-177-56.compute-1.amazonaws.com
 
 ## EC2 Instance
 
@@ -209,6 +208,7 @@ Add project to a GH repository (Don't forget .gitignore)
 - sudo yum install git
 - clone repo (Be sure to select HTTPS)
   - Add .env stuff in project file
+  - Update allowed_hosts with EC2 IP and Change Debug to False
 - sudo yum install -y docker
 - sudo usermod -a -G docker ec2-user
 - sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -220,7 +220,7 @@ Add project to a GH repository (Don't forget .gitignore)
 
 - sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 - sudo reboot
-- Update allowed_hosts with EC2 IP and Change Debug to False
+
 
 Test the Public IP
 
@@ -269,3 +269,8 @@ run:
 
 - Handle collecting static files so that styling doesn't go away with DEBUG off
   - There is some trickiness here, especially on Heroku. Often static assets would be on CDN so it's not an issue.
+
+
+### Things to look at
+
+https://github.com/meeb/django-distill-example

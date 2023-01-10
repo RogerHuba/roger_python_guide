@@ -12,7 +12,46 @@ A SQL query walks into a bar, walks up to two tables, and asks, “Can I join yo
 
 > Let's work on a Warmup.
 
-[Warm-Up](../warm-up/NOTES.md)
+```python
+# Given nested lists of integers, write some code that will add 2 to each one.
+#
+# Input:
+#
+# [[1, 2, 3] , [4, 5, 6]]
+#
+# Output:
+#
+# [[3, 4, 5], [6, 7, 8]]
+
+# A few potential ways to accomplish this
+
+def add_two1(nums):
+    for arr in nums:
+        for num in arr:
+            num += 2
+
+    return nums
+
+
+def add_two2(nums):
+    for arr in nums:
+        for i, num in enumerate(arr):
+            arr[i] = num + 2
+
+    return nums
+
+
+def add_two3(nums):
+    return [[num + 2 for num in arr] for arr in nums]
+
+
+if __name__ == '__main__':
+    list_of_list = [[1, 2, 3], [4, 5, 6]]
+    print(add_two1(list_of_list))
+    print(add_two2(list_of_list))
+    print(add_two3(list_of_list))
+
+```
 
 > We just introduced enumerate in the previous lab code-review.  This may be a good time to go over how enumerate works.
 [Enumerate Demo](../demo/enumerate/main.py)

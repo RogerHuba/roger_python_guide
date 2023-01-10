@@ -47,6 +47,7 @@ my_string = 'This is a string that I have here'
 for char in my_string:
     print(char)
 
+# The * will unpack an iterable
 # print(*my_string)
 ```
 

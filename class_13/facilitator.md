@@ -38,13 +38,14 @@ A: Second hand store
 > Open up kaggle.com and look for some data
 > Explain that they need to prove their conclusion
 > No acceptance tests today.
-> If we want to work on some data, well we need to find some data to play around with.  I have this salary.csv file that I am going to use.
+> If we want to work on some data, well we need to find some data to play around with.  
+> I have this salary.csv file that I am going to use.
 > Look over the CVS to see what kind of data we are looking at.
 > We want to use this data to visualize our data, and start making some predictions based on what we see.
 > I created another csv file that has something called snacks in it (explain)
 > Next we will start our imports
 
-Will need to drag and drop salary.csv into google.colab
+Add salaries csv to Kaggle.  
 
 ```python
 import pandas as pd
@@ -209,11 +210,14 @@ plt.plot
 > We drew a prediction line in how years of experience relates to salary.
 > QUESTION: What would you infer from this data?
 > We could potentially dig into the data little here and look at some of the outliers on our plot.
-> If this is something you want to do to prove your hypothesis, then you will have a little research to do on what methods or other libraries to import.
+> If this is something you want to do to prove your hypothesis, 
+> then you will have a little research to do on what methods or other libraries to import.
 
 > This was  not overly difficult to make the change and see the new data.
-> But I am a developer, I am inherently LAZY.  I want to do a little work as possible. So let's do a little more work, so we ultimately have to do less work.
-> We are going to use something called Seaborn. We will learn a little more about Seaborn in the next class, but we can use it a little today.
+> But I am a developer, I am inherently LAZY.  I want to do a little work as possible. 
+> So let's do a little more work, so we ultimately have to do less work.
+> We are going to use something called Seaborn. 
+> We will learn a little more about Seaborn in the next class, but we can use it a little today.
 
 ```python
 import seaborn as sns

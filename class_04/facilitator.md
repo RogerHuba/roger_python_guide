@@ -61,7 +61,7 @@ from star-wars.star_wars import JediMaster
 if __name__ == '__main__':
     master1 = JediMaster()
     print(master1)
-    # Copy and past a second instance and pring. Show 2 different objects and 2 locations.
+    # Copy and past a second instance and print. Show 2 different objects and 2 locations.
 ```
 
 > We could give the object a name manually right now.

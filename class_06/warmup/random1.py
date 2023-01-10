@@ -1,5 +1,5 @@
 # File Name: random1.py
-
+# https://docs.python.org/3/library/random.html
 # Import the library random.
 import random
 

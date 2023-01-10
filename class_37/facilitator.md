@@ -26,7 +26,8 @@ Plan on explaining each step as you go.
 ## Create Project
 
 - [Next + Tailwind Template](https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss)
-- > npx create-next-app --example with-tailwindcss magic-eight-ball
+- > npx create-next-app magic-eight-ball
+- > Follow this [tailwindcss](https://tailwindcss.com/docs/guides/nextjs)
 - > NOTE: Make sure students are up to date with NPX
 - > This may take a min or 2 depending on internet speed and computer proccessing.
 - > cd magic-eight-ball
@@ -121,78 +122,6 @@ Add below the form
         <p className="text-xl text-center">Ask me anything</p>
     </div>
 </div>
-```
-
-### Responses Table
-
-Let's move on to table that shows the 8 Ball's responses.
-
-Continuing with "just static" plan for now.
-Add below 8 Ball
-
-``` javascript
-{/* Responses Table */}
-<table className="w-1/2 mx-auto my-4">
-    <thead>
-        <tr>
-            <th className="border border-gray-700">No.</th>
-            <th className="border border-gray-700">Question</th>
-            <th className="border border-gray-700">Response</th>
-        </tr>
-    </thead>
-    <tbody>
-        <td className="pl-2 border border-gray-700">1</td>
-        <td className="pl-2 border border-gray-700">Is the Dark side stronger than the Light side?</td>
-        <td className="pl-2 border border-gray-700">Yes.</td>
-    </tbody>
-</table>
-```
-
-Acknowledge that there is a lot of repeated markup and prepare for the reasonable/inevitable question of "wouldn't classes be easier"
-
-Let students know there is a common way of keeping styled React DRY that they'll learn soon.
-
-For now go ahead and duplicate a little code.
-
-## Interactivity
-
-### Link component
-
-The easiest interactive functionality is the `careers` link in footer.
-
-- import Link in index.js
-
-```javascript
-import Link from 'next/link'
-```
-
-- Modify nav in footer
-
-```javascript
-<nav>
-    <Link href="/careers">
-        <a>Careers</a>
-    </Link>
-</nav>
-```
-
-Now we've got a nice link that will navigate to another page within site but NOT require a new page load, so it's very snappy.
-
-But we don't have a `/careers` page, what to do?
-
-- Create `pages/careers.js`
-- Add a little bit of code that will work for now
-
-```javascript
-import Link from 'next/link'
-export default function Careers() {
-    return (
-        <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-            <h1 className="text-4xl">Careers Page Coming Soon</h1>
-            <Link href="/"><a className="p-4 m-4 text-2xl bg-gray-300 rounded-lg">Back to Home</a></Link>
-        </div>
-    )
-}
 ```
 
 ### Question Form Input

@@ -114,7 +114,7 @@ print(sys.version)
 
 ```python
 grid = np.ones()
-# Look for shape errir
+# Look for shape error
 ```
 
 ```python
@@ -162,7 +162,7 @@ plt.imshow()
 ```
 
 > ERROR.  Uh-oh.  What happen here?  NOTE: We did not re-run the first cell.  Re-run it and then re-run the help.
-> If we dig thorough the help we would see that imshow is looking for an ndarray. Well we just happen to have one of those. If this follows some rules on how imshow uses the ndarray, something should happen for us.
+> If we dig thorough the help we would see that imshow is looking for an ndarray. Well we just happen to have one of those. If this follows some rules on how imshow uses the nparray, something should happen for us.
 >
 ```python
 plt.imshow(grid)

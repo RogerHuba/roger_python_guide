@@ -18,6 +18,10 @@ def zip_ll_new(ll1, ll2):
 def zip_ll_inplace(ll1, ll2):
     current1 = ll1.head
     current2 = ll1.head
+    if current1 and not current2:
+        return ll1
+    elif curren2 and not current1:
+        return ll2
 
     while current1 and current2:
         temp1 = current1.next

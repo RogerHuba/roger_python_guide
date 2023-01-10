@@ -47,16 +47,13 @@ Print out -
   - This dissonance can make it more difficult to reason about the problem domain
 - **What**
   - Object Relational Mappers or mapping ( ORM ) bridges that gap by allowing developers to *mostly* think about Objects while the mappers handles interaction with the database.
-  - You worked with PostgresQL in 301.  You probably remember statments like:
+  - You worked with Mongo in 301.  Post Gres is a little different. You will see thing in SQL look like this:
 
 ```sql
 SELECT * FROM users WHERE school = "CodeFellows';
 ```
 
-> Object-relational-mapping is the idea of being able to write queries like the one above, using
-> our preferred programming language.
->
-> Long story short, we are trying to interact with our database using python instead of SQL.
+> Object-relational-mapping is the idea of being able to write queries like the one above, using our preferred programming language.  Long story short, we are trying to interact with our database using python instead of SQL.
 
 - **How**
   - Django's ORM is called a Model
@@ -102,7 +99,7 @@ admin.site.register(Movie)
 - Now see the movie.
 - Create a Movie
   - Notice the less than ideal display of *Movie object(1)*
-- Update Movie model with `__str__` method that returns self.name
+- Update **Movie model** with `__str__` method that returns self.name
 
 ```python
     def __str__(self):
@@ -178,10 +175,7 @@ urlpatters = [
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Movies</title>
 </head>
 <body>
     {% block content %}

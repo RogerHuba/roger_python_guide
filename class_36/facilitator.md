@@ -1,8 +1,8 @@
 # Challenges
 
-## Individual Challenge #1 (20 Min) -> Review (30 Min)
+## Individual Challenge #1 (15 Min) -> Review (30 Min)
 
-WB only.  Individual. Given a list, write a function that takes in the list and sums up the numers in the list. You can assume you will always get a list, there will always be at least one item in the list, and there will only be whole numbers (may be positive or negative).
+WB only.  Individual. Given 2 numbers and an operator (+-*/), write a function that returns the (sum, difference, product, or quotient). You may get negative and positive ints, and zero.  The problem will be handled like number1 + number2, number1 / number2, number1 + number2, number1 - number2.
 
 Have every individual share their WB and critique items on the WB.  Do not critique the code or algo (not enough time)
 
@@ -50,7 +50,7 @@ def is_panagram(str):
     return is_str_pan
 ```
 
-## Group Chalenge #3 (30 Min) - Review (10 Min)
+## New Group Chalenge #3 (30 Min) - Review (10 Min)
 
 Given a LL and an int, write a function that deletes all nodes where the node value is > the given int.
 

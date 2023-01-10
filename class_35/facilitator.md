@@ -18,7 +18,7 @@
   - Notice you are doing an adjacency list and not an adjacency matrix
 
 - Bring up the Graph readme.
-- [Grapghs](https://codefellows.github.io/common_curriculum/data_structures_and_algorithms/Code_401/class-35/resources/graphs.html)
+- [Graphs](https://codefellows.github.io/common_curriculum/data_structures_and_algorithms/Code_401/class-35/resources/graphs.html)
 
 > What are some real world scenarios that depict a graph?
 

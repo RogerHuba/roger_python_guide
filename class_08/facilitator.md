@@ -29,7 +29,7 @@ assert squares == [1,4,9,16,25]
 
 ## Code Challenge
 
-> Given a 2 linked lists, return the count of duplicate values
+> Given a 2 linked lists, write a function that returns the count of duplicate values
 
 Sample Data
 1 -> 3 -> 8 -> 13 -> None
@@ -70,7 +70,7 @@ def count_common_nodes(ll_1, ll_2):
         current1 = current1.next
         current2 = ll_2.head
 
-    return count
+    return len(dupes)
 ```
 
 ```python
