@@ -92,13 +92,13 @@ import Head from 'next/head'
 
 export default function Home() {
 
-    let user = null;
+    // DONT FORGET THIS
+    let user = {username: 'pat'};
 
     return (
         <div>
             <Head>
                 <title>Cookie Stand Demo</title>
-                <link rel="icon" href="/favicon.ico" />
             </Head>
 
             <main className="p-4 space-y-8 text-center">
@@ -119,6 +119,7 @@ export default function Home() {
 - Change `user = null` to `user = {username:'pat'}` and see what happens
 
 ```javascript
+// Add above return
 const user = { username: 'somebody' };
 ```
 

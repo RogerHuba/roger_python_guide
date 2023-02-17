@@ -22,74 +22,69 @@ You CANNOT use the string library
 ```python
 # Usint panagram
   
-def ispangram(word):
+def is_pangram(word):
     ALPHA = "abcdefghijklmnopqrstuvwxyz"
     for char in ALPHA:
         if char not in word.lower():
             return False
-  
-    return True
+      return True
 ```
 
 ```python
-import string
-  
-alphabet = set(string.ascii_lowercase)
-  
-def ispangram(string):
-    return set(string.lower()) >= alphabet
-```
-
-```python
-def is_panagram(str):
-    is_str_pan = True
+def is_panagram(word):
     for num in range(97, 123):
-        if chr(num) not in str.lower():
+        if chr(num) not in word.lower():
             return False
 
-    return is_str_pan
+    return True
 ```
 
 ## New Group Chalenge #3 (30 Min) - Review (10 Min)
 
-Given a LL and an int, write a function that deletes all nodes where the node value is > the given int.
+Given a list and an int, where each index in the list is is a LL, write a function that deletes all nodes where the node value is greater than the given int.
 
-(ll, 18)
-
+(lst, 18)
+[ll1, ll2, ll3]
+ 
+ ll1:
 [2] -> [19] -> [1] -> [12] -> [23] -> None
 would return a ll of
 [2]-> [1] -> [12] -> None
 
-(ll, 2)
+(lst, 2)
+[ll1, ll2, ll3]
 
+ll1:
 [2] -> [19] -> [1] -> [12] -> [23] -> None
 would return a ll of
 [1] -> None
 
 ```python
-def delete_over(ll, num):
+def delete_over(lst, num):
 
-    at_head_node = True
-    current = ll.head
+    for ll in lst:
+        at_head_node = True
+        current = ll.head
 
-    while at_head_node and ll.head:
-        if not ll.head.next and ll.head.value > num:
-            ll.head = None
-            return ll
-        elif ll.head.value > num:
-            ll.head = current.next
-        else:
-            at_head_node = False
-    
-    while current.next:
-        previous = current
-        current = current.next
-        if current.value > num:
-            previous.next = current.next
-    return ll       
+        while at_head_node and ll.head:
+            if not ll.head.next and ll.head.value > num:
+                ll.head = None
+
+            elif ll.head.value > num:
+                ll.head = current.next
+            
+            else:
+                at_head_node = False
+        
+        while current:
+            previous = current
+            current = current.next
+            if current.value > num:
+                previous.next = current.next
+    return lst       
 ```
 
-## Group Challenge #4 (30 Min)
+## Group Challenge #4a (30 Min)
 
 Write a function that takes a binary search tree as an argument, as well as some integer. Check if a node value equals the given integer. If there does, return True. Otherwise, return False.
 
@@ -104,4 +99,31 @@ def bst_contains(input_tree, value):
     else:
       node = node.right
   return False
+```
+
+## Group Challenge #4b (30 Min)
+
+Write a function that takes 2 linked lists, of single digit, positive numbers, and add the "numbers" represented by the LL's.
+
+ll1: [1]->[0]->[0]-> None
+ll2: [2]->[2]->[2]-> None
+100 + 222 = 322
+
+```python
+def ad_ll(ll1, ll2):
+    ll1_num = ''
+    ll2_num = ''
+    current1 = ll1.head
+    current2 = ll2.head
+    if not ll1.head and ll2.head:
+        return 0
+    while current1 or current2:
+        if current1:
+            ll1_num += str(current1.value)
+            current1 = current1.next
+        if current2:
+            ll2_num += str(current2.value)
+            current2 = current2.next
+    return int(ll1_num) + int(ll2_num)
+
 ```

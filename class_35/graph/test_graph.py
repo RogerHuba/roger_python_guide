@@ -1,46 +1,80 @@
 import pytest
 from graph import Graph, Vertex
 
-def test_add_graph():
+def test_add_node():
     graph = Graph()
-    assert graph
+    expected = 'spam'  # a vertex's value that comes back
+    actual = graph.add_node('spam').value
+    assert actual == expected
 
-
-def test_add_vertex():
+def test_size_empty():
     graph = Graph()
-    vertex = graph.add_vertex('spam')
-    assert vertex.value == 'spam'
+    expected = 0
+    actual = graph.size()
+    assert actual == expected
 
+
+def test_size():
+    graph = Graph()
+    graph.add_node('spam')
+    expected = 1
+    actual = graph.size()
+    assert actual == expected
 
 def test_add_edge():
+    g = Graph()
+    apple = g.add_node("apple")
+    banana = g.add_node("banana")
+    g.add_edge(apple, banana, 5)
+    neighbors = g.get_neighbors(apple)
+    assert len(neighbors) == 1
+    assert neighbors[0].vertex.value == "banana"
+    assert neighbors[0].weight == 5
+
+
+def test_bouquet():
+    g = Graph()
+    apple = g.add_node("apple")
+    g.add_edge(apple, apple, 10)
+    neighbors = g.get_neighbors(apple)
+    assert len(neighbors) == 1
+    assert neighbors[0].vertex.value == "apple"
+    assert neighbors[0].weight == 10
+
+
+def test_add_edge_interloper_start():
     graph = Graph()
-    spam = graph.add_vertex('spam')
-    egg = graph.add_vertex('eggs')
-    graph.add_edge(spam, egg)
-    assert True
+    start = Vertex('start')
+    end = graph.add_node('end')
+    with pytest.raises(KeyError):
+        graph.add_edge(start, end)
 
 
-@pytest.mark.skip
-# Currently failing
-def test_add_edge_leo_test(self):
+def test_add_edge_interloper_end():
     graph = Graph()
-    start = graph.add_vertex('start_vertex')
-    end = graph.add_vertex('end_vertex')
-    graph.add_edge(start, end)
-    assert graph.adjacency_list[start][0].vertex == end
+    end = Vertex('end')
+    start = graph.add_node('start')
+    with pytest.raises(KeyError):
+        graph.add_edge(start, end)
 
 
-def test_add_edge_test_size_pass():
+def test_get_nodes():
     graph = Graph()
-    spam = graph.add_vertex('spam')
-    egg = graph.add_vertex('eggs')
-    graph.add_edge(spam, egg)
-    assert len(graph.adjacency_list) == 2
+    banana = graph.add_node('banana')
+    apple = graph.add_node('apple')
+    loner = Vertex('loner')
+    expected = 2
+    actual = len(graph.get_nodes())
+    assert actual == expected
 
 
-def test_add_edge_test_size_fail():
+def test_get_neighbors():
     graph = Graph()
-    spam = graph.add_vertex('spam')
-    egg = graph.add_vertex('eggs')
-    graph.add_edge(spam, egg)
-    assert len(graph.adjacency_list) != 3
+    banana = graph.add_node('banana')
+    apple = graph.add_node('apple')
+    graph.add_edge(apple, banana, 44)
+    neighbors = graph.get_neighbors(apple)
+    assert len(neighbors) == 1
+    neighbor_edge = neighbors[0]
+    assert neighbor_edge.vertex.value == 'banana'
+    assert neighbor_edge.weight == 44

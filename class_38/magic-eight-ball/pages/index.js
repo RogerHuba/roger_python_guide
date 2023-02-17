@@ -41,7 +41,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header answerCount={answeredQuestions.length} />
-      <QuestionForm questionAsked = {questionAskedHandler} />
+      <QuestionForm questionAsked = {questionAskedHandler()} />
       <EightBall answeredQuestion={ answeredQuestions[answeredQuestions.length -1] } />
       <History answeredQuestions = { answeredQuestions } />
       <Footer />

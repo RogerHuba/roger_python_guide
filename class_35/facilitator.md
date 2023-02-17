@@ -26,7 +26,7 @@
     - Sprinkler
     - Social Media (Friends on Facebook)
 
-> Graph is a non-linear data structure.
+> Graph is a non-linear data structure with a set of vertices and edges
 
 - Draw out Linear vs Non-linear structures.
 Linear - Normally easier to implement and traverse

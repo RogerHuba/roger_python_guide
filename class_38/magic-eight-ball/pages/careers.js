@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
 export default function Careers(){
     return(
@@ -8,5 +8,5 @@ export default function Careers(){
                 <a className="p-4 m-4 text-2xl bg-gray-300 rounded-lg">Back to Home Page</a>
             </Link>
         </div>
-    )
+    );
 }
