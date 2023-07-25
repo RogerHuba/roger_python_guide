@@ -1,33 +1,19 @@
 from functools import wraps
 from time import sleep
 
-def emphasize(func):
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-
-        return_val_from_undecorated_function = func(*args, **kwargs)
-
-        emphasized = return_val_from_undecorated_function.upper() + "!!!"
-
-        return emphasized
-
-    return wrapper
-
-def sarcastic_decorator(func):
+def yo_mamma_decorator(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         orig_val = func(*args, **kwargs)
-        return f'Oh Sure, "{orig_val}" sounds like a "great" idea'
-
+        return f'Yo mamma says "{orig_val}"'
     return wrapper
 
 
-def proclaim(func):
+def sophisticated_decorator(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         orig_val = func(*args, **kwargs)
-        return "On this day I do say, " + orig_val
-
+        return f'It is with a great honor that I hear you say "{orig_val}"'
     return wrapper
 
 def procrastinate(func):
@@ -40,14 +26,11 @@ def procrastinate(func):
 
 
 @procrastinate
-@proclaim
-def say(txt):
+@yo_mamma_decorator
+@sophisticated_decorator
+def just_sayin(txt):
     return txt
 
-@sarcastic_decorator
-@emphasize
-def restaurant_suggestion(cuisine):
-    return cuisine
 
 if __name__ == "__main__":
-    print(say('spam goes best with eggs.'))
+    print(just_sayin('I love star wars!'))

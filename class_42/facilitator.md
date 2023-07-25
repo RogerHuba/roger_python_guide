@@ -26,14 +26,14 @@
 - > Today's lab asks you to use interators / generators on a custom collection to do some things.
 - > I am going to do this using a linked list (hence the warm up to get your mind fresh). I am going to apply some pythonic features so that we can interact with that list in a condenced and concise way. In fact, I am going to make it so that we can iterate thought a linkedlist and not have to traverse. With that said lets do some code.
 
-- create a poetry environment
+- create an  environment
   - create a `linked_list_iterator.py` file.
   - shell up
   - Copy the test file over.
-  - code .
+  - open code editor
 
 - Have the test_linked_list_interator.py file open and so we can go through the tests.
-- Copy the linked_list class, node class, __init__, append, and insert methodsinto the file. Show the reversed method and how it is quickly creating a linked list.
+- Copy the linked_list class, node class, __init__, append, and insert methods into the file. Show the reversed method and how it is quickly creating a linked list.
 
 Should like like this:
 
@@ -170,7 +170,8 @@ for i in range(10):
 
 ```python
 # it is a method so it needs self.
-__iter__(self):
+def __iter__(self):
+    pass
 ```
 
 - > It needs something to be returned that represents that iterableness. It needs a notion of what is next. If we tap into the power of generators we can make this happen.
@@ -193,7 +194,7 @@ def __iter__(self):
 - > What we have here is a value generator that will yield one linked list node at a time for us. value_generator can be whatever you want (potatoe).  __iter__ needs to be called. Let's see if this is enough to pass our test. Success. Using a generator and a few lines of code, we can now iterate through a linked list.
 - > It turns out just by being iterable, we get some other things for free. (free is always good). What do I mean by that.  Lets look at our next test.
 
-- > Lets add a new test to check on todays warmup.  Sum tthe total of a LL.
+- > Lets add a new test to check on todays warmup.  Sum the total of a LL.
 
 - Add the following:
 
@@ -295,34 +296,6 @@ return left(self)[index]
 
 - Depending on time left, open a deco.py file
 
-- Add this code in to create your own thing.
-
-```python
-from functools import wraps
-def yo_mamma_decorator(func):
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        orig_val = func(*args, **kwargs)
-        return f'Yo mamma says "{orig_val}"'
-    return wrapper
-
-def sophisticated_decorator(func):
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        orig_val = func(*args, **kwargs)
-        return f'It is with a great honor that I hear you say "{orig_val}"'
-    return wrapper
-
-
-# @yo_mamma_decorator
-# @sophisticated_decorator
-def just_saying(txt):
-    return txt
-
-
-if __name__ == "__main__":
-    print(just_saying('I love star wars!'))
-```
 
 - > You may want to talk about the difference between *args and **kwargs
 

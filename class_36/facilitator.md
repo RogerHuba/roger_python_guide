@@ -46,10 +46,10 @@ Given a list and an int, where each index in the list is is a LL, write a functi
 (lst, 18)
 [ll1, ll2, ll3]
  
- ll1:
+ ll: Int: 10
 [2] -> [19] -> [1] -> [12] -> [23] -> None
 would return a ll of
-[2]-> [1] -> [12] -> None
+[2]-> [1] -> None
 
 (lst, 2)
 [ll1, ll2, ll3]
@@ -60,7 +60,7 @@ would return a ll of
 [1] -> None
 
 ```python
-def delete_over(lst, num):
+def delete_over(ll, num):
 
     for ll in lst:
         at_head_node = True

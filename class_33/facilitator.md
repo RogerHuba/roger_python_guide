@@ -134,7 +134,7 @@ Now we have something going on.  We have an access and a refresh token.
 Lets grab the access inside the quotes and put in a get request:
 
 ```python
-http :8000/api/v1/things/ 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc0NjE5MDEyLCJpYXQiOjE2NzQ2MTg3MTIsImp0aSI6IjEwNGU5ODdkNjMxZDQ5MzY5ZWM5Mzk3NjcwMDkxMWFjIiwidXNlcl9pZCI6MX0.-X63QaizdvqKfSyqpC7hPUWyEm6tpbTHcxT9vA6q7aI'
+http :8000/api/v1/things/ 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgzMTM4NzkyLCJpYXQiOjE2ODMxMzg0OTIsImp0aSI6IjRlZDBkMGEzNTc1NjQ0MmI5NjNjMDM5YTk4ZGQyYjZhIiwidXNlcl9pZCI6MX0.JvWMbsIKsdUnZ1PLCjmUD4RaJyNexP-S7lp1WF_CiV0'
 ```
 
 if you get a ```HTTP/1.1 301 Moved Permanently``` you are missing a / on the end of the route
@@ -249,7 +249,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
 ...,
 'corsheaders.middleware.CorsMiddleware',
-'django.middleware.common.CommonMiddleware',
+'django.middleware.common.CommonMiddleware',dc
 ...,
 ]
 ```

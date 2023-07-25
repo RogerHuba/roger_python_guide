@@ -106,3 +106,8 @@ if __name__ == "__main__":
 pytest -k version_1
 
 You will need this pytest.ini (which will be up in the folder today)
+
+### Pytest Coverage Tests
+- pip install pytest-cov
+- pytest --cov
+https://pytest-cov.readthedocs.io/en/latest/plugins.html

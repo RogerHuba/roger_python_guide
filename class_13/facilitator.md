@@ -27,7 +27,6 @@ A: Second hand store
   > If we had all Covid Data could we...
   > Guess where outbreaks were going to occur?
   > Guess when the spread will slow
-  > Guess when we can get back on Campus
 > Liner Regression and training model data could help us with some of those answers.
 > Now, we need to have GOOD data in order to make a good guess.
 > The more data points we have, the more accurate our estimates become.

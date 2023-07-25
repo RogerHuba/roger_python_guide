@@ -36,7 +36,7 @@ def encrypt(plain: str, key: int) -> str:
 # plain: 12345
 # key: 2
 # -> 345678
-```
+``` 
 
 First thing we do is give ourself an variable to store our return value.
 

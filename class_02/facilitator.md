@@ -27,7 +27,7 @@ import first
 
 Run `python second.py`
 
-We can see the name has changed in first.p. Lets copy that print code from first to second.
+We can see the name has changed in first.py. Lets copy that print code from first to second.
 
 ```python
 # add to second.py

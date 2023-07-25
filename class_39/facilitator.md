@@ -1,377 +1,603 @@
-# Cookie Stand Demo
+# Cookie Stand Connect Front End to Back End Demo
+- Be sure that there are 3 versions uploaded to the class repo. 
+  - Admin Demo (Working)
+  - API Demo (Working)
+  - Admin Starter
 
-## Modify API
+## Review Lab Requirements
+- In Canvas go over the upcomming Lab for the day
 
-**NOTE:** This section can be skipped if your Cookie Stand API already has custom claim and token expiration.
+## Cookie Stand API Container
+- In the api folder, start up the dgango application.
+  - Ensure the .env.sample is copied to a .env file
+  - depending on what is in the database may need to:
+    - ```docker compose run web python manage.py makemigrations```
+    - ```docker compose run web python manage.py migrate```
+    - ```docker compose run web python manage.py createsuperuser```
+      - admin:admin for ease of use
+  - ```docker compose up```
+  - navigate to localhost:8000 or 0.0.0.0:8000
+  - Check that you can see routes at / route
 
-- Three small changes are needed to API.
-- By default, minimal information is included in the JWT returned by API.
-- We need to make a small change to include more info bundled in the tokens.
-- `project/views.py`
+## Cookie Stand Admin Page
+- Open a new terminal windows (Don't close API)
+- Navigate to Cookie Stand Admin Page
+- run ```npm run dev`` and see that it starts or check for errors
+  - Delete the node_modules folder, run npm i fixes most issues.
+  - Default demo should be working, if not troubleshoot.
+- At the main page of the Cookie Stand Admin, login.
+  - If nothing there, add some values.
+    - Need to add:
+      - Location Name
+      - Minimum
+      - Maximum
+      - Average
+      - Press Create button.
+  - Add a 2nd, and and maybe a third
+  - Delete one of the entries to see that it works.
+NOTE: Be sure to point out the lack of styling here.
+This is for them to figure out in lab.
 
-```python
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView
+## Cooie Stand Starter Page
+- Shutdown the running Cookie Stand Admin in terminal.
+- Navigate to the the Cookie Stand Starter Page.
+- If node_module folders exists, delete.
+- run ```npm i```
+- ```npm run dev```
+NOTE:  This Page will have 1 line of Data already.
 
+## Update the Page Demo
+- Now that we have a starting place, lets see what needs changing
+- This is not what we want (based off the working demo we saw)
+  - No login
+  - Delete not working
+  - Create not working
+    - Think about why create is not working right now.
+    - In Django's model, what were some of the required fields?
+      - That's right, the usermodel to set the owner. 
+  - Data showing without being logged in.
+- The information with out being logged in, let's resolve that issue first.
+- Navigate to pages->index.js
+  - We can see right now we are rendinering the <CookieStandAdmin />
+  - This is not what we want as our default behavior.
+  - We want some conditions.  We want to show this if we have a user loged in, if not show the login page.
+- Update this:
 
-class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-
-        # Add custom claims
-        token["email"] = user.email
-        token["username"] = user.username
-        # ...
-
-        return token
-
-
-class MyTokenObtainPairView(TokenObtainPairView):
-    serializer_class = MyTokenObtainPairSerializer
-
+```JavaScript
+<CookieStandAdmin />
 ```
 
-- The second change is to modify `project/urls.py` to look like this...
+to this:
 
-```python
-from django.contrib import admin
-from django.urls import include, path
-from rest_framework_simplejwt import views as jwt_views
-from .views import MyTokenObtainPairView
-
-urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("api/v1/cookie-stands/", include("cookie_stands.urls")),
-    path("api-auth/", include("rest_framework.urls")),
-    path(
-        "api/token/",
-        MyTokenObtainPairView.as_view(),
-        name="token_obtain_pair",
-    ),
-    path(
-        "api/token/refresh",
-        jwt_views.TokenRefreshView.as_view(),
-        name="token_refresh",
-    ),
-]
-```
-
-- Now email and username are included in the tokens returned after logging in.
-- NOTE: It is NOT a requirement of an API to return such  info. Each API will differ. The point is to know you can.
-- The third change is to `project/settings.py` to configure how long the access token last before expiring. Add this line to settings, usually at the bottom.
-
-```python
-SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(
-        seconds=60 * 60
-    ),  # lasts for 60 minutes
+```JavaScript
+// If we have a user then show CookieStandAdmin
+{user ?
+<CookieStandAdmin />
+: // Otherwise we show this.
+<h2>Login Form Comming Soon</h2>
 }
 ```
 
-## Create App
+- Based on this it will not work just yet.  Why not?
+- user has not been defined in our ternary expression.
+- Show the Web Page
+- Lets make one really quick for the purposes of testing:
 
-[Non TypeScript Next JS](https://tailwindcss.com/docs/guides/nextjs)
+Add this above the return
 
-- `npx create-next-app cookie-stand-front`
-- cd to folder created
-- npm install -D tailwindcss postcss autoprefixer
-- npx tailwindcss init -p
-
-## Install Dependencies
-
-- `npm i axios swr jsonwebtoken`
-- Alternately, install each one when needed
-
-## Skeleton Home Page
-
-- Replace `index.js` placeholder content with...
-
-```javascript
-import Head from 'next/head'
-
-export default function Home() {
-
-    // DONT FORGET THIS
-    let user = {username: 'pat'};
-
-    return (
-        <div>
-            <Head>
-                <title>Cookie Stand Demo</title>
-            </Head>
-
-            <main className="p-4 space-y-8 text-center">
-                <h1 className="text-4xl">Fetching Data from Authenticated API</h1>
-                <button className="p-2 text-white bg-gray-500 rounded">Login</button>
-                {user ? (
-                    <h2>Welcome {user.username}</h2>
-                ) : (
-                    <h2>Need to log in</h2>
-                )}
-            </main>
-        </div>
-    )
-}
+```JavaScript
+const user = null;
 ```
 
-- Page should render `Need to log in`
-- Change `user = null` to `user = {username:'pat'}` and see what happens
+- What I expect to happen here is because user is null, or falsy, we should render the Login Form Comming Soon.
+- Now looking at our page, that is exaclty what we get.
+- Lets change that to something truthy and see if something else renders.
 
-```javascript
-// Add above return
-const user = { username: 'somebody' };
+```JavaScript
+const user = true;
 ```
 
-- `Welcome somebody` should render.
-- The task now is to offload responsibility of providing the user to some other service.
-- Introducing `auth.js`
-  - copy over `contexts/auth.js` from solution
-  - copy over `.env.local` from solution's `sample.env.local`
-- There's less than 50 lines of code there, but the do alot.
-- But before looking under the hood let's just see how to use it.
-- `auth.js` defines a `context` which does two things - enables providing shared "stuff" and enables consuming shared "stuff." That's pretty vague, so let's go through the steps.
-- Modify `pages/_app.js`
+- Now we see our CookieStandAdmin data.
+- Great. Our handling of the admin data is working, but not entirely like we want. We want to be actually able to login.
+- We are going to save a little time here and grab the code from the "finished" demo that is in the class repo.
 
-```javascript
-import 'tailwindcss/tailwind.css'
-import { AuthProvider } from '../contexts/auth'
+Add the following to the bottom of index.js
 
-function MyApp({ Component, pageProps }) {
-    return <AuthProvider>
-        <Component {...pageProps} />
-    </AuthProvider>
-}
+```JavaScript
+function LoginForm({ onLogin }) {
 
-export default MyApp
-```
-
-- `_app.js` contains the parent for all page components.
-- By wrapping `AuthProvider` around them, all page components, and all their children, have access to auth provided "stuff" - as long as these components ask the right way.
-- `pages/index.js`
-  - Add `import { useAuth } from '../contexts/auth'`
-  - Change `user` definition line to `const { user } = useAuth();`
-- Should still render `Need to log in`
-- To change that we need to log in of course.
-- `pages/index.js`
-  - Modify user definition line to be `const { user, login } = useAuth();`
-  - Add onClick handler to login button.
-    - `<button onClick={() => login(process.env.NEXT_PUBLIC_USERNAME, process.env.NEXT_PUBLIC_PASSWORD)}`
-    - NOTE: the username and password must match known user in API's database
-- Page should still render `Welcome pat` but this user is real!
-- Logging out is just as easy
-- Modify `pages/index.js` to  handle logging out
-
-```javascript
-import Head from 'next/head'
-import { useAuth } from '../contexts/auth'
-
-export default function Home() {
-
-    const { user, login, logout } = useAuth();
-
-    return (
-        <div>
-            <Head>
-                <title>Cookie Stand Demo</title>
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-
-            <main className="p-4 space-y-8 text-center">
-                <h1 className="text-4xl">Fetching Data from Authenticated API</h1>
-                {user ? (
-                    <>
-                        <h2>Welcome {user.username}</h2>
-                        <button onClick={logout} className="p-2 text-white bg-gray-500 rounded">Logout</button>
-                    </>
-                ) : (
-                    <>
-                        <h2>Need to log in</h2>
-                        <button onClick={() => login(process.env.NEXT_PUBLIC_USERNAME, process.env.NEXT_PUBLIC_PASSWORD)} className="p-2 text-white bg-gray-500 rounded">Login</button>
-                    </>
-                )}
-            </main>
-        </div>
-    )
-}
-```
-
-- And that's Auth in action.
-  - Dig as deep as you care to into `auth.js` file and/or django project changes.
-  - But stress to students that they should be increasingly comfortable using a library's public features and only digging into implementation details when they've got the time and the curiousity.
-
-## Resources
-
-- The only reason we bothered to log in was to get access to the API's resources.
-- REMINDER: A `resource` in a restful API can be considered the `noun` your API manages.
-  - E.g. for `GET /api/v1/shoes` the resource is `shoes`
-- We've been working with Cookie Stands, that's the `resource` we want to perform CRUD operations on.
-- There are plenty of ways interact with an API from the front end, some of which folks learned in 301.
-- We're going to work with a couple newer tools that are getting really popular.
-- These tools are going to be used within a `custom hook` named `useResource`
-  - Copy over `hooks/useResource.js`
-  - Update `pages/index.js` to render a `StandList` component.
-
-```javascript
-import Head from 'next/head'
-import { useAuth } from '../contexts/auth'
-import useResource from '../hooks/useResource'
-
-export default function Home() {
-
-    const { user, login, logout } = useAuth();
-    const { resources, loading } = useResource();
-
-    return (
-        <div>
-            <Head>
-                <title>Cookie Stand Demo</title>
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-
-            <main className="p-4 space-y-8 text-center">
-                <h1 className="text-4xl">Fetching Data from Authenticated API</h1>
-                {user ? (
-                    <>
-                        <h2>Welcome {user.username}</h2>
-
-                        <button onClick={logout} className="p-2 text-white bg-gray-500 rounded">Logout</button>
-
-                        <StandList stands={resources} loading={loading} />
-
-                    </>
-                ) : (
-                    <>
-                        <h2>Need to log in</h2>
-                        <button onClick={() => login(process.env.NEXT_PUBLIC_USERNAME, process.env.NEXT_PUBLIC_PASSWORD)} className="p-2 text-white bg-gray-500 rounded">Login</button>
-                    </>
-                )}
-            </main>
-        </div>
-    )
-}
-
-function StandList({ stands, loading }) {
-
-    if (loading) return <p>Loading...</p>
-
-    return <ul>
-        {stands.map(stand => (
-            <li key={stand.id}>{stand.location}</li>
-        ))}
-    </ul>
-}
-```
-
-- But we can get more from `useResource`, we can do CRUD! Well, not Update, that's left for students to do.
-- Let's add ability to create a resource, in this case a cookie stand.
-- Define `createResource` const alongside `resources` from return value of `useResource` hook.
-- Render a `<StandCreateForm >`
-- Define a `<StandCreateForm>`
-
-```javascript
-import Head from 'next/head'
-import { useAuth } from '../contexts/auth'
-import useResource from '../hooks/useResource'
-
-export default function Home() {
-
-    const { user, login, logout } = useAuth();
-    const { resources, loading, createResource } = useResource();
-
-    return (
-        <div>
-            <Head>
-                <title>Cookie Stand Demo</title>
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-
-            <main className="p-4 space-y-8 text-center">
-                <h1 className="text-4xl">Fetching Data from Authenticated API</h1>
-                {user ? (
-                    <>
-                        <h2>Welcome {user.username}</h2>
-
-                        <button onClick={logout} className="p-2 text-white bg-gray-500 rounded">Logout</button>
-
-                        <StandCreateForm onCreate={createResource} />
-
-                        <StandList stands={resources} loading={loading} />
-
-                    </>
-                ) : (
-                    <>
-                        <h2>Need to log in</h2>
-                        <button onClick={() => login(process.env.NEXT_PUBLIC_USERNAME, process.env.NEXT_PUBLIC_PASSWORD)} className="p-2 text-white bg-gray-500 rounded">Login</button>
-                    </>
-                )}
-            </main>
-        </div>
-    )
-}
-
-function StandList({ stands, loading }) {
-
-    if (loading) return <p>Loading...</p>
-
-    return <ul>
-        {stands?.map(stand => (
-            <li key={stand.id}>{stand.location}</li>
-        ))}
-    </ul>
-}
-
-function StandCreateForm({ onCreate }) {
-
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
-        const standInfo = {
-            location: event.target.location.value,
-            minimum_customers_per_hour: parseInt(event.target.min.value),
-            maximum_customers_per_hour: parseInt(event.target.max.value),
-            average_cookies_per_sale: parseFloat(event.target.avg.value),
-        }
-        onCreate(standInfo);
-        event.target.reset();
+        onLogin(event.target.username.value, event.target.password.value);
     }
+
     return (
-        <form className="space-x-4" onSubmit={handleSubmit}>
-            <input className="border-2 border-black" name="location" placeholder="location" />
-            <input className="border-2 border-black" name="min" placeholder="min" />
-            <input className="border-2 border-black" name="max" placeholder="max" />
-            <input className="border-2 border-black" name="avg" placeholder="average" />
-            <button className="p-2 text-white bg-gray-500 rounded">CREATE</button>
+        <form onSubmit={handleSubmit}>
+            <fieldset autoComplete='off'>
+                <legend>Log In</legend>
+                <label htmlFor="username">Username</label>
+                <input name="username" />
+                <label htmlFor="password">Password</label>
+                <input type="password" name="password" />
+                <button>Log In</button>
+            </fieldset>
         </form>
-    )
+    );
 }
 ```
 
-- So now we can Read and Create resources. Let's move on to Delete.
-- **NOTE:** Get the students to lead the way here
-- First we need to define `deleteResource`
-  - `const { resources, loading, createResource, deleteResource } = useResource();`
-- Next, modify `<StandList>` declaration
-  - `<StandList stands={resources} loading={loading} onDelete={deleteResource} />`
-- Last, update `<StandList>` component definition to  allow deletes...
+- Lets walk through this code. If we just focus on this, it is small enough that we should be able to understand everything here.
+- The onLogin here is called using object destructuring. 
+- This is a concept that can make code more readable and clear, especially when passing down props.
+- Imagine we have a movie object
 
-```javascript
-function StandList({ stands, loading, onDelete }) {
+```JavaScript
+  const movie = {
+    name: "Star Wars",
+    year: 1978,
+    director: "George Lucas
+  };
+```
 
-    if (loading) return <p>Loading...</p>
+-   Before destructuring, you would need to access each property individually
+    -   movie.name
+    -   movie.year
+    -   movie.director
 
-    return <ul>
-        {stands?.map(stand => (
-            <li key={stand.id} className="space-x-2">
-                <span>{stand.location}</span>
-                <span onClick={() => onDelete(stand.id)}>[X]</span>
-            </li>
-        ))}
-    </ul>
+
+- Destructing lets us streamline the code
+
+```Java Script
+const { name, year, director } = movie;
+```
+
+- is the same as
+
+```JavaScript
+const name = movie.firstName
+const year = movie.year
+const city = movie.director
+```
+
+```JavaScript
+// Object Destructuring
+const movie = {
+    name: "Star Wars",
+    year: 1978,
+    director: "George Lucas"
+};
+
+console.log(movie.name);
+console.log(movie.year);
+console.log(movie.director);
+
+const { name, year, director } = movie;
+
+console.log(name);
+console.log(year);
+console.log(director);
+```
+
+- This lets us access the properties without the 'movie'
+- That is a general overview, there is a little more to that.  
+- If you want more info, add that to your lookup list.
+- We see that the function starts with a capital letter, indicating that this is a component. This is a React rule, not a JavaScript rule.
+
+- Next we look at the handleSumbit(event)
+- We have our prevent default to prevent the page from reloading itself.
+- It is going to call the passed in onLogin and we are going to pass values by position. 
+- We're going to pass it in the username fields value, and the password fields value.
+- So onLogin is not an event handler in the same sense, it's a function that just get gets called, and then expects a username and a password.
+- All of the form submission event stuff happens inside of this component.
+
+- Then we see the jsx here. It has a single top level return in <form>. This is html here. Nothing that needs explaining.
+- Let's head back up and get this to render.
+- In the default return, in place of:
+
+```html
+<h2>Login Form Comming Soon</h2>
+```
+
+- Replace it with:
+
+```JavaScript
+<LoginForm onLogin={loginHandler} />
+```
+
+Now we need a function to handle the loginHandler:
+
+```JavaScript
+function loginHandler(username, password) {
+    alert(username);
 }
 ```
 
-## Summary
+- We head to the page and try to login and see if it is wired up correctly.  There is out alert.
+- No login, need to update our user to null.  Try again.
+- Success. Now we want to wire this up to something that has "real" information.
+- Where is our "real" information?
+  - Django API, the backend of this application.
+- Time to login there. We are not creating a user, or sign up, just verifying that a user is valid (username, passoword) from Django.
+- We are going to introduce some front-end authentication into our application. We will do this via "Context", something that was in your reading last tuesday.
+- Context is a way of providing data and functionality across components.
+- To get this started we need to create a few things.
+  - A folder called contents
+  - a file called auth.js
+- What will auth.js's main responsibility.
+- The main thing it will do is define a hook.
+- This hook will allow us to, in the same way we used State as a hook, it is going to allow us to do auth stuff in a hook.
+- If anyone asks about what is a hook:
 
-There you have it, 3/4 of CRUD!
+```text
+In React, a hook is a special function that allows you to use state and other React features in function components. Hooks were introduced as a way to provide stateful logic to function components, which previously could only be achieved with class components.
 
-The job in lab is to modify your front end client and back end to enable authenticated clients to perform restful operations on your API.
+React provides several built-in hooks that can be used to manage state, handle side effects, and control the rendering of your components. Some of the most commonly used hooks include:
+
+useState - Allows you to manage state in a functional component.
+useEffect - Allows you to perform side effects, such as fetching data or updating the DOM, in response to changes in state or props.
+useContext - Allows you to access context data from a parent component in a functional component.
+useRef - Allows you to create a mutable reference that persists across component renders.
+useCallback - Allows you to memoize a function so that it only changes when its dependencies change.
+Hooks are an essential part of modern React development and can greatly simplify the management of complex state and logic in your components.
+```
+
+- As a convention, hooks always start with 'use'. So are going to create a useAuth hook. 
+- We also want to make this so that other parts of our application have access to this hook. 
+- We will do this through something called an authProvider.
+- So we're going to need to define some stuff, create a context, we're going to need to to interact with that context in our useAuth hook, and we're going to need to provide it. 
+- So there is a lot going on here.
+- I'm going to start typing. 
+- Today, you are going to be using this hook, you won't need to create it from scratch, just use it. 
+- This is not a shortcut. 
+- It is to prepare you for what you will be doing on the job. 
+- You will often be taked to use something that you did not create. 
+- You just need to know how to integrate it.
+
+We are going to start with some imports. 2 hooks (they start with use, and another function.)
+
+```JavaScript
+import { createContext, useContext, useState } from 'react';
+```
+
+- Because our api is using json web tokens, we need 
+
+```JavaScript
+import jwt from 'jsonwebtoken';
+```
+
+- Right now, it does not exist. Run:
+- ```npm in jsonwebtoken``` in terminal
+- We need this because this is how we communicate with our API to authenticate.
+- We are going to need to know, where is, or what is the URL that we are talking to.  Add:
+
+```JavaScript
+const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+```
+
+- We are not hard coding the url, we are going to set it up in a .env to protect it. Notice the naming contvention "NEXT_PUBLIC". 
+- This is a NextJS thing that will allow you to use a .env without any additonal installs. (remember back to djangoenviron). 
+- This will grab it out of your environment. 
+- At the top level we are going to create a .env.local. We have a sample sitting here for us to use. 
+- I am just going to rename it.
+
+- Next we need to create context, we are going to all it AuthContext. Add:
+
+```JavaScript
+const AuthContext = createContext();
+```
+
+- You will see how we interact with this in just a moment.
+- Next we need to define a hook via a functiont hat will be made avaliable outside of this module. So it will need to be exported. Add:
+
+```JavaScript
+export function useAuth() {
+    const auth = useContext(AuthContext);
+    if (!auth) {
+        throw new Error('You forgot AuthProvider!');
+    }
+    return auth;
+}
+```
+
+- This makes a local variable inside the function, called auth, which is the return value of calling useContext imported on line 1, and passing in that authContext.
+- There is a lot going on behind the scenes, but essentialy this is some of the plumbing that is required to be able to use this AuthHook across our application. 
+- It gives us a warning if we forget the auth provider.
+- The next thing to add, has a LOT going on it it. We are going to create an new export. Add:
+
+```JavaScript
+export function AuthProvider(props) {
+
+}
+```
+
+- The long story short here is this is going to return us a provider. 
+- Remember when I said that you do not need to know the ins and outs of this, just how to implement it. 
+- This is one of those cases. Add this into the function. Lets bring this in a little at a time. Add:
+
+```JavaScript
+    const [state, setState] = useState({
+        tokens: null,
+        user: null,
+        login,
+        logout,
+    });
+```
+
+- The first thing it does is the provider is going to keep track of state using the useState hook to keep track of things. 
+- It will pay attention to who the current user is, but it will also pay attention to tokens, wich is import because we want to get tokens back. 
+- If you remember back to JWT in Django, we created the token pair that we accessed from the API, this will allow us to maintain the tokens in state, as well as the ability to login and logout.
+- Notice the syntax of login, logout inside the object. Does anyone know what this means. Ultimately it means the key:value is the same name, so this is the same as ```login:login, logout:logout```. 
+- Like pythonistas, JS devs love removing and simplifying code as much as possible.
+- Now it is time to handle the login. Add (inside AuthProvider):
+
+```JavaScript
+async function login(username, password) {
+
+        // const response = await axios.post(tokenUrl, { username, password });
+
+        const options = {
+            method: "POST",
+            body: JSON.stringify({username, password}),
+            headers: {'Content-Type': 'application/json'},
+        };
+
+        const response = await fetch(tokenUrl, options);
+
+        const data = await response.json();
+
+        const decodedAccess = jwt.decode(data.access);
+
+        const newState = {
+            tokens: data,
+            user: {
+                username: decodedAccess.username,
+                email: decodedAccess.email,
+                id: decodedAccess.user_id
+            },
+        };
+
+        setState(prevState => ({ ...prevState, ...newState }));
+    }
+```
+
+- This takes in a user name and a password that does some things. 
+- Particularly it calls out to a url ```see await fetch(tokenUrl, options)```. 
+- What is a tokenUrl, well it should be a combination of the baseurl, and the remaining portion of the path that gets you to the token.
+- Where do we get this token? If we remember back to Django, we get this from localhost:8000/api/token. We are not specifying that anywhere here in our auth.js.  
+- Lets add that in. Add:
+
+```JavaScript
+const tokenUrl = baseUrl + '/api/token/';
+```
+
+- The breakdown after this is: We fetch some data, get a json response, decode the data to break it down into an object, which we create a newState and update the state of our app. 
+- If you want to dig into this one a little more, feel free but that gives you the overview of the rest of login.
+- Logout is a little simpler. 
+- We set user and tokens to null, then update State. Add: 
+
+```JavaScript
+    function logout() {
+        const newState = {
+            tokens: null,
+            user: null,
+        };
+        setState(prevState => ({ ...prevState, ...newState }));
+    }
+```
+
+- You could be a little more sopfistacted and force a logout on the back end, but for our purposes by removing the user and tokens from state, we force the logout.
+- We are alomst done here. 
+- Tiny bit left. 
+- The authprovider is suppose to return a provider. Right now that is not doing that. Let's fix that. 
+- Add:
+
+```JavaScript
+    return (
+        <AuthContext.Provider value={state}>
+            {props.children}
+        </AuthContext.Provider>
+    );
+```
+
+- This means that Auth context provider is going to wrap around
+some other components. 
+Those other components are called the children, and so anything else gets thrown in there, gets wraped. 
+If I've got some children, then i'll refer to that with props.children. 
+
+- This should be done now. 
+- BUT we can't test it yet and we can't use it yet. 
+- We need to head over to our pages folder and look at **```_app.js```**. 
+- This is where all our components live that can be extended within your app. 
+- We want every component to have the ability to deal with Auth.
+-  We do that by importing the provider, and wraping that provider around the <Component />
+- First we import AuthProvider.  
+- Add:
+
+```JavaScript
+import { AuthProvider } from '../contexts/auth';
+```
+
+- Now I want to wrap component with AuthProvider. Add:
+
+```JavaScript
+export default function App({
+    Component,
+    pageProps
+}) {
+    return (
+        <AuthProvider>
+            <Component {...pageProps} />
+        </AuthProvider>
+    );
+}
+```
+
+- That finished the plumbing. 
+- Now how do we use it? 
+- Well you use it where you want to use it. 
+- We want to use it back where we originally hardcoded our user and now have it tie into our authentication system.
+- Head back to **```index.js```**
+- First we need to import useAuth.  Add:
+
+```JavaScript
+import { useAuth } from '../contexts/auth';
+```
+
+- Then we need to use it. 
+- We want our user and the ability to login. Add:
+
+```JavaScript
+// Replace this
+//   const user = null;
+// with
+    const { user, login } = useAuth();
+```
+
+- We also had this alert to show we were logged in. 
+- We can get rid of that. 
+- Then we just have to update our loginHandler to what we want to use, which is login. 
+- Then down in the cookie standform add:
+
+```JavaScript
+    const { user } = useAuth();
+```
+
+- We login and we are now looking at our "hardcoded" cookie stand. 
+- Login works, handling of our data does now. 
+- We are going to add in another hook, a useResrouce hook. 
+- I am going to quickly update the code with the use resource "stuff". 
+- My page is going to break while I update this.
+- Import useResoruce (Needs to be created) Add:
+
+```JavaScript
+import useResource from '../hooks/useResource';
+```
+
+- This does not exist so I need to create that. 
+- Add **``` hooks folder```** and **```useResource.js file```**. 
+- There is a lot to this file. Add:
+
+```JavaScript
+import useSWR from 'swr';
+
+export const apiUrl = process.env.NEXT_PUBLIC_RESOURCE_URL;
+import { useAuth } from '../contexts/auth';
+
+export default function useResource() {
+
+    const { tokens, logout } = useAuth();
+
+    const { data, error, mutate } = useSWR([apiUrl, tokens], fetchResource);
+
+    async function fetchResource(url) {
+
+        if (!tokens) {
+            return;
+        }
+
+        try {
+            const response = await fetch(apiUrl, config());
+
+            const responseJSON = await response.json();
+
+            return responseJSON;
+
+        } catch (err) {
+            handleError(err);
+        }
+    }
+
+    async function createResource(info) {
+
+        try {
+            const options = config();
+            options.method = "POST",
+            options.body = JSON.stringify(info);
+            await fetch(apiUrl, options);
+            mutate(); // mutate causes complete collection to be refetched
+        } catch (err) {
+            handleError(err);
+        }
+    }
+
+    async function deleteResource(id) {
+
+        try {
+            const url = apiUrl + id;
+            const options = config();
+            options.method = "DELETE";
+            await fetch(url, options);
+            mutate(); // mutate causes complete collection to be refetched
+        } catch (err) {
+            handleError(err);
+        }
+    }
+
+    async function updateResource(resource) {
+        // STRETCH
+        // Add ability for user to update an existing resource
+    }
+
+
+    // helper function to handle getting Authorization headers EXACTLY right
+    function config() {
+
+        return {
+            headers: {
+                'Authorization': 'Bearer ' + tokens.access,
+                'Content-Type': 'application/json',
+            }
+        };
+    }
+
+    function handleError(err) {
+        console.error(err);
+        // currently just log out on error
+        // but a common error will be short lived token expiring
+        // STRETCH: refresh the access token when it has expired
+        logout();
+    }
+
+    return {
+        resources: data,
+        error,
+        loading: tokens && !error && !data,
+        createResource,
+        deleteResource,
+        updateResource,
+    };
+}
+
+/* STRETCH
+This approach works, but it's not very snappy for the user.
+Check the SWR docs to see if you can "optomistically" render updated state while the API response is pending.
+*/
+```
+
+- In this file there is a dependency for swr. 
+- We will need to add that with ```npm i swr```
+
+- Then we are going to replace our CookieStandAdmin().  Replace:
+
+```JavaScript
+function CookieStandAdmin() {
+
+    const { resources, deleteResource } = useResource();
+
+    return (
+        <>
+            <CookieStandForm />
+            <CookieStandTable stands={resources || []} deleteStand={deleteResource} />
+        </>
+    );
+}
+```
+
+- After that add in CookieStandForm Add:
+
+```JavaScript
+const { createResource } = useResource();
+```
+
+- add after console.log ```createResource(info)```
+- Should be able to run the page and do the things.

@@ -1,0 +1,38 @@
+def kth_from_end1(self, k):
+    current = self.head
+    length = 0
+    while current:
+        length += 1
+        current = current.next
+    current = self.head
+    steps_remaining = length - k - 1
+    if steps_remaining < 0:
+        raise TargetError
+    for _ in range(steps_remaining):
+        current = current.next
+        if not current:
+            raise TargetError
+    return current
+
+
+def kth_from_end2(self, k):
+    if self.head is None:
+        return None
+        
+    # Calculate length of the linked list
+    length = 0
+    current = self.head
+    while current is not None:
+        length += 1
+        current = current.next
+        
+    # Check if k is valid
+    if k < 0 or k >= length:
+        return None
+        
+    # Traverse the linked list to find the kth from end node
+    current = self.head
+    for i in range(length - k - 1):
+        current = current.next
+        
+    return current.value

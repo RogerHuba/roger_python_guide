@@ -175,7 +175,7 @@ urlpatters = [
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Movies</title>
+    <title>THings</title>
 </head>
 <body>
     {% block content %}

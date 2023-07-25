@@ -1,7 +1,14 @@
+{% load compress %}
+{% load static %}
+
 <!DOCTYPE html>
 <html>
     <head>
         <title>Our Title</title>
+
+        {% compress css %}
+            <link rel="stylesheet" href="{% static 'src/output.css' %}">
+        {% endcompress %}
     </head>
     <body>
         <header>
@@ -14,6 +21,6 @@
         {% block content %}
 
         {% endblock content %}
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.2/flowbite.min.js"></script>
     </body>
 </html>

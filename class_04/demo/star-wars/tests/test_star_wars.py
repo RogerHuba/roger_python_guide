@@ -109,4 +109,3 @@ def luke():
 @pytest.fixture
 def vader():
     return SithLord('Darth Vader')
-

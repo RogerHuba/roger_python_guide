@@ -105,9 +105,9 @@ try:
 except ZeroDivisionError:
     print("Don't divide by zero silly.")
 except Exception as e:  # notice we can refer to the exception using 'as'
-    # log the exception somewhere, probably including the stack trace
+
     print("So sorry end user. Something broke!")
-    # print(e)
+
 ```
 
 > Python also allows you do a couple more things with exceptions. One is an 'else' block which runs when there was NOT an exception. This is not that commonly used but every now and then is helpful

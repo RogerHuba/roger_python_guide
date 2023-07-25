@@ -8,11 +8,6 @@
 - A friend of mine doesn’t pay his exorcist. He got repossessed.
 - I begin to read a horror novel in Braille. Something bad is about to happen, I can feel it.
 
-## Career Coaching
-
-- Next Sat is your final career coaching. This is your 5-7 min pitch. There are a couple of prep assignments to take note of before Sat. There is not a lecture on Sat because the presentations take up most of the day. When we do finish with Presentations there will a small "something" to do.
-- The weeks after on code-challenge night there will be intervie challenges. I have them hidden right now but will publish them every monday / thursday.
-
 ## Mock Interviews
 
 - [Geeks for Geeks Question](https://www.geeksforgeeks.org/add-two-numbers-represented-by-linked-lists/)
@@ -48,16 +43,25 @@ def add_ll(lists):
 ### Code Challenge 38 Review
 
 ```python
+# This is defining a method called depth_first_search that takes a vertex parameter and belongs to a graph object.
 def depth_first_search(self, vertex):
+    # This line checks if the given vertex is a valid node in the graph using the get_nodes() method of the graph object. If the vertex is not found, it returns an empty list.
     if vertex not in self.get_nodes():
         return []
+    # This line creates three variables: result, stack, and visited. result is an empty list that will contain the visited vertices in the order they were discovered. stack is initialized as an empty stack that will hold the nodes that still need to be visited. visited is an empty set that will contain the visited nodes so far.
     result, stack, visited = [], Stack(), set()
+    # This line pushes the vertex onto the stack to start the search.
     stack.push(vertex)
+    # This initiates a while loop that continues as long as the stack is not empty.
     while stack:
+        # This line gets the top element of the stack without removing it using the peek() method.
         top = stack.peek()
+        # If the top node has not been visited before, this line appends its value to the result list.
         if top not in visited:
             result.append(top.value)
+        # This line adds the top node to the visited set.
         visited.add(top)
+        # This loop checks if there are any unvisited child nodes of the top node. If so, it pushes the first unvisited child onto the stack and sets the has_unvisited flag to True.
         has_unvisited = False
         children = [edge.vertex for edge in self.get_neighbors(top)]
         for child in children:
@@ -65,14 +69,16 @@ def depth_first_search(self, vertex):
                 has_unvisited = True
                 stack.push(child)
                 break
+        # If there are no unvisited child nodes left for the top node, it removes the top node from the stack using the pop() method.        
         if not has_unvisited:
             stack.pop()
+    # Finally, the result list containing the visited nodes in the order they were discovered is returned.
     return result
 ```
 
 ## Stepping Back / Requirements
 - We're making progress. Let's see how things stand.
-See the hard coded `0 questions answered` in upper right?
+See the hard coded `1 questions answered` in upper right?
 That's not gonna work. It should start at zero then increment as questions are answered.
 In other words, the number of questions answered should be part of our app's `state`
 So let's step back and think about our app's state.
@@ -84,7 +90,7 @@ Let's put that to the back of our mind for the time being.  We will address this
 
 ## Move Items to their own componenets
 
-- Thinking in React{:target="_blank"} was in readings. Use the demo as a chance to model this approach.
+- Thinking in React was in readings. Use the demo as a chance to model this approach.
 
 - Start in index and determine components needed.
   - Root component

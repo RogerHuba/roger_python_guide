@@ -27,7 +27,34 @@ squares = [num ** 2 for num in nums]
 assert squares == [1,4,9,16,25]
 ```
 
-## Code Challenge
+## Code Challenge 1
+
+> Given a 2 linked lists, write a function that returns the sum of the number represented by the 2 linked lists.
+
+Sample Data
+1 -> 2 -> 5 -> None:  This would be 125
+3 -> 7 -> 5 -> None:  This would be 375
+
+Would return the sime of 125 and 375
+return 500
+
+Possible solution:
+def sum_ll(ll1, ll2)
+    current1 = ll1.head
+    curret2 = ll2.head
+    value1 = ''
+    value2 = ''
+    while current1 or current2:
+        if current1:
+            value1 += str(current1.value)
+            current1 = current1.next
+        if current2:
+        value2 += str(current2.value)
+        current2 = current2.next
+    return int(value1) + int(value2)
+
+
+## Code Challenge 2
 
 > Given a 2 linked lists, write a function that returns the count of duplicate values
 
@@ -124,7 +151,7 @@ if __name__ == "__main__":
 
 > Here we are on the hump lecture of module 2. We have been trying to wrap our heads around what being pythonic really is. How do we make pythonic code? Python has very little in the way of rules. Most of the expectations are more conventions.
 
-- Tonight we are going to review a few Classes and methods and discuss what is going on with them.
+- Today we are going to review a few Classes and methods and discuss what is going on with them.
 
 ```python
 class Banker:

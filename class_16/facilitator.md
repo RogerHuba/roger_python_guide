@@ -2,6 +2,12 @@
 
 This is a new topic. Lot of new talking points.
 
+## Jokes
+I asked my friend, “Hey, did you read that article about a social media platform that has some very toxic people, very questionable virtual communities, and people that come together to do amazing things?”
+
+He replies: “Yeah, I Reddit.”
+
+
 ## Look at Lab for this class
 
 As deployment practices evolve `Serverless` computing has emerged as an efficient (in terms of time and money) solution for many projects.
@@ -14,17 +20,17 @@ What was the old way?
 FTP - this was the way. Big companies did this.
 Then came more complexity and more costs.
 
-- When I was doing server deployments the average cost was slose to 25,000.
+- When I was doing server deployments the average cost was close to 25,000.
 
 Tons of distributed Servers - There is a lot of power with this but there is a lot of overhead.
 
 The online service came in to simplify things: GitHub -> Heroku -> AWS -> Digital Ocean -> Vercel -> Netlify
 
-What do you do when a service does not meet your requirements.  Think back to Kaggle. What version of python were they runnning?  3.7 or 3.8.  What if you needed some functionality from python 3.10.  Well, there is not much you can do there. You try your best with what they give you but ultimately they are the boss and you use what they give you, or you find another service to try.  (HINT: We will address this more in the second half of class with Docker, but for now this is what we will go with)
+What do you do when a service does not meet your requirements.  Think back to Kaggle. What version of python were they runnning?  3.7 something.  What if you needed some functionality from python 3.10.  Well, there is not much you can do there. You try your best with what they give you but ultimately they are the boss and you use what they give you, or you find another service to try.  (HINT: We will address this more in the second half of class with Docker, but for now this is what we will go with)
 
 At some point you determine that you need more control.  There will be this balance between balance and convenience. You are always looking for that balance. You pay for this.
 
-If you had a hello world app that you wanted to host somewhere public. SOmething that responds to http requests and presestents some info, returns a restful api.  This is not as simple as a GH deploymnet. You need to find somewhere that can host this, build the api.  Essentially you need to build yourself an entire webserver for hosting, you need to build your own house because the premades ones out there are just not cutting it.  All you need is to drop the welcome mat, but you need the house to host the mat.
+If you had a hello world app that you wanted to host somewhere public. Something that responds to http requests and presestents some info, returns a restful api.  This is not as simple as a GH deploymnet. You need to find somewhere that can host this, build the api.  Essentially you need to build yourself an entire webserver for hosting, you need to build your own house because the premades ones out there are just not cutting it.  All you need is to drop the welcome mat, but you need the house to host the mat.
 
 Welcome to serverless. This is where we can have the house already provided, we can drop the welcome mat, but we have full control over what size, color, and image on the welcome mat.  We maintain the control we need.
 

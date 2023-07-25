@@ -20,15 +20,13 @@
 - input_linked_list (7)->(2)->(13)->(9)->(3) expected return (13)
 
 ```python
-def largest_value(ll):
+def largest_value(linkedlist):
   largest = 0
-  current = ll.head
+  current = linkedlist.head
   while current:
     if current.value > largest:
       largest = current.value
     current = current.next
-
-  # code here, change return to largest number
   return largest
 ```
 
@@ -42,6 +40,12 @@ def largest_value(ll):
 ## Show what the game should look like at the end of the week
 
 - Need to pull up Python Guide Game of Greed
+- Testing: pytest -k version_1
+  - Show pytest.ini
+  - Show mark in test files
+- Run as a module
+  - python -m ten_thousand.game
+
 
 ## Go through Lab Requirements Again
 

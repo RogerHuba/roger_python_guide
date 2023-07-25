@@ -1,13 +1,21 @@
 import requests
 from bs4 import BeautifulSoup
 
-URL = "https://testing-www.codefellows.org/courses/code-400/"
-page = requests.get(URL)
-# print(page.content)
+url = "https://testing-www.codefellows.org/course-calendar/?filters=400:%20Advanced,code-python-401"
 
-soup = BeautifulSoup(page.content, 'html.parser')
+req = requests.get(url)
+# print(req.text)
+markup = req.text
+
+soup = BeautifulSoup(markup, 'html.parser')
 # print(soup)
+# print(soup.find_all("h1"))
+# print(soup.find("h1"))
+# print(soup.find("h1").text)
 
-results = soup.find(class_='course-details')
+courses = soup.select(".calendar-event")
 
-print(results.__dir__(self))
+for course in courses:
+    if "Python" in course.h1.text:
+        print(course.h1.text)
+        print(course.h2.text)
