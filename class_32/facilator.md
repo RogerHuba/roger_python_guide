@@ -48,13 +48,13 @@ def sum_all(x, y, z):
 ```
 
 ```python
-x = lambda x, y, z: x + y + z
+x = lambda x, y, z=0: x + y + z
 
-x(2, 3, 5)
+x(2, 3)
 ```
 
 ```python
-larger = lambda x,y: a if x>y else b
+larger = lambda x,y: x if x > y else y
 ```
 
 ## Topic 1 : Permissions Setup for Demo
@@ -98,7 +98,7 @@ In `project/urls.py` add
 ```python
 path("api-auth/", include("rest_framework.urls")),
 ```
-
+Create app/permissions.py
 In `app/permissions.py`
 
 ```python
